@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>01F27166-3359-4D13-A145-A4B7281289C9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BluePrinter</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</key>
+		<string>https://github.com/davidquesada/BluePrinter.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BluePrinter.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/davidquesada/BluePrinter.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BluePrinter</string>
+		</dict>
+	</array>
+</dict>
+</plist>
