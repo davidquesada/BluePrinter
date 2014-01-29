@@ -47,7 +47,7 @@
 +(void)checkLoginStatus:(void (^)(BOOL))completion
 {
     MPrintRequest *req = [self requestForUserInfo];
-    [req perform:^(MPrintResponse *response) {
+    [req performWithCompletion:^(MPrintResponse *response) {
         
         BOOL r = [self parseLoginStatusResponse:response];
         if (completion)
@@ -61,7 +61,7 @@
     
     [request.urlRequest setHTTPBody:[@"url=https%3A%2F%2Fweblogin.umich.edu%2F&verify=Log+Out" dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [request perform:^(MPrintResponse *response) {
+    [request performWithCompletion:^(MPrintResponse *response) {
         // TODO: How do we verify the success of a logout?
         if (completion)
             completion(YES);

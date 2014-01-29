@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, Method)
 -(instancetype)initWithCustomURL:(NSURL *)url;
 -(instancetype)initWithCustomURL:(NSURL *)url method:(Method)method;
 
--(void)perform:(void (^)(MPrintResponse *response))completion;
+-(void)performWithCompletion:(void (^)(MPrintResponse *response))completion;
 
 @property NSURL *customURL;
 @property NSTimeInterval timeout;

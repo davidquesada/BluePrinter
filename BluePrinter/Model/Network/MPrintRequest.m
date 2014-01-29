@@ -122,7 +122,7 @@
     return YES;
 }
 
--(void)perform:(void (^)(MPrintResponse *))completion
+-(void)performWithCompletion:(void (^)(MPrintResponse *))completion
 {
 //    char *write = (char *)(0);
 //    *write = 'h';
