@@ -160,9 +160,7 @@
     NSLog(@"Contents: %@", cont);
     
     self.response.jsonObject = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:nil];
-    
-    // if (self.response.jsonObject)
-    //      [self parseJSONObject] // eventually,
+    self.response.statusCode = statusCodeForStatusString(self.response.statusString);
     
     if (self.mycompletion)
         self.mycompletion(self.response);

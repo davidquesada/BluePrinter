@@ -38,6 +38,7 @@
 {
     [Location refreshLocations:^(BOOL success) {
         [sender endRefreshing];
+        [self.tableView reloadData];
     }];
 }
 
@@ -72,9 +73,11 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NO"];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NO"];
     
-    cell.textLabel.text = [cell description];
+    Location *location = [Location locationAtIndex:indexPath.row];
+    cell.textLabel.text = location.displayName;
+    cell.detailTextLabel.text = location.location;
     return cell;
 }
 

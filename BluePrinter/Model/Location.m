@@ -15,23 +15,39 @@ NSArray *locations;
 
 +(int)locationCount
 {
-    return 25;
+    return locations.count;
 }
 
 +(instancetype)locationAtIndex:(int)index
 {
-    return nil;
+    return locations[index];
 }
 
 +(void)refreshLocations:(void (^)(BOOL))completion
+{    
+    [self fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
+        if (response.success)
+            locations = objects;
+        if (completion)
+            completion(response.success);
+    }];
+}
+
+#pragma mark - MPrintObject fields
+
++(NSString *)APIEndpoint
 {
-    int64_t delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        completion(YES);
-    });
-    
-    MPrintRequest *request = [[MPrintRequest alloc] initWithEndpoint:@"/queues"];
+    return @"/queues";
+}
+
++(NSDictionary *)fieldConversions
+{
+    return @{
+             @"name" : @"name",
+             @"display_name" : @"displayName",
+             @"sub_campus_area" : @"subCampusArea",
+             @"location" : @"location",
+             };
 }
 
 @end

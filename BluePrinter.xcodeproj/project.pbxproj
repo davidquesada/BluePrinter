@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63613C9B1898B308007CD749 /* MPrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9A1898B308007CD749 /* MPrintObject.m */; };
 		63AA558B1888B44F0073D214 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558A1888B44F0073D214 /* Account.m */; };
 		63AA558E1888F2980073D214 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558D1888F2980073D214 /* LoginViewController.m */; };
 		B20C187218863E890088EE73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187118863E890088EE73 /* UIKit.framework */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63613C991898B308007CD749 /* MPrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintObject.h; path = Model/Network/MPrintObject.h; sourceTree = "<group>"; };
+		63613C9A1898B308007CD749 /* MPrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintObject.m; path = Model/Network/MPrintObject.m; sourceTree = "<group>"; };
 		63AA55891888B44F0073D214 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Account.h; path = Model/Account.h; sourceTree = "<group>"; };
 		63AA558A1888B44F0073D214 /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Account.m; path = Model/Account.m; sourceTree = "<group>"; };
 		63AA558C1888F2980073D214 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				B20C18B7188646EF0088EE73 /* MPrintResponse.h */,
 				B20C18B8188646EF0088EE73 /* MPrintResponse.m */,
 				63AA558F188903940073D214 /* Network.h */,
+				63613C991898B308007CD749 /* MPrintObject.h */,
+				63613C9A1898B308007CD749 /* MPrintObject.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				63AA558B1888B44F0073D214 /* Account.m in Sources */,
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,
+				63613C9B1898B308007CD749 /* MPrintObject.m in Sources */,
 				B20C18AE188641520088EE73 /* JobsViewController.m in Sources */,
 				B20C18B2188641AA0088EE73 /* Location.m in Sources */,
 				B20C18B61886458C0088EE73 /* MPrintRequest.m in Sources */,

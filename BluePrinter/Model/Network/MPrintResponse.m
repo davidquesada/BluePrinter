@@ -8,6 +8,35 @@
 
 #import "MPrintResponse.h"
 
+MPrintStatusCode statusCodeForStatusString(NSString *statusString)
+{
+    if (!statusString || [statusString isEqualToString:@"failure"])
+        return MPrintStatusCodeFailed;
+    if ([statusString isEqualToString:@"success"])
+        return MPrintStatusCodeSuccess;
+    return MPrintStatusCodeOther;
+}
+
 @implementation MPrintResponse
+
+-(NSString *)statusString
+{
+    return [self.jsonObject valueForKey:@"status"];
+}
+
+-(BOOL)success
+{
+    return self.statusCode == MPrintStatusCodeSuccess;
+}
+
+-(NSArray *)results
+{
+    return [self.jsonObject valueForKey:@"result"];
+}
+
+-(NSString *)message
+{
+    return [self.jsonObject valueForKey:@"status_message"];
+}
 
 @end

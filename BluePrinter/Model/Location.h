@@ -7,12 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MPrintObject.h"
 
-@interface Location : NSObject
+@interface Location : MPrintObject
 
 +(int)locationCount;
 +(instancetype)locationAtIndex:(int)index;
 
 +(void)refreshLocations:(void (^)(BOOL success))completion;
+
+@property NSString *name; // Technical name.
+@property NSString *displayName;
+
+@property NSString *subCampusArea;
+@property NSString *location;
 
 @end
