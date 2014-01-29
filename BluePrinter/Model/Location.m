@@ -35,7 +35,7 @@ NSArray *locations;
 
 #pragma mark - MPrintObject fields
 
-+(NSString *)APIEndpoint
++(NSString *)fetchAPIEndpoint
 {
     return @"/queues";
 }

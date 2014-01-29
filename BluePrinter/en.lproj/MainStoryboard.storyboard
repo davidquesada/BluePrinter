@@ -74,16 +74,42 @@
             </objects>
             <point key="canvasLocation" x="1308" y="1915"/>
         </scene>
-        <!--View Controller - Files-->
+        <!--Services View Controller - Files-->
         <scene sceneID="hth-4q-GYT">
             <objects>
-                <viewController id="a6P-uQ-erI" sceneMemberID="viewController">
+                <viewController id="a6P-uQ-erI" customClass="ServicesViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ykg-wx-4NQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="serviceCell" textLabel="Dvl-xg-7qd" style="IBUITableViewCellStyleDefault" id="hy7-BC-7ni">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hy7-BC-7ni" id="Zp9-1N-CUd">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dvl-xg-7qd">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="a6P-uQ-erI" id="gXe-CV-wFJ"/>
+                            <outlet property="delegate" destination="a6P-uQ-erI" id="KYR-aj-Vu3"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Files" id="h6B-ah-wKR"/>
+                    <connections>
+                        <outlet property="tableView" destination="Ykg-wx-4NQ" id="P2T-1o-7oD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nUn-S6-sm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

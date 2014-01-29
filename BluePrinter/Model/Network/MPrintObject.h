@@ -14,6 +14,8 @@ typedef void (^MPrintFetchHandler)(NSMutableArray *objects, MPrintResponse *resp
 
 @interface MPrintObject : NSObject
 
+-(instancetype)initWithJSONDictionary:(NSDictionary *)dictionary;
+
 #pragma mark - API's
 
 +(void)fetchWithCompletion:(MPrintFetchHandler)completion;
@@ -21,7 +23,7 @@ typedef void (^MPrintFetchHandler)(NSMutableArray *objects, MPrintResponse *resp
 
 #pragma mark - Override these in your subclasses
 
-+(NSString *)APIEndpoint;
++(NSString *)fetchAPIEndpoint;
 +(NSDictionary *)fieldConversions;
 
 @end

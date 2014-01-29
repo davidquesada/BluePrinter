@@ -27,11 +27,11 @@ static NSString * const MPrintObjectDefaultAPIEndpoint = @"You must subclass MPr
 
 +(void)fetchWithArguments:(NSDictionary *)args completion:(MPrintFetchHandler)completion
 {
-    if ([self APIEndpoint] == MPrintObjectDefaultAPIEndpoint)
+    if ([self fetchAPIEndpoint] == MPrintObjectDefaultAPIEndpoint)
         @throw MPrintObjectDefaultAPIEndpoint;
     
     //TODO: Actually do something with the arguments.
-    MPrintRequest *request = [[MPrintRequest alloc] initWithEndpoint:[self APIEndpoint]];
+    MPrintRequest *request = [[MPrintRequest alloc] initWithEndpoint:[self fetchAPIEndpoint]];
     [request performWithCompletion:^(MPrintResponse *response) {
         
         NSMutableArray *objects = nil;
@@ -59,9 +59,14 @@ static NSString * const MPrintObjectDefaultAPIEndpoint = @"You must subclass MPr
     return results;
 }
 
+-(instancetype)initWithJSONDictionary:(NSDictionary *)dictionary
+{
+    return self = [self init];
+}
+
 -(instancetype)initWithJSONDictionary:(NSDictionary *)dictionary conversions:(NSDictionary *)conversions
 {
-    if ((self = [self init]))
+    if ((self = [self initWithJSONDictionary:dictionary]))
     {
         [conversions enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             id val = [dictionary valueForKey:key];
@@ -74,7 +79,7 @@ static NSString * const MPrintObjectDefaultAPIEndpoint = @"You must subclass MPr
 
 #pragma mark - Overrideable Things.
 
-+(NSString *)APIEndpoint
++(NSString *)fetchAPIEndpoint
 {
     return MPrintObjectDefaultAPIEndpoint;
 }
