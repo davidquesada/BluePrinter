@@ -8,6 +8,8 @@
 
 #import "LocationsViewController.h"
 #import "Location.h"
+#import "Account.h"
+#import "LoginViewController.h"
 
 @interface LocationsViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak) IBOutlet UITableView *tableView;
@@ -37,6 +39,28 @@
     [Location refreshLocations:^(BOOL success) {
         [sender endRefreshing];
     }];
+}
+
+-(IBAction)check:(id)sender
+{
+    [Account checkLoginStatus:^(BOOL isLoggedIn) {
+        UIAlertView *alert = [[UIAlertView alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        
+        if (isLoggedIn)
+            alert.title = [Account main].username;
+        else
+            alert.title = @"Not logged in";
+        [alert show];
+        
+        NSLog(@"Done. Logged In: %d", isLoggedIn);
+    }];
+}
+
+-(IBAction)showLogin:(id)sender
+{
+    LoginViewController *view = [[LoginViewController alloc] init];
+    [self presentViewController:view animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDelegate/DataSource

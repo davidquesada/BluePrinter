@@ -10,4 +10,8 @@
 
 @interface MPrintResponse : NSObject
 
+@property NSData *data;
+@property int statusCode;
+@property NSDictionary *jsonObject;
+
 @end

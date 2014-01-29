@@ -18,7 +18,18 @@
                             <outlet property="delegate" destination="wcC-ek-sAg" id="ViN-tq-00l"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Locations" id="dkv-W1-ixU"/>
+                    <navigationItem key="navigationItem" title="Locations" id="dkv-W1-ixU">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="WQx-Y1-2lQ">
+                            <connections>
+                                <action selector="showLogin:" destination="wcC-ek-sAg" id="7Ik-GG-0qf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Check Login" id="ALp-Cv-H6w">
+                            <connections>
+                                <action selector="check:" destination="wcC-ek-sAg" id="5xj-BV-7lI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="eDs-8r-Wrw" id="khF-XP-OyO"/>
                     </connections>
@@ -27,16 +38,22 @@
             </objects>
             <point key="canvasLocation" x="1308" y="602"/>
         </scene>
-        <!--View Controller - Jobs-->
+        <!--Jobs View Controller - Jobs-->
         <scene sceneID="lOA-tk-KO0">
             <objects>
-                <viewController id="GBO-PJ-P0K" sceneMemberID="viewController">
+                <viewController id="GBO-PJ-P0K" customClass="JobsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZfY-Jd-5pr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Jobs" id="O9U-oe-cYS"/>
+                    <navigationItem key="navigationItem" title="Jobs" id="O9U-oe-cYS">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Npk-6u-CyF">
+                            <connections>
+                                <action selector="logout:" destination="GBO-PJ-P0K" id="zVc-Yt-JeQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCM-AS-xoi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

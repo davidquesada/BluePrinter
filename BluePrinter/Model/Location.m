@@ -7,6 +7,9 @@
 //
 
 #import "Location.h"
+#import "Network.h"
+
+NSArray *locations;
 
 @implementation Location
 
@@ -27,6 +30,8 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         completion(YES);
     });
+    
+    MPrintRequest *request = [[MPrintRequest alloc] initWithEndpoint:@"/queues"];
 }
 
 @end
