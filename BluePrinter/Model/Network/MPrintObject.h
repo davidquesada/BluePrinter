@@ -10,7 +10,8 @@
 
 @class MPrintResponse;
 
-typedef void (^MPrintFetchHandler)(NSMutableArray *objects, MPrintResponse *response) ;
+typedef void (^MPrintDataHandler)(NSData *data, MPrintResponse *response);
+typedef void (^MPrintFetchHandler)(NSMutableArray *objects, MPrintResponse *response);
 
 @interface MPrintObject : NSObject
 
