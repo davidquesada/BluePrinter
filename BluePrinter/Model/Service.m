@@ -8,6 +8,7 @@
 
 #import "Service.h"
 #import "MPrintResponse.h"
+#import "MPrintLocalService.h"
 
 NSMutableDictionary *savedServices;
 
@@ -17,8 +18,12 @@ NSMutableDictionary *savedServices;
 @property (readwrite) NSString *name;
 @property (readwrite) ServiceType type;
 
+@property MPrintLocalService *localService;
+
 -(instancetype)initWithServiceType:(ServiceType)type;
 +(void)clearSavedServices;
+
++(MPrintLocalService *)loadLocalService;
 
 @end
 
@@ -47,7 +52,17 @@ NSMutableDictionary *savedServices;
 
 +(instancetype)serviceWithType:(ServiceType)type
 {
+    if (type == ServiceTypeLocal)
+        return [self loadLocalService];
     return savedServices[@(type)];
+}
+
++(MPrintLocalService *)loadLocalService
+{
+    static MPrintLocalService *local = nil;
+    if (!local)
+        local = [[MPrintLocalService alloc] init];
+    return local;
 }
 
 +(NSString *)fetchAPIEndpoint
@@ -62,35 +77,6 @@ NSMutableDictionary *savedServices;
         self.type = type;
     }
     return self;
-}
-
--(BOOL)isConnected
-{
-    return self.connectedStatus != 0;
-}
-
--(BOOL)supportsDownload
-{
-    return NO;
-}
-
-+(NSDictionary *)fieldConversions
-{
-    return @{
-             @"description" : @"description",
-             @"is_connected" : @"connectedStatus",
-             @"name" : @"name",
-             };
-}
-
--(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion
-{
-    
-}
-
--(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion
-{
-    @throw @"Downloading service files is currently not supported.";
 }
 
 -(instancetype)initWithJSONDictionary:(NSDictionary *)dictionary
@@ -108,6 +94,71 @@ NSMutableDictionary *savedServices;
         savedServices[@(realtype)] = self;
     }
     return self;
+}
+
+-(BOOL)isConnected
+{
+    return self.connectedStatus != 0;
+}
+
++(NSDictionary *)fieldConversions
+{
+    return @{
+             @"description" : @"description",
+             @"is_connected" : @"connectedStatus",
+             @"name" : @"name",
+             };
+}
+
+#pragma mark - Service Support Stubs
+
+-(BOOL)supportsDownload
+{
+    return NO;
+}
+
+-(BOOL)supportsDelete
+{
+    return NO;
+}
+
+-(BOOL)supportsImport
+{
+    return NO;
+}
+
+-(BOOL)supportsRename
+{
+    return NO;
+}
+
+#pragma mark - Fetching Stuff
+
+-(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion
+{
+    
+}
+
+-(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion
+{
+    @throw @"Downloading service files is currently not supported.";
+}
+
+#pragma mark - Service Stubs
+
+-(ServiceError)importFileAtLocalPath:(NSString *)path
+{
+    return ServiceErrorNotSupported;
+}
+
+-(ServiceError)deleteFileAtPath:(NSString *)path
+{
+    return ServiceErrorNotSupported;
+}
+
+-(ServiceError)renameFileAtPath:(NSString *)path toNewPath:(NSString *)newPath
+{
+    return ServiceErrorNotSupported;
 }
 
 @end

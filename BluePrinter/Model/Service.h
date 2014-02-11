@@ -16,6 +16,24 @@ typedef NS_ENUM(NSInteger, ServiceType)
     ServiceTypeDropbox,
     ServiceTypeDrive,
     ServiceTypeBox,
+    
+    // A wrapper around the local filesystem.
+    ServiceTypeLocal,
+};
+
+typedef NS_ENUM(NSInteger, ServiceError)
+{
+    // No error.
+    ServiceErrorNone,
+    
+    // Generic failure case.
+    ServiceErrorFailure,
+    
+    // The specified operation is not supported for this service.
+    ServiceErrorNotSupported,
+    
+    // Attempted to rename/save/import a file to a path that already exists.
+    ServiceErrorFileExists,
 };
 
 @interface Service : MPrintObject
@@ -28,8 +46,18 @@ typedef NS_ENUM(NSInteger, ServiceType)
 @property (readonly) NSString *name;
 @property (readonly) ServiceType type;
 @property (readonly) BOOL supportsDownload;
+@property (readonly) BOOL supportsDelete;
+@property (readonly) BOOL supportsImport;
+@property (readonly) BOOL supportsRename;
 
+// The 'objects' property of the completion is an array of ServiceFile objects.
 -(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion;
 -(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion;
+
+#pragma mark - File Manipulation Methods
+
+-(ServiceError)importFileAtLocalPath:(NSString *)path;
+-(ServiceError)deleteFileAtPath:(NSString *)path;
+-(ServiceError)renameFileAtPath:(NSString *)path toNewPath:(NSString *)newPath;
 
 @end

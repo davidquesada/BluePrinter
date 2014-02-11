@@ -13,6 +13,7 @@
 		637E8295189B811000DA9A35 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 637E8294189B811000DA9A35 /* ServiceFile.m */; };
 		63AA558B1888B44F0073D214 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558A1888B44F0073D214 /* Account.m */; };
 		63AA558E1888F2980073D214 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558D1888F2980073D214 /* LoginViewController.m */; };
+		63C50C7218A9F7E300D63876 /* MPrintLocalService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50C7118A9F7E300D63876 /* MPrintLocalService.m */; };
 		B20C187218863E890088EE73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187118863E890088EE73 /* UIKit.framework */; };
 		B20C187418863E890088EE73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187318863E890088EE73 /* Foundation.framework */; };
 		B20C187618863E890088EE73 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187518863E890088EE73 /* CoreGraphics.framework */; };
@@ -46,6 +47,8 @@
 		63AA558C1888F2980073D214 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
 		63AA558D1888F2980073D214 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllers/LoginViewController.m; sourceTree = "<group>"; };
 		63AA558F188903940073D214 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Network.h; path = Model/Network/Network.h; sourceTree = "<group>"; };
+		63C50C7018A9F7E300D63876 /* MPrintLocalService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintLocalService.h; path = Model/Services/MPrintLocalService.h; sourceTree = "<group>"; };
+		63C50C7118A9F7E300D63876 /* MPrintLocalService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintLocalService.m; path = Model/Services/MPrintLocalService.m; sourceTree = "<group>"; };
 		B20C186D18863E890088EE73 /* BluePrinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluePrinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B20C187118863E890088EE73 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B20C187318863E890088EE73 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -90,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63C50C6F18A9F7AA00D63876 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				63C50C7018A9F7E300D63876 /* MPrintLocalService.h */,
+				63C50C7118A9F7E300D63876 /* MPrintLocalService.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		B20C186218863E890088EE73 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				B20C18B3188645750088EE73 /* Network */,
+				63C50C6F18A9F7AA00D63876 /* Services */,
 				B20C18B0188641AA0088EE73 /* Location.h */,
 				B20C18B1188641AA0088EE73 /* Location.m */,
 				63AA55891888B44F0073D214 /* Account.h */,
@@ -269,6 +282,7 @@
 				B20C188218863E890088EE73 /* AppDelegate.m in Sources */,
 				B20C18A2188641040088EE73 /* FilesViewController.m in Sources */,
 				63613C9E1898CC10007CD749 /* Service.m in Sources */,
+				63C50C7218A9F7E300D63876 /* MPrintLocalService.m in Sources */,
 				63AA558B1888B44F0073D214 /* Account.m in Sources */,
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,

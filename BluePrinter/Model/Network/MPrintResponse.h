@@ -21,6 +21,8 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString);
 // status:  'success', 'failure', (Any more?)
 @interface MPrintResponse : NSObject
 
++(instancetype)successResponse;
+
 @property NSData *data;
 @property MPrintStatusCode statusCode;
 @property NSDictionary *jsonObject;

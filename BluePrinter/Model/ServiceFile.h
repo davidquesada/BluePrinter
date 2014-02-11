@@ -19,6 +19,9 @@
 @property (readonly) Service *service;
 @property (readonly) NSString *fullpath;
 
+-(id)init;
+-(id)initWithLocalPath:(NSString *)path;
+
 -(void)fetchDirectoryContentsWithCompletion:(MPrintFetchHandler)completion;
 -(void)downloadFileContentsWithCompletion:(MPrintDataHandler)completion;
 

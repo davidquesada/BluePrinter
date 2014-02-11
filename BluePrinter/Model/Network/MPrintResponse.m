@@ -19,6 +19,13 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString)
 
 @implementation MPrintResponse
 
++(instancetype)successResponse
+{
+    MPrintResponse *response = [[MPrintResponse alloc] init];
+    response.jsonObject = @{ @"status" : @"success" };
+    return response;
+}
+
 -(NSString *)statusString
 {
     return [self.jsonObject valueForKey:@"status"];
