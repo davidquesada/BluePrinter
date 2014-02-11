@@ -221,6 +221,11 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "David Quesada";
+				TargetAttributes = {
+					B20C186C18863E890088EE73 = {
+						DevelopmentTeam = 3F8V289RVT;
+					};
+				};
 			};
 			buildConfigurationList = B20C186718863E890088EE73 /* Build configuration list for PBXProject "BluePrinter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -352,10 +357,13 @@
 		B20C189D18863E890088EE73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BluePrinter/BluePrinter-Prefix.pch";
 				INFOPLIST_FILE = "BluePrinter/BluePrinter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -363,10 +371,13 @@
 		B20C189E18863E890088EE73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BluePrinter/BluePrinter-Prefix.pch";
 				INFOPLIST_FILE = "BluePrinter/BluePrinter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
