@@ -12,7 +12,7 @@
 #import "ServiceFile.h"
 #import "AppDelegate.h"
 
-@interface PrintJobTableViewController ()
+@interface PrintJobTableViewController ()<ChoosePrinterViewControllerDelegate>
 {
     BOOL _canPrint;
 }
@@ -70,6 +70,7 @@
 -(IBAction)choosePrinter:(id)sender
 {
     ChoosePrinterViewController *controller = [[ChoosePrinterViewController alloc] init];
+    controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -84,8 +85,8 @@
     if (self.request.printLocation)
     {
         self.printerCell.textLabel.textColor = [UIColor blackColor];
-        self.printerCell.textLabel.text = self.request.printLocation.name;
-        self.printerCell.detailTextLabel.text = self.request.printLocation.description;
+        self.printerCell.textLabel.text = self.request.printLocation.displayName;
+        self.printerCell.detailTextLabel.text = self.request.printLocation.location;
     } else {
         self.printerCell.textLabel.textColor = [UIColor lightGrayColor];
         self.printerCell.textLabel.text = @"Select a Printer";
@@ -108,6 +109,14 @@
         _printCell.textLabel.textColor = [UIColor lightGrayColor];
     }
 
+}
+
+#pragma mark - ChoosePrinterViewControllerDelegate
+
+-(void)choosePrinterViewController:(ChoosePrinterViewController *)controller didChoosePrintLocation:(Location *)location
+{
+    self.request.printLocation = location;
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 #pragma mark - UITableView Stuff

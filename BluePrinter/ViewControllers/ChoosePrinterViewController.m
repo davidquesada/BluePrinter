@@ -7,43 +7,66 @@
 //
 
 #import "ChoosePrinterViewController.h"
+#import "Location.h"
 
-@interface ChoosePrinterViewController ()
+@interface ChoosePrinterViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
 @implementation ChoosePrinterViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = @"Printing Locations";
 }
 
-- (void)didReceiveMemoryWarning
+-(void)loadView
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    UITableView *table = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.view = table;
+    
+    table.dataSource = self;
+    table.delegate = self;
+    
+    table.rowHeight = 52;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)refresh
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
 }
-*/
+
+#pragma mark - UITableView Stuff
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yo"];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"yo"];
+    }
+    
+    Location *location = [Location locationAtIndex:indexPath.row];
+    
+    cell.textLabel.text = location.displayName;
+    cell.detailTextLabel.text = location.location;
+    
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [Location locationCount];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Location *loc = [Location locationAtIndex:indexPath.row];
+    
+    if ([self.delegate respondsToSelector:@selector(choosePrinterViewController:didChoosePrintLocation:)])
+        [self.delegate choosePrinterViewController:self didChoosePrintLocation:loc];
+}
 
 @end

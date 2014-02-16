@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class ChoosePrinterViewController;
+@class Location;
+
+@protocol ChoosePrinterViewControllerDelegate <NSObject>
+@optional
+-(void)choosePrinterViewController:(ChoosePrinterViewController *)controller
+            didChoosePrintLocation:(Location *)location;
+@end
+
 @interface ChoosePrinterViewController : UIViewController
+@property(weak) id<ChoosePrinterViewControllerDelegate> delegate;
 
 @end

@@ -73,7 +73,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NO"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NO"];
+    
+    if (!cell)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NO"];
     
     Location *location = [Location locationAtIndex:indexPath.row];
     cell.textLabel.text = location.displayName;
