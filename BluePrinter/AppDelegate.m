@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MPrintLocalService.h"
 
 @implementation AppDelegate
 
@@ -41,6 +42,14 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSString *path = [url path];
+    [[Service localService] importFileAtLocalPath:path];
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    return YES;
 }
 
 @end

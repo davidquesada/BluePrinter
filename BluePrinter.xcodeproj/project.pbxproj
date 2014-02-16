@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6355364218B0682B00E88433 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6355364118B0682B00E88433 /* FileCell.xib */; };
 		63613C9B1898B308007CD749 /* MPrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9A1898B308007CD749 /* MPrintObject.m */; };
 		63613C9E1898CC10007CD749 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9D1898CC10007CD749 /* Service.m */; };
 		63613CA11898D095007CD749 /* ServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613CA01898D095007CD749 /* ServicesViewController.m */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6355364118B0682B00E88433 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FileCell.xib; path = Nibs/FileCell.xib; sourceTree = "<group>"; };
 		63613C991898B308007CD749 /* MPrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintObject.h; path = Model/Network/MPrintObject.h; sourceTree = "<group>"; };
 		63613C9A1898B308007CD749 /* MPrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintObject.m; path = Model/Network/MPrintObject.m; sourceTree = "<group>"; };
 		63613C9C1898CC10007CD749 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Service.h; path = Model/Service.h; sourceTree = "<group>"; };
@@ -99,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6355364018B067FF00E88433 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				6355364118B0682B00E88433 /* FileCell.xib */,
+			);
+			name = Nibs;
+			sourceTree = "<group>";
+		};
 		63C50C6F18A9F7AA00D63876 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +148,7 @@
 		B20C187718863E890088EE73 /* BluePrinter */ = {
 			isa = PBXGroup;
 			children = (
+				6355364018B067FF00E88433 /* Nibs */,
 				B20C188018863E890088EE73 /* AppDelegate.h */,
 				B20C188118863E890088EE73 /* AppDelegate.m */,
 				B20C188918863E890088EE73 /* MainStoryboard.storyboard */,
@@ -275,6 +286,7 @@
 				B20C187C18863E890088EE73 /* InfoPlist.strings in Resources */,
 				B20C188418863E890088EE73 /* Default.png in Resources */,
 				B20C188618863E890088EE73 /* Default@2x.png in Resources */,
+				6355364218B0682B00E88433 /* FileCell.xib in Resources */,
 				B20C188818863E890088EE73 /* Default-568h@2x.png in Resources */,
 				B20C188B18863E890088EE73 /* MainStoryboard.storyboard in Resources */,
 			);

@@ -8,6 +8,7 @@
 
 #import "ServicesViewController.h"
 #import "Service.h"
+#import "FilesViewController.h"
 
 @interface ServicesViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak) IBOutlet UITableView *tableView;
@@ -42,6 +43,11 @@
         [sender endRefreshing];
         [self.tableView reloadData];
     }];
+}
+
+-(IBAction)showLocalFiles:(id)sender
+{
+    [self.navigationController pushViewController:[[FilesViewController alloc] initWithService:[Service localService]] animated:YES];
 }
 
 #pragma mark - UITableView Methods

@@ -41,6 +41,8 @@ typedef NS_ENUM(NSInteger, ServiceError)
 +(ServiceType)serviceTypeFromString:(NSString *)string;
 +(instancetype)serviceWithType:(ServiceType)type;
 
++(instancetype)localService;
+
 @property (readonly) NSString *description;
 @property (readonly) BOOL isConnected;
 @property (readonly) NSString *name;

@@ -57,6 +57,11 @@ NSMutableDictionary *savedServices;
     return savedServices[@(type)];
 }
 
++(instancetype)localService
+{
+    return [self loadLocalService];
+}
+
 +(MPrintLocalService *)loadLocalService
 {
     static MPrintLocalService *local = nil;

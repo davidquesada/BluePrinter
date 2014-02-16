@@ -23,6 +23,8 @@
     self = [super init];
     if (self) {
         _directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) lastObject];
+        _directory = [_directory stringByAppendingPathComponent:@"LocalFiles"];
+        [[NSFileManager defaultManager] createDirectoryAtPath:_directory withIntermediateDirectories:NO attributes:nil error:nil];
     }
     return self;
 }

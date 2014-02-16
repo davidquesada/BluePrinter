@@ -7,20 +7,52 @@
 //
 
 #import "FilesViewController.h"
+#import "Service.h"
+#import "ServiceFile.h"
 
-@interface FilesViewController ()
+@interface FilesViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    BOOL _hasAppeared;
+}
+@property(readwrite) Service *service;
+@property(readwrite) NSString *path;
 
+@property NSArray *files;
+
+@property(weak) UITableView *tableView;
+@property(weak) UIRefreshControl *refresh;
 @end
 
 @implementation FilesViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithService:(Service *)service path:(NSString *)path
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if ((self = [self init]))
+    {
+        self.service = service;
+        self.path = path;
     }
     return self;
+}
+-(id)initWithService:(Service *)service
+{
+    return self = [self initWithService:service path:@"/"];
+}
+
+-(void)loadView
+{
+    self.view = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = (id)self.view;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 64.0;
+    [self.tableView registerNib:[UINib nibWithNibName:@"FileCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"fileCell"];
+    
+    UIRefreshControl *ref = [[UIRefreshControl alloc] init];
+    [self.tableView addSubview:ref];
+    [ref addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    
+    self.navigationItem.title = [self.path lastPathComponent];
 }
 
 - (void)viewDidLoad
@@ -29,10 +61,48 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if (!_hasAppeared)
+    {
+        _hasAppeared = YES;
+        [self refresh:self.refresh];
+    }
+}
+
+-(void)refresh:(UIRefreshControl *)sender
+{
+    if (!self.refresh.isRefreshing)
+        [self.refresh beginRefreshing];
+    [self.service fetchDirectoryInfoForPath:self.path completion:^(NSMutableArray *objects, MPrintResponse *response) {
+        self.files = objects;
+        [sender endRefreshing];
+        [self.tableView reloadData];
+    }];
+}
+
+#pragma mark - UITableView Stuff
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"fileCell"];
+    ServiceFile *file = _files[indexPath.row];
+    
+    cell.textLabel.text = file.name;
+    
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _files.count;
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.service.supportsDelete)
+        return UITableViewCellEditingStyleDelete;
+    return UITableViewCellEditingStyleNone;
 }
 
 @end
