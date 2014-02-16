@@ -11,5 +11,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (readonly) UIStoryboard *mainStoryboard;
+
++(instancetype)sharedDelegate;
 
 @end

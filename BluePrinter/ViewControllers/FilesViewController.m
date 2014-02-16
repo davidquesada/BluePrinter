@@ -9,6 +9,8 @@
 #import "FilesViewController.h"
 #import "Service.h"
 #import "ServiceFile.h"
+#import "PrintRequest.h"
+#import "PrintJobTableViewController.h"
 
 @interface FilesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -58,7 +60,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -103,6 +104,26 @@
     if (self.service.supportsDelete)
         return UITableViewCellEditingStyleDelete;
     return UITableViewCellEditingStyleNone;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ServiceFile *file = _files[indexPath.row];
+    if (file.isDirectory)
+    {
+        NSLog(@"I Still need to support directories.");
+        return;
+    }
+    
+    PrintRequest *req = [[PrintRequest alloc] init];
+    req.file = file;
+    
+    PrintJobTableViewController *controller = [[PrintJobTableViewController alloc] initWithPrintRequest:req];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

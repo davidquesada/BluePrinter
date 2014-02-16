@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6355364218B0682B00E88433 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6355364118B0682B00E88433 /* FileCell.xib */; };
+		6355364518B0716900E88433 /* PrintJobTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6355364418B0716900E88433 /* PrintJobTableViewController.m */; };
+		6355364818B07BE100E88433 /* ChoosePrinterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6355364718B07BE100E88433 /* ChoosePrinterViewController.m */; };
 		63613C9B1898B308007CD749 /* MPrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9A1898B308007CD749 /* MPrintObject.m */; };
 		63613C9E1898CC10007CD749 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9D1898CC10007CD749 /* Service.m */; };
 		63613CA11898D095007CD749 /* ServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613CA01898D095007CD749 /* ServicesViewController.m */; };
@@ -38,6 +40,10 @@
 
 /* Begin PBXFileReference section */
 		6355364118B0682B00E88433 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FileCell.xib; path = Nibs/FileCell.xib; sourceTree = "<group>"; };
+		6355364318B0716900E88433 /* PrintJobTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintJobTableViewController.h; path = ViewControllers/PrintJobTableViewController.h; sourceTree = "<group>"; };
+		6355364418B0716900E88433 /* PrintJobTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintJobTableViewController.m; path = ViewControllers/PrintJobTableViewController.m; sourceTree = "<group>"; };
+		6355364618B07BE100E88433 /* ChoosePrinterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChoosePrinterViewController.h; path = ViewControllers/ChoosePrinterViewController.h; sourceTree = "<group>"; };
+		6355364718B07BE100E88433 /* ChoosePrinterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChoosePrinterViewController.m; path = ViewControllers/ChoosePrinterViewController.m; sourceTree = "<group>"; };
 		63613C991898B308007CD749 /* MPrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintObject.h; path = Model/Network/MPrintObject.h; sourceTree = "<group>"; };
 		63613C9A1898B308007CD749 /* MPrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintObject.m; path = Model/Network/MPrintObject.m; sourceTree = "<group>"; };
 		63613C9C1898CC10007CD749 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Service.h; path = Model/Service.h; sourceTree = "<group>"; };
@@ -188,6 +194,10 @@
 				63AA558D1888F2980073D214 /* LoginViewController.m */,
 				63613C9F1898D095007CD749 /* ServicesViewController.h */,
 				63613CA01898D095007CD749 /* ServicesViewController.m */,
+				6355364318B0716900E88433 /* PrintJobTableViewController.h */,
+				6355364418B0716900E88433 /* PrintJobTableViewController.m */,
+				6355364618B07BE100E88433 /* ChoosePrinterViewController.h */,
+				6355364718B07BE100E88433 /* ChoosePrinterViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -303,6 +313,7 @@
 				B20C187E18863E890088EE73 /* main.m in Sources */,
 				B20C188218863E890088EE73 /* AppDelegate.m in Sources */,
 				B20C18A2188641040088EE73 /* FilesViewController.m in Sources */,
+				6355364818B07BE100E88433 /* ChoosePrinterViewController.m in Sources */,
 				63613C9E1898CC10007CD749 /* Service.m in Sources */,
 				63C50C7518AA107F00D63876 /* PrintRequest.m in Sources */,
 				63C50C7218A9F7E300D63876 /* MPrintLocalService.m in Sources */,
@@ -316,6 +327,7 @@
 				B20C18B2188641AA0088EE73 /* Location.m in Sources */,
 				B20C18B61886458C0088EE73 /* MPrintRequest.m in Sources */,
 				63AA558E1888F2980073D214 /* LoginViewController.m in Sources */,
+				6355364518B0716900E88433 /* PrintJobTableViewController.m in Sources */,
 				B20C18B9188646EF0088EE73 /* MPrintResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,11 +9,27 @@
 #import "AppDelegate.h"
 #import "MPrintLocalService.h"
 
+AppDelegate *sharedDelegate;
+
 @implementation AppDelegate
+
++(instancetype)sharedDelegate
+{
+    return sharedDelegate;
+}
+
+-(UIStoryboard *)mainStoryboard
+{
+    static UIStoryboard *board = nil;
+    if (!board)
+        board = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]];
+    return board;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    sharedDelegate = self;
     return YES;
 }
 							

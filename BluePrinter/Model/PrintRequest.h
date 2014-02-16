@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class ServiceFile;
-@class Location;
+#import "Location.h"
+#import "ServiceFile.h"
+
 @class PrintJob;
 @class MPrintResponse;
 

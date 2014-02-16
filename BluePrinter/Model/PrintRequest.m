@@ -14,6 +14,15 @@
 
 @implementation PrintRequest
 
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        self.copies = 1;
+    }
+    return self;
+}
+
 -(void)send:(void (^)(PrintJob *, MPrintResponse *))completion
 {
 //    MPrintRequest *req = [[MPrintRequest alloc] initWithEndpoint:@"/jobs" method:POST];
