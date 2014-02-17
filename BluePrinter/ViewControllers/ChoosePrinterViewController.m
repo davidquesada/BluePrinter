@@ -12,6 +12,8 @@
 @interface ChoosePrinterViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property UISearchDisplayController *sdc;
 @property NSArray *searchResults;
+@property(weak) UIRefreshControl *refreshControl;
+@property(weak) UITableView *tableView;
 
 -(void)loadSearchResultsForString:(NSString *)string;
 
@@ -29,6 +31,7 @@
 {
     UITableView *table = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.view = table;
+    self.tableView = table;
     
     table.dataSource = self;
     table.delegate = self;
@@ -48,11 +51,30 @@
     
     // Due to a UIKit bug, we need to keep an additional strong reference to this.
     self.sdc = searchDisplayController;
+    
+    UIRefreshControl *ref = [[UIRefreshControl alloc] init];
+    [ref addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:ref];
+    self.refreshControl = ref;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (![Location locationCount])
+        [self refresh];
+    
 }
 
 -(void)refresh
 {
-    
+    if (!self.refreshControl.isRefreshing)
+        [self.refreshControl beginRefreshing];
+    [Location refreshLocations:^(BOOL success) {
+        if (success)
+            [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 -(void)dealloc
