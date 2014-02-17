@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UIWebViewDelegate>
 
 @end
 
@@ -23,14 +23,13 @@
         UIViewController *root = [[UIViewController alloc] init];
         root.view = view;
         
-        root.navigationItem.title = @"LoginPage";
-        root.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissWebView:)];
+        root.navigationItem.title = @"Login";
+        root.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissWebView:)];
         
         self.viewControllers = @[ root ];
         
-        
-        [view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://weblogin.umich.edu"]]];
-        
+        [view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://weblogin.umich.edu/?cosign-mprint&https://mprint.umich.edu/api"]]];
+        view.delegate = self;
     }
     return self;
 }
@@ -38,6 +37,38 @@
 -(IBAction)dismissWebView:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+#pragma mark - UIWebViewDelegate Methods
+
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *location = request.URL.description;
+
+    // If we are redirected to the mprint API page, then the login must have been successful.
+    if ([location isEqualToString:@"https://mprint.umich.edu/api"])
+    {
+        [self dismissWebView:nil];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
