@@ -23,6 +23,11 @@ NSArray *locations;
     return locations[index];
 }
 
++(NSArray *)allLocations
+{
+    return locations;
+}
+
 +(void)refreshLocations:(void (^)(BOOL))completion
 {    
     [self fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {

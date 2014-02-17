@@ -13,6 +13,7 @@
 
 +(int)locationCount;
 +(instancetype)locationAtIndex:(int)index;
++(NSArray *)allLocations;
 
 +(void)refreshLocations:(void (^)(BOOL success))completion;
 
