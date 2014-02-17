@@ -24,5 +24,6 @@
 
 -(void)fetchDirectoryContentsWithCompletion:(MPrintFetchHandler)completion;
 -(void)downloadFileContentsWithCompletion:(MPrintDataHandler)completion;
+-(NSData *)downloadFileContentsBlocking:(MPrintResponse **)response;
 
 @end

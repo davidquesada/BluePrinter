@@ -64,7 +64,19 @@
 {
     if (!_canPrint)
         return;
-    [[[UIAlertView alloc] initWithTitle:@"NotImplementedException" message:@"I'm sorry, Dave. I'm afraid I can't do that." delegate:nil cancelButtonTitle:@"Fine." otherButtonTitles:nil] show];
+    
+    NSAssert((self.request), @"Print request was null.");
+    
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    alert.title = @"Printing...";
+    [alert show];
+    
+    [self.request send:^(PrintJob *job, MPrintResponse *response) {
+        
+        [alert dismissWithClickedButtonIndex:0 animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
 }
 
 -(IBAction)choosePrinter:(id)sender

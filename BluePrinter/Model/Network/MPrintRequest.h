@@ -68,6 +68,10 @@ typedef NS_ENUM(NSInteger, Method)
 
 -(void)performWithCompletion:(void (^)(MPrintResponse *response))completion;
 
+
+-(void)addFormValue:(NSString *)value forKey:(NSString *)key;
+-(void)addFormData:(NSData *)data forKey:(NSString *)key withFilename:(NSString *)filename contentType:(NSString *)contentType;
+
 @property NSURL *customURL;
 @property NSTimeInterval timeout;
 

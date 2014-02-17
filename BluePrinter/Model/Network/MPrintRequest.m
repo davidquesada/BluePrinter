@@ -10,7 +10,11 @@
 #import "MPrintResponse.h"
 
 @interface MPrintRequest ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
-
+{
+    BOOL _isMultipartForm;
+    NSString *_boundary;
+    NSMutableData *_bodyData;
+}
 @property NSString *endpoint;
 @property Method method;
 
@@ -21,6 +25,8 @@
 
 @property NSMutableData *data;
 -(BOOL)createRequest; // Try to create an actual NSURLRequest object. return NO if not able to do so.
+-(void)makeMultipartForm;
+-(void)appendBoundary;
 
 @property MPrintResponse *response;
 
@@ -101,8 +107,6 @@
         return NO;
     self.started = YES;
     
-    //self.request = [[NSMutableURLRequest alloc] init];
-    
     self.request.URL = [self url];
     self.request.timeoutInterval = 1.0 + self.timeout;
     self.request.HTTPShouldHandleCookies = YES;
@@ -116,8 +120,8 @@
         default: [self.request setHTTPMethod:@"GET"];
     }
     
-    // What about request.body?
-    
+    if (_isMultipartForm)
+        [self.request setHTTPBody:_bodyData];
     
     return YES;
 }
@@ -141,6 +145,59 @@
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];
     [connection start];
+}
+
+#pragma mark - Multipart Form Stuff
+
+-(void)makeMultipartForm
+{
+    if (_isMultipartForm)
+        return;
+    _isMultipartForm = YES;
+    
+    self.method = POST;
+    self.request.HTTPMethod = @"POST";
+    _boundary = @"------------QUESOi7P3uVG8347RW8xu5H6aJCvSyAS947";
+    
+    _bodyData = [[NSMutableData alloc] init];
+    [self appendBoundary];
+    
+    id contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _boundary];
+    [self.request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+}
+
+-(void)appendBoundary
+{
+    [_bodyData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", _boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+}
+
+-(void)addFormValue:(NSString *)value forKey:(NSString *)key
+{
+    [self makeMultipartForm];
+   
+    // TODO: Here is probably where I would/should sanitize the data.
+    NSData *data = [value dataUsingEncoding:NSUTF8StringEncoding];
+    [self addFormData:data forKey:key withFilename:nil contentType:nil];
+}
+
+-(void)addFormData:(NSData *)data forKey:(NSString *)key withFilename:(NSString *)filename contentType:(NSString *)contentType
+{
+    [self makeMultipartForm];
+    
+    NSMutableString *header = [[NSMutableString alloc] initWithFormat:@"Content-Disposition: form-data; name=\"%@\"", key];
+    
+    if (filename)
+        [header appendFormat:@"; filename=\"%@\"", filename];
+    
+    if (contentType)
+        [header appendFormat:@"\r\nContent-Type: \"%@\"", contentType];
+    
+    [header appendString:@"\r\n\r\n"];
+    
+    NSData *headerData = [header dataUsingEncoding:NSUTF8StringEncoding];
+    [_bodyData appendData:headerData];
+    [_bodyData appendData:data];
+    [self appendBoundary];
 }
 
 #pragma mark - NSURLConnection Delegate Methods

@@ -76,4 +76,24 @@
     [self.service downloadFileWithName:self.name inPath:self.path completion:completion];
 }
 
+-(NSData *)downloadFileContentsBlocking:(MPrintResponse *__autoreleasing *)response
+{
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    
+    __block NSData *ret = nil;
+    
+    NSLog(@"Waiting for blocking file download...");
+    [self downloadFileContentsWithCompletion:^(NSData *data, MPrintResponse *actualResponse) {
+        
+        ret = data;
+        if (response)
+            *response = actualResponse;
+        
+        dispatch_semaphore_signal(sema);
+    }];
+    
+    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    return ret;
+}
+
 @end
