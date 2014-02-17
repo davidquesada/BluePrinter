@@ -1,0 +1,119 @@
+//
+//  MPrintCosignManager.m
+//  BluePrinter
+//
+//  Created by David Quesada on 2/17/14.
+//  Copyright (c) 2014 David Quesada. All rights reserved.
+//
+
+#import "MPrintCosignManager.h"
+
+static NSString * const MPCMEnabledKey = @"MPCMEnabled";
+static NSString * const MPCMCosignKey = @"MPCMCosign";
+static NSString * const MPCMMPrintCosignKey = @"MPCMMPrintCosign";
+
+static NSString *getCookieValue(NSString *domain, NSString *name);
+
+@implementation MPrintCosignManager
+
++(void)load
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSHTTPCookieStorage *cookieStore = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    
+    if (![def objectForKey:MPCMEnabledKey])
+        [self setPersistentCosignEnabled:YES];
+    
+    if (![self isPersistentCosignEnabled])
+        return;
+    
+    NSString *cosign = [def stringForKey:MPCMCosignKey];
+    NSString *mprintcosign = [def stringForKey:MPCMMPrintCosignKey];
+    
+    if (!cosign || !mprintcosign)
+    {
+        NSLog(@"Stored cosign values not found.");
+        return;
+    }
+    
+    NSHTTPCookie *cookie;
+    
+    cookie = [[NSHTTPCookie alloc] initWithProperties:@{
+                                                      NSHTTPCookieDomain : @"weblogin.umich.edu",
+                                                      NSHTTPCookieName : @"cosign",
+                                                      NSHTTPCookieValue : cosign,
+                                                      NSHTTPCookieSecure : @(YES),
+                                                      NSHTTPCookiePath : @"/"
+                                                      }];
+    [cookieStore setCookie:cookie];
+    
+    cookie = [[NSHTTPCookie alloc] initWithProperties:@{
+                                                        NSHTTPCookieDomain : @"mprint.umich.edu",
+                                                        NSHTTPCookieName : @"cosign-mprint",
+                                                        NSHTTPCookieValue : mprintcosign,
+                                                        NSHTTPCookieSecure : @(YES),
+                                                        NSHTTPCookiePath : @"/"
+                                                        }];
+    [cookieStore setCookie:cookie];
+}
+
++(void)didLogIn
+{
+    if (![self isPersistentCosignEnabled])
+        return;
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    
+    NSString *cosign = getCookieValue(@"https://weblogin.umich.edu", @"cosign");
+    NSString *mprintcosign = getCookieValue(@"https://mprint.umich.edu", @"cosign-mprint");
+    
+    NSLog(@"Storing values (CS,CS-MP) = (%@, %@)", cosign, mprintcosign);
+    
+    if (!cosign || !mprintcosign)
+        NSLog(@"Unable to retrieve cosign values after login!");
+    
+    [def setObject:cosign forKey:MPCMCosignKey];
+    [def setObject:mprintcosign forKey:MPCMMPrintCosignKey];
+    [def synchronize];
+}
+
++(void)didLogOut
+{
+    if (![self isPersistentCosignEnabled])
+        return;
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    [def removeObjectForKey:MPCMEnabledKey];
+    [def removeObjectForKey:MPCMCosignKey];
+    [def removeObjectForKey:MPCMMPrintCosignKey];
+    [def synchronize];
+}
+
++(BOOL)isPersistentCosignEnabled
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:MPCMEnabledKey];
+}
+
++(void)setPersistentCosignEnabled:(BOOL)enabled
+{
+    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:MPCMEnabledKey];
+    if (!enabled)
+        [self didLogOut];
+}
+
+@end
+
+NSString *getCookieValue(NSString *domain, NSString *name)
+{
+    NSHTTPCookieStorage *store = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSURL *url = [NSURL URLWithString:domain];
+    NSArray *cookies = [store cookiesForURL:url];
+    
+    for (NSHTTPCookie *cookie in cookies)
+    {
+        if ([cookie.name isEqualToString:name])
+            return cookie.value;
+    }
+    
+    return nil;
+}

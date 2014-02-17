@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "MPrintCosignManager.h"
 
 @interface LoginViewController ()<UIWebViewDelegate>
 
@@ -64,6 +65,7 @@
     // If we are redirected to the mprint API page, then the login must have been successful.
     if ([location isEqualToString:@"https://mprint.umich.edu/api"])
     {
+        [MPrintCosignManager didLogIn];
         [self dismissWebView:nil];
         return NO;
     }

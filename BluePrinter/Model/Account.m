@@ -9,6 +9,7 @@
 #import "Account.h"
 #import "MPrintRequest.h"
 #import "MPrintResponse.h"
+#import "MPrintCosignManager.h"
 
 @interface Account ()
 @property(readwrite) NSString *username;
@@ -66,6 +67,8 @@
         if (completion)
             completion(YES);
     }];
+    
+    [MPrintCosignManager didLogOut];
 }
 
 @end
