@@ -8,13 +8,17 @@
 
 #import "PrintJobTableViewController.h"
 #import "ChoosePrinterViewController.h"
+#import "SimpleChooserViewController.h"
 #import "PrintRequest.h"
 #import "ServiceFile.h"
 #import "AppDelegate.h"
 
-@interface PrintJobTableViewController ()<ChoosePrinterViewControllerDelegate>
+@interface PrintJobTableViewController ()<ChoosePrinterViewControllerDelegate, SimpleChooserViewControllerDelegate>
 {
     BOOL _canPrint;
+    __weak SimpleChooserViewController *orientationChooser;
+    __weak SimpleChooserViewController *pagesChooser;
+    __weak SimpleChooserViewController *doubleSidedChooser;
 }
 @property(readwrite) PrintRequest *request;
 
@@ -23,7 +27,12 @@
 @property(weak) IBOutlet UIStepper *copiesStepper;
 @property(weak) IBOutlet UITableViewCell *printCell;
 
+@property(weak) IBOutlet UITableViewCell *orientationCell;
+@property(weak) IBOutlet UITableViewCell *pagesPerSheetCell;
+@property(weak) IBOutlet UITableViewCell *doubleSidedCell;
+
 -(void)updateUI;
+-(void)showChooserForTriggeringCell:(UITableViewCell *)cell;
 
 @end
 
@@ -123,6 +132,39 @@
 
 }
 
+-(void)showChooserForTriggeringCell:(UITableViewCell *)cell
+{
+    SimpleChooserViewController *chooser;
+    if (cell == self.orientationCell)
+    {
+        chooser = [[SimpleChooserViewController alloc] initWithTitle:@"Orientation" options:@[ @"Portrait", @"Landscape" ] selectedString:self.orientationCell.detailTextLabel.text];
+        orientationChooser = chooser;
+    } else if (cell == self.pagesPerSheetCell)
+    {
+        chooser = [[SimpleChooserViewController alloc] initWithTitle:@"Pages Per Sheet" options:@[ @"1", @"2", @"4", @"6", @"9", @"16" ] selectedString:self.pagesPerSheetCell.detailTextLabel.text];
+        pagesChooser = chooser;
+    } else if (cell == self.doubleSidedCell)
+    {
+        chooser = [[SimpleChooserViewController alloc] initWithTitle:@"Double-Sided" options:@[ @"No", @"Bind on long edge", @"Bind on short edge"] selectedString:self.doubleSidedCell.detailTextLabel.text];
+        doubleSidedChooser = chooser;
+    }
+    
+    chooser.delegate = self;
+    [self.navigationController pushViewController:chooser animated:YES];
+}
+
+#pragma mark - SimpleChooserViewControllerDelegate Methods
+
+-(void)simpleChooser:(SimpleChooserViewController *)chooser didChooseItem:(NSString *)item atIndex:(NSInteger)index
+{
+    if (chooser == orientationChooser)
+        self.orientationCell.detailTextLabel.text = item;
+    else if (chooser == pagesChooser)
+        self.pagesPerSheetCell.detailTextLabel.text = item;
+    else if (chooser == doubleSidedChooser)
+        self.doubleSidedCell.detailTextLabel.text = item;
+}
+
 #pragma mark - ChoosePrinterViewControllerDelegate
 
 -(void)choosePrinterViewController:(ChoosePrinterViewController *)controller didChoosePrintLocation:(Location *)location
@@ -143,6 +185,8 @@
         [self choosePrinter:nil];
     else if (cell == _printCell)
         [self print:nil];
+    else
+        [self showChooserForTriggeringCell:cell];
 }
 
 @end
