@@ -11,10 +11,13 @@
 #import "FilesViewController.h"
 
 @interface ServicesViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    BOOL _hasReloaded;
+}
 @property (weak) IBOutlet UITableView *tableView;
 
-@property NSMutableArray *connectedServices;
-@property NSMutableArray *disconnectedServices;
+@property NSArray *sections;
+-(void)createSections;
 @end
 
 @implementation ServicesViewController
@@ -26,20 +29,31 @@
     [ref addTarget:self action:@selector(reload:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:ref];
     
-    self.connectedServices = [NSMutableArray new];
-    self.disconnectedServices = [NSMutableArray new];
+    self.tableView.rowHeight = 60.0;
+    self.tableView.sectionHeaderHeight = 30.0;
+    
+    _sections = @[ [NSMutableArray new], [NSMutableArray new], [NSMutableArray new], ];
+    [self createSections];
+    
+    [self reload:(id)self.tableView.tableHeaderView];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!_hasReloaded)
+    {
+        _hasReloaded = YES;
+        [self reload:(id)self.tableView.tableHeaderView];
+    }
 }
 
 -(void)reload:(UIRefreshControl *)sender
 {
-    [Service fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
-        for (Service *svc in objects)
-        {
-            if (svc.isConnected)
-                [self.connectedServices addObject:svc];
-            else
-                [self.disconnectedServices addObject:svc];
-        }
+    if (!sender.isRefreshing)
+        [sender beginRefreshing];
+    [Service refreshServices:^(NSMutableArray *objects, MPrintResponse *response) {
+        [self createSections];
         [sender endRefreshing];
         [self.tableView reloadData];
     }];
@@ -50,36 +64,46 @@
     [self.navigationController pushViewController:[[FilesViewController alloc] initWithService:[Service localService]] animated:YES];
 }
 
+-(void)createSections
+{
+    for (NSMutableArray *section in _sections)
+        [section removeAllObjects];
+    for (Service *service in [Service allServices])
+    {
+        if (service.type == ServiceTypeLocal)
+            [_sections[0] addObject:service];
+        else if (service.isConnected)
+            [_sections[1] addObject:service];
+        else
+            [_sections[2] addObject:service];
+    }
+}
+
 #pragma mark - UITableView Methods
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return _sections.count;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
+    if (section == 1 && [_sections[1] count])
         return @"Connected Services";
-    if (section == 1)
+    if (section == 2 && [_sections[2] count])
         return @"Inactive Services";
     return nil;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0)
-        return self.connectedServices.count;
-    if (section == 1)
-        return self.disconnectedServices.count;
-    return 0;
+    return [_sections[section] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"serviceCell"];
-    NSArray *array = (indexPath.section ? self.disconnectedServices : self.connectedServices);
-    Service *service = array[indexPath.row];
+    Service *service = _sections[indexPath.section][indexPath.row];
     
     cell.textLabel.text = service.description;
     
@@ -93,12 +117,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section != 0)
-        return;
-    Service *service = self.connectedServices[indexPath.row];
+
+    Service *service = _sections[indexPath.section][indexPath.row];
     if (!service.isConnected)
         return;
-    NSLog(@"TODO: Show the files in this service");
+    
+    FilesViewController *controller = [[FilesViewController alloc] initWithService:service];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

@@ -10,7 +10,8 @@
 #import "MPrintResponse.h"
 #import "MPrintLocalService.h"
 
-NSMutableDictionary *savedServices;
+NSDictionary *typedServices;
+NSArray *allServices;
 
 @interface Service ()
 @property (readwrite) NSString *description;
@@ -21,7 +22,8 @@ NSMutableDictionary *savedServices;
 @property MPrintLocalService *localService;
 
 -(instancetype)initWithServiceType:(ServiceType)type;
-+(void)clearSavedServices;
+-(void)updateStatus:(NSDictionary *)status;
+
 
 +(MPrintLocalService *)loadLocalService;
 
@@ -42,19 +44,9 @@ NSMutableDictionary *savedServices;
     return (ServiceType)[dict[string] integerValue];
 }
 
-+(void)clearSavedServices
-{
-    if (savedServices)
-        [savedServices removeAllObjects];
-    else
-        savedServices = [NSMutableDictionary new];
-}
-
 +(instancetype)serviceWithType:(ServiceType)type
 {
-    if (type == ServiceTypeLocal)
-        return [self loadLocalService];
-    return savedServices[@(type)];
+    return typedServices[@(type)];
 }
 
 +(instancetype)localService
@@ -70,6 +62,52 @@ NSMutableDictionary *savedServices;
     return local;
 }
 
++(NSArray *)allServices
+{
+    return allServices;
+}
+
++(void)load
+{
+    Service *local, *ifs, *locker, *dropbox, *drive, *box;
+    
+    allServices = @[
+                    local =     [self localService],
+                    ifs =       [[Service alloc] initWithServiceType:ServiceTypeIFS],
+                    locker =    [[Service alloc] initWithServiceType:ServiceTypeLocker],
+                    dropbox =   [[Service alloc] initWithServiceType:ServiceTypeDropbox],
+                    drive =     [[Service alloc] initWithServiceType:ServiceTypeDrive],
+                    box =       [[Service alloc] initWithServiceType:ServiceTypeBox],
+                    ];
+    
+    typedServices = @{
+                      @(ServiceTypeLocal) : local,
+                      @(ServiceTypeIFS) : ifs,
+                      @(ServiceTypeLocker) : locker,
+                      @(ServiceTypeDropbox) : dropbox,
+                      @(ServiceTypeDrive) : drive,
+                      @(ServiceTypeBox) : box,
+                      };
+}
+
++(void)refreshServices:(MPrintFetchHandler)completion
+{
+    [self fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
+        if (response.success)
+        {
+            for (NSDictionary *dict in response.results)
+            {
+                ServiceType type = [self serviceTypeFromString:dict[@"name"]];
+                Service *svc = typedServices[@(type)];
+                [svc updateStatus:dict];
+            }
+        }
+        
+        if (completion)
+            completion(nil, response);
+    }];
+}
+
 +(NSString *)fetchAPIEndpoint
 {
     return @"/services";
@@ -80,23 +118,33 @@ NSMutableDictionary *savedServices;
     if ((self = [self init]))
     {
         self.type = type;
-    }
-    return self;
-}
-
--(instancetype)initWithJSONDictionary:(NSDictionary *)dictionary
-{
-    NSString *type = dictionary[@"name"];
-    if (!type)
-        return nil;
-    ServiceType realtype = [Service serviceTypeFromString:type];
-    if (realtype == ServiceTypeNone)
-        return nil;
-    if ((self = [self initWithServiceType:realtype]))
-    {
-        if (!savedServices)
-            savedServices = [NSMutableDictionary new];
-        savedServices[@(realtype)] = self;
+        switch (type) {
+            case ServiceTypeBox:
+                self.name = @"box";
+                self.description = @"Box";
+                break;
+            case ServiceTypeDrive:
+                self.name = @"drive";
+                self.description = @"Google Drive";
+                break;
+            case ServiceTypeDropbox:
+                self.name = @"dropbox";
+                self.description = @"Dropbox";
+                break;
+            case ServiceTypeIFS:
+                self.name = @"ifs";
+                self.description = @"MFile IFS";
+                break;
+            case ServiceTypeLocker:
+                self.name = @"locker";
+                self.description = @"MPrint Locker";
+                break;
+            case ServiceTypeLocal:
+                self.description = @"Saved Files";
+                break;
+            default:
+                break;
+        }
     }
     return self;
 }
@@ -106,13 +154,11 @@ NSMutableDictionary *savedServices;
     return self.connectedStatus != 0;
 }
 
-+(NSDictionary *)fieldConversions
+-(void)updateStatus:(NSDictionary *)status
 {
-    return @{
-             @"description" : @"description",
-             @"is_connected" : @"connectedStatus",
-             @"name" : @"name",
-             };
+    self.connectedStatus = [status[@"is_connected"] intValue];
+    self.name = status[@"name"];
+    self.description = status[@"description"];
 }
 
 #pragma mark - Service Support Stubs

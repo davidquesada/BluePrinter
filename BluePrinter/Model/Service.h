@@ -38,10 +38,14 @@ typedef NS_ENUM(NSInteger, ServiceError)
 
 @interface Service : MPrintObject
 
++(void)refreshServices:(MPrintFetchHandler)completion;
+
 +(ServiceType)serviceTypeFromString:(NSString *)string;
 +(instancetype)serviceWithType:(ServiceType)type;
 
 +(instancetype)localService;
+
++(NSArray *)allServices;
 
 @property (readonly) NSString *description;
 @property (readonly) BOOL isConnected;

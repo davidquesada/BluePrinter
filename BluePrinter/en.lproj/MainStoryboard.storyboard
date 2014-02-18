@@ -106,13 +106,7 @@
                             <outlet property="delegate" destination="a6P-uQ-erI" id="KYR-aj-Vu3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Files" id="h6B-ah-wKR">
-                        <barButtonItem key="rightBarButtonItem" title="Local" id="efC-Ua-dZI">
-                            <connections>
-                                <action selector="showLocalFiles:" destination="a6P-uQ-erI" id="GY7-i2-W18"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Files" id="h6B-ah-wKR"/>
                     <connections>
                         <outlet property="tableView" destination="Ykg-wx-4NQ" id="P2T-1o-7oD"/>
                     </connections>

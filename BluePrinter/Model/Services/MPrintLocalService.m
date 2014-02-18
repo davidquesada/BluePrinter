@@ -33,7 +33,7 @@
 
 -(NSString *)description
 {
-    return [[UIDevice currentDevice] name];
+    return @"Saved Files";
 }
 
 -(BOOL)isConnected
@@ -43,7 +43,7 @@
 
 -(NSString *)name
 {
-    return @"Local Storage";
+    return @"local";
 }
 
 -(ServiceType)type
