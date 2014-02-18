@@ -29,8 +29,10 @@ NSArray *locations;
 }
 
 +(void)refreshLocations:(void (^)(BOOL))completion
-{    
-    [self fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
+{
+    // Adding "list" to the url makes it return fewer attributes about each queue.
+    // Less data, less conversion, less waste...
+    [self fetchWithArguments:@{ @"list" : @"" } completion:^(NSMutableArray *objects, MPrintResponse *response) {
         if (response.success)
             locations = objects;
         if (completion)
