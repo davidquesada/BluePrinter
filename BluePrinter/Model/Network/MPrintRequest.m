@@ -14,6 +14,7 @@
     BOOL _isMultipartForm;
     NSString *_boundary;
     NSMutableData *_bodyData;
+    NSMutableDictionary *_getParameters;
 }
 @property NSString *endpoint;
 @property Method method;
@@ -27,6 +28,8 @@
 -(BOOL)createRequest; // Try to create an actual NSURLRequest object. return NO if not able to do so.
 -(void)makeMultipartForm;
 -(void)appendBoundary;
+
+-(NSString *)getParameterString;
 
 @property MPrintResponse *response;
 
@@ -90,6 +93,10 @@
         return self.customURL;
 //    NSMUtableu
     NSString *s = [[self.class baseURL] stringByAppendingString:self.endpoint];
+    
+    if (_getParameters.count)
+        s = [s stringByAppendingString:[self getParameterString]];
+    
     NSLog(@"Building url: %@", s);
     return [NSURL URLWithString:s];
 }
@@ -128,10 +135,6 @@
 
 -(void)performWithCompletion:(void (^)(MPrintResponse *))completion
 {
-//    char *write = (char *)(0);
-//    *write = 'h';
-    
-    // NO. It's not here yet.
     if (![self createRequest])
         return;
     // TODO: If we fail here, do we want to call 'completion'?
@@ -145,6 +148,38 @@
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];
     [connection start];
+}
+
+-(void)addGetValue:(NSString *)value forKey:(NSString *)key
+{
+    if (!_getParameters)
+        _getParameters = [NSMutableDictionary new];
+    _getParameters[key] = value;
+}
+
+-(void)addGetValuesFromDictionary:(NSDictionary *)dict
+{
+    if (!_getParameters)
+        _getParameters = [dict mutableCopy];
+    else
+        [_getParameters addEntriesFromDictionary:dict];
+}
+
+-(NSString *)getParameterString
+{
+    if (!_getParameters.count)
+        return @"";
+    NSMutableArray *parts = [NSMutableArray new];
+    [_getParameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+
+        // TODO: Verify that this is sufficient sanitation/encoding for url parameters.
+        obj = [obj stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *part = [NSString stringWithFormat:@"%@=%@", key, obj];
+        [parts addObject:part];
+    }];
+    
+    NSString *join = [parts componentsJoinedByString:@"&"];
+    return [@"?" stringByAppendingString:join];
 }
 
 #pragma mark - Multipart Form Stuff

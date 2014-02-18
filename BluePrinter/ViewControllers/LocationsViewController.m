@@ -78,7 +78,7 @@
     if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NO"];
     
-    Location *location = [Location locationAtIndex:indexPath.row];
+    __weak Location *location = [Location locationAtIndex:indexPath.row];
     cell.textLabel.text = location.displayName;
     cell.detailTextLabel.text = location.location;
     return cell;

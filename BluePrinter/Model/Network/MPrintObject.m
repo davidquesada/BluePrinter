@@ -32,6 +32,7 @@ static NSString * const MPrintObjectDefaultAPIEndpoint = @"You must subclass MPr
     
     //TODO: Actually do something with the arguments.
     MPrintRequest *request = [[MPrintRequest alloc] initWithEndpoint:[self fetchAPIEndpoint]];
+    [request addGetValuesFromDictionary:args];
     [request performWithCompletion:^(MPrintResponse *response) {
         
         NSMutableArray *objects = nil;
