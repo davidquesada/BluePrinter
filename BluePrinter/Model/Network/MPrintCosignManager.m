@@ -105,15 +105,20 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
 +(void)userDidLogOut
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:MPrintUserDidLogOutNotification object:nil];
- 
-    if (![self isPersistentCosignEnabled])
-        return;
     
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def removeObjectForKey:MPCMEnabledKey];
     [def removeObjectForKey:MPCMCosignKey];
     [def removeObjectForKey:MPCMMPrintCosignKey];
     [def synchronize];
+    
+    NSHTTPCookieStorage *store = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    
+    for (NSHTTPCookie *cookie in store.cookies.copy)
+    {
+        if ([cookie.name isEqualToString:@"cosign"] || [cookie.name isEqualToString:@"cosign-mprint"])
+            [store deleteCookie:cookie];
+    }
 }
 
 +(BOOL)isPersistentCosignEnabled
