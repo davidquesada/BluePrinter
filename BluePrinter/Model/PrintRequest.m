@@ -53,12 +53,14 @@
     MPrintRequest *printReq = [[MPrintRequest alloc] initWithEndpoint:@"/jobs" method:POST];
     self.internalRequest = printReq;
     
-    NSMutableURLRequest *req = [printReq urlRequest];
-    
     [self attachFileToRequest];
     [self createRequestDictionary];
 
     [self.requestDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        
+        // Account for some NSNumbers in the request dictionary.
+        if (![obj isKindOfClass:[NSString class]])
+            obj = [obj description];
         [printReq addFormValue:obj forKey:key];
     }];
     

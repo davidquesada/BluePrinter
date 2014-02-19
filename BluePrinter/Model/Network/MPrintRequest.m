@@ -217,6 +217,8 @@
 
 -(void)addFormData:(NSData *)data forKey:(NSString *)key withFilename:(NSString *)filename contentType:(NSString *)contentType
 {
+    if (!data)
+        NSLog(@"Attempted to add nil data for form key: %@", key);
     [self makeMultipartForm];
     
     NSMutableString *header = [[NSMutableString alloc] initWithFormat:@"Content-Disposition: form-data; name=\"%@\"", key];

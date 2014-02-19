@@ -25,6 +25,9 @@
 @property(weak) IBOutlet UITableViewCell *printerCell;
 @property(weak) IBOutlet UILabel *copiesLabel;
 @property(weak) IBOutlet UIStepper *copiesStepper;
+@property(weak) IBOutlet UITextField *rangeTextField;
+@property(weak) IBOutlet UISwitch *scaleSwitch;
+
 @property(weak) IBOutlet UITableViewCell *printCell;
 
 @property(weak) IBOutlet UITableViewCell *orientationCell;
@@ -64,12 +67,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)cancel:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(IBAction)print:(id)sender
+-(void)print:(id)sender
 {
     if (!_canPrint)
         return;
@@ -88,17 +86,11 @@
     }];
 }
 
--(IBAction)choosePrinter:(id)sender
+-(void)choosePrinter:(id)sender
 {
     ChoosePrinterViewController *controller = [[ChoosePrinterViewController alloc] init];
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
-}
-
--(IBAction)stepperDidStep:(UIStepper *)stepper
-{
-    self.request.copies = (int)stepper.value;
-    [self updateUI];
 }
 
 -(void)updateUI
@@ -119,11 +111,14 @@
     else
         _copiesLabel.text = [NSString stringWithFormat:@"%d Copies", self.request.copies];
     
+    _rangeTextField.text = self.request.pageRange;
+    
     _canPrint = (self.request.printLocation != nil);
     
     _orientationCell.detailTextLabel.text = [self.request orientationDescription];
     _pagesPerSheetCell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.request.pagesPerSheet];
     _doubleSidedCell.detailTextLabel.text = [self.request doubleSidedDescription];
+    _scaleSwitch.on = self.request.fitToPage;
     
     if (_canPrint)
     {
@@ -138,7 +133,7 @@
 
 -(void)showChooserForTriggeringCell:(UITableViewCell *)cell
 {
-    SimpleChooserViewController *chooser;
+    SimpleChooserViewController *chooser = nil;
     if (cell == self.orientationCell)
     {
         chooser = [[SimpleChooserViewController alloc] initWithTitle:@"Orientation" options:@[ @"Portrait", @"Landscape" ] selectedString:self.orientationCell.detailTextLabel.text];
@@ -153,8 +148,34 @@
         doubleSidedChooser = chooser;
     }
     
+    if (!chooser)
+        return;
+    
     chooser.delegate = self;
     [self.navigationController pushViewController:chooser animated:YES];
+}
+
+#pragma mark - IBActions
+
+-(IBAction)cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(IBAction)stepperDidStep:(UIStepper *)stepper
+{
+    self.request.copies = (int)stepper.value;
+    [self updateUI];
+}
+
+-(IBAction)pageRangeDidChange:(id)sender
+{
+    self.request.pageRange = _rangeTextField.text;
+}
+
+-(IBAction)scaleSwitchDidChange:(id)sender
+{
+    self.request.fitToPage = _scaleSwitch.on;
 }
 
 #pragma mark - SimpleChooserViewControllerDelegate Methods
