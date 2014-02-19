@@ -21,6 +21,11 @@ typedef void (^MPrintFetchHandler)(NSMutableArray *objects, MPrintResponse *resp
 
 +(void)fetchWithCompletion:(MPrintFetchHandler)completion;
 +(void)fetchWithArguments:(NSDictionary *)args completion:(MPrintFetchHandler)completion;
++(void)fetchWithEndpoint:(NSString *)endpoint
+               arguments:(NSDictionary *)args
+              completion:(MPrintFetchHandler)completion;
++(void)fetchWithEndpoint:(NSString *)endpoint
+              completion:(MPrintFetchHandler)completion;
 
 #pragma mark - Override these in your subclasses
 

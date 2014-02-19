@@ -75,6 +75,9 @@ typedef NS_ENUM(NSInteger, Method)
 -(void)addGetValue:(NSString *)value forKey:(NSString *)key;
 -(void)addGetValuesFromDictionary:(NSDictionary *)dict;
 
+-(void)addBodyValue:(NSString *)value forKey:(NSString *)key;
+-(void)addBodyValuesFromDictionary:(NSDictionary *)dict;
+
 @property NSURL *customURL;
 @property NSTimeInterval timeout;
 

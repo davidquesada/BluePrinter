@@ -29,7 +29,6 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
 +(void)load
 {
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSHTTPCookieStorage *cookieStore = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     
     if (![def objectForKey:MPCMEnabledKey])
         [self setPersistentCosignEnabled:YES];

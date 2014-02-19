@@ -11,6 +11,7 @@
 #import "MPrintCosignManager.h"
 #import "Location.h"
 #import "Service.h"
+#import "PrintJob.h"
 
 AppDelegate *sharedDelegate;
 
@@ -83,6 +84,7 @@ AppDelegate *sharedDelegate;
     [Location refreshLocations:nil];
     [Location refreshRecentLocations:nil];
     [Service refreshServices:nil];
+    [PrintJob refreshUserJobs:nil];
 }
 
 @end

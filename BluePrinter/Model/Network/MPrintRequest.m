@@ -12,9 +12,10 @@
 @interface MPrintRequest ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 {
     BOOL _isMultipartForm;
+    BOOL _wantsBodyParameters;
     NSString *_boundary;
     NSMutableData *_bodyData;
-    NSMutableDictionary *_getParameters;
+    NSMutableDictionary *_parameters;
 }
 @property NSString *endpoint;
 @property Method method;
@@ -27,8 +28,10 @@
 @property NSMutableData *data;
 -(BOOL)createRequest; // Try to create an actual NSURLRequest object. return NO if not able to do so.
 -(void)makeMultipartForm;
+-(void)setWantsBodyParameters;
 -(void)appendBoundary;
 
+-(NSString *)parameterString;
 -(NSString *)getParameterString;
 
 @property MPrintResponse *response;
@@ -94,7 +97,7 @@
 //    NSMUtableu
     NSString *s = [[self.class baseURL] stringByAppendingString:self.endpoint];
     
-    if (_getParameters.count)
+    if (_parameters.count && !_wantsBodyParameters)
         s = [s stringByAppendingString:[self getParameterString]];
     
     NSLog(@"Building url: %@", s);
@@ -130,6 +133,11 @@
     if (_isMultipartForm)
         [self.request setHTTPBody:_bodyData];
     
+    if (_wantsBodyParameters)
+    {
+        [self.request setHTTPBody:[[self parameterString] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
     return YES;
 }
 
@@ -152,25 +160,25 @@
 
 -(void)addGetValue:(NSString *)value forKey:(NSString *)key
 {
-    if (!_getParameters)
-        _getParameters = [NSMutableDictionary new];
-    _getParameters[key] = value;
+    if (!_parameters)
+        _parameters = [NSMutableDictionary new];
+    _parameters[key] = value;
 }
 
 -(void)addGetValuesFromDictionary:(NSDictionary *)dict
 {
-    if (!_getParameters)
-        _getParameters = [dict mutableCopy];
+    if (!_parameters)
+        _parameters = [dict mutableCopy];
     else
-        [_getParameters addEntriesFromDictionary:dict];
+        [_parameters addEntriesFromDictionary:dict];
 }
 
--(NSString *)getParameterString
+-(NSString *)parameterString
 {
-    if (!_getParameters.count)
+    if (!_parameters.count)
         return @"";
     NSMutableArray *parts = [NSMutableArray new];
-    [_getParameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    [_parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 
         // TODO: Verify that this is sufficient sanitation/encoding for url parameters.
         obj = [obj stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -179,7 +187,38 @@
     }];
     
     NSString *join = [parts componentsJoinedByString:@"&"];
-    return [@"?" stringByAppendingString:join];
+    return join;
+}
+
+-(NSString *)getParameterString
+{
+    return [@"?" stringByAppendingString:[self parameterString]];
+}
+
+#pragma mark - Post Variable Stuff
+
+-(void)setWantsBodyParameters
+{
+    if (_wantsBodyParameters)
+        return;
+    _wantsBodyParameters = YES;
+}
+
+-(void)addBodyValue:(NSString *)value forKey:(NSString *)key
+{
+    [self setWantsBodyParameters];
+    if (!_parameters)
+        _parameters = [NSMutableDictionary new];
+    _parameters[key] = value;
+}
+
+-(void)addBodyValuesFromDictionary:(NSDictionary *)dict
+{
+    [self setWantsBodyParameters];
+    if (!_parameters)
+        _parameters = [dict mutableCopy];
+    else
+        [_parameters addEntriesFromDictionary:dict];
 }
 
 #pragma mark - Multipart Form Stuff

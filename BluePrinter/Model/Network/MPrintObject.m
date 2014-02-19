@@ -30,8 +30,18 @@ static NSString * const MPrintObjectDefaultAPIEndpoint = @"You must subclass MPr
     if ([self fetchAPIEndpoint] == MPrintObjectDefaultAPIEndpoint)
         @throw MPrintObjectDefaultAPIEndpoint;
     
+    [self fetchWithEndpoint:[self fetchAPIEndpoint] arguments:args completion:completion];
+}
+
++(void)fetchWithEndpoint:(NSString *)endpoint completion:(MPrintFetchHandler)completion
+{
+    [self fetchWithEndpoint:endpoint arguments:nil completion:completion];
+}
+
++(void)fetchWithEndpoint:(NSString *)endpoint arguments:(NSDictionary *)args completion:(MPrintFetchHandler)completion
+{
     //TODO: Actually do something with the arguments.
-    MPrintRequest *request = [[MPrintRequest alloc] initWithEndpoint:[self fetchAPIEndpoint]];
+    MPrintRequest *request = [[MPrintRequest alloc] initWithEndpoint:endpoint];
     [request addGetValuesFromDictionary:args];
     [request performWithCompletion:^(MPrintResponse *response) {
         

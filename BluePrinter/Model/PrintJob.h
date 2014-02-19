@@ -7,7 +7,30 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MPrintObject.h"
 
-@interface PrintJob : NSObject
+extern NSString * const MPrintDidRefreshUserJobsNotification;
+
+@interface PrintJob : MPrintObject
+
++(NSArray *)userJobs;
++(void)refreshUserJobs:(void (^)(BOOL success))completion;
+
+@property(readonly) NSString *jobID;
+
+@property(readonly) NSString *uniqname;
+@property(readonly) NSDate *creationTime;
+@property(readonly) NSString *name;
+@property(readonly) NSString *printerDisplayName;
+@property(readonly) NSString *printerName;
+
+@property(readonly) NSInteger progress;
+@property(readonly) BOOL cancellable; // returned as 1/0
+
+// TODO: Figure out what the values for this are. ("completed", ...)
+@property(readonly) NSString *state;
+
+-(void)refresh:(MPrintFetchHandler)completion;
+-(void)cancel:(MPrintFetchHandler)completion;
 
 @end
