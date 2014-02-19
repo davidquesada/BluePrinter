@@ -100,7 +100,7 @@
                 @"queue" : self.printLocation.name,
                 @"orientation" : [self orientationValue],
                 @"sides" : [self doubleSidedValue],
-                @"pages-per-sheet" : @(self.pagesPerSheet),
+                @"pages_per_sheet" : @(self.pagesPerSheet),
 
 //              @"range" : @"1-45",
                 
