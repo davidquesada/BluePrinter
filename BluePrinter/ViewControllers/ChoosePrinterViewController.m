@@ -11,11 +11,16 @@
 
 @interface ChoosePrinterViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property UISearchDisplayController *sdc;
+
+@property NSArray *sections;
 @property NSArray *searchResults;
+
 @property(weak) UIRefreshControl *refreshControl;
 @property(weak) UITableView *tableView;
 
 -(void)loadSearchResultsForString:(NSString *)string;
+
+-(void)createSections;
 
 @end
 
@@ -29,7 +34,7 @@
 
 -(void)loadView
 {
-    UITableView *table = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    UITableView *table = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.view = table;
     self.tableView = table;
     
@@ -56,13 +61,18 @@
     [ref addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:ref];
     self.refreshControl = ref;
+    
+    [self createSections];
+    [self.tableView reloadData];
+    
+    self.tableView.contentOffset = CGPointMake(0, -44.0);
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     if (![Location locationCount])
-        [self refresh];
+        [self performSelector:@selector(refresh) withObject:nil afterDelay:.005];
     
 }
 
@@ -72,9 +82,32 @@
         [self.refreshControl beginRefreshing];
     [Location refreshLocations:^(BOOL success) {
         if (success)
+        {
+            [self createSections];
             [self.tableView reloadData];
+        }
         [self.refreshControl endRefreshing];
+        [Location refreshRecentLocations:^(BOOL success) {
+            if (success)
+            {
+                [self createSections];
+                [self.tableView reloadData];
+            }
+        }];
     }];
+}
+
+-(void)createSections
+{
+    NSArray *a = [Location recentLocations];
+    NSArray *b = [Location allLocations];
+    
+    if (!a.count)
+        a = @[[NSNull null]];
+    if (!b.count)
+        b = @[[NSNull null]];
+    
+    _sections = @[ a, b, ];
 }
 
 -(void)dealloc
@@ -111,20 +144,50 @@
 
 #pragma mark - UITableView Stuff
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (tableView == _tableView)
+        return 2;
+    return 1;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    // No section header for search results.
+    if (tableView != _tableView)
+        return nil;
+    if (section == 0)
+        return @"Recent Locations";
+    return @"All Locations";
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Location *location = nil;
+    if (tableView == _tableView)
+        location = _sections[indexPath.section][indexPath.row];
+    else
+        location = [_searchResults objectAtIndex:indexPath.row];
+    
+    if (location == (id)[NSNull null])
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nope"];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"nope"];
+            cell.textLabel.text = @"None";
+            cell.textLabel.textColor = [UIColor lightGrayColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        return cell;
+    }
+    
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yo"];
     if (!cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"yo"];
     }
-    
-    Location *location = nil;
-    
-    if (tableView == (id)self.view)
-        location = [Location locationAtIndex:indexPath.row];
-    else
-        location = [_searchResults objectAtIndex:indexPath.row];
     
     cell.textLabel.text = location.displayName;
     cell.detailTextLabel.text = location.location;
@@ -134,8 +197,8 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == (id)self.view)
-        return [Location locationCount];
+    if (tableView == _tableView)
+        return [_sections[section] count];
     return _searchResults.count;
 }
 
@@ -144,10 +207,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Location *loc = nil;
     
-    if (tableView == (id)self.view)
-        loc = [Location locationAtIndex:indexPath.row];
+    if (tableView == _tableView)
+        loc = _sections[indexPath.section][indexPath.row];
     else
         loc = _searchResults[indexPath.row];
+    
+    if (loc == (id)[NSNull null])
+        return;
     
     if ([self.delegate respondsToSelector:@selector(choosePrinterViewController:didChoosePrintLocation:)])
         [self.delegate choosePrinterViewController:self didChoosePrintLocation:loc];

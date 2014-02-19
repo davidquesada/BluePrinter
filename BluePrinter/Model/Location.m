@@ -10,6 +10,7 @@
 #import "Network.h"
 
 NSArray *locations;
+NSArray *recentLocations;
 
 @implementation Location
 
@@ -39,6 +40,21 @@ NSArray *locations;
             completion(response.success);
     }];
 }
+
++(NSArray *)recentLocations
+{
+    return recentLocations;
+}
+
++(void)refreshRecentLocations:(void (^)(BOOL))completion
+{
+    [self fetchWithArguments:@{ @"list" : @"", @"recent" : @"" } completion:^(NSMutableArray *objects, MPrintResponse *response) {
+        if (response.success)
+            recentLocations = objects;
+        if (completion)
+            completion(response.success);
+    }];
+}  
 
 #pragma mark - MPrintObject fields
 

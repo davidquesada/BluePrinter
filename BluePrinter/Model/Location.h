@@ -17,6 +17,9 @@
 
 +(void)refreshLocations:(void (^)(BOOL success))completion;
 
++(NSArray *)recentLocations;
++(void)refreshRecentLocations:(void (^)(BOOL success))completion;
+
 @property NSString *name; // Technical name.
 @property NSString *displayName;
 
