@@ -164,6 +164,10 @@
 
 -(IBAction)stepperDidStep:(UIStepper *)stepper
 {
+    // Calling [self updateUI] nukes any changes the user makes to "range" if the field is still being edited.
+    // As a hack, just stop editing the "range" field so its value is saved.
+    [_rangeTextField resignFirstResponder];
+    
     self.request.copies = (int)stepper.value;
     [self updateUI];
 }
