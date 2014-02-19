@@ -121,6 +121,10 @@
     
     _canPrint = (self.request.printLocation != nil);
     
+    _orientationCell.detailTextLabel.text = [self.request orientationDescription];
+    _pagesPerSheetCell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.request.pagesPerSheet];
+    _doubleSidedCell.detailTextLabel.text = [self.request doubleSidedDescription];
+    
     if (_canPrint)
     {
         _printCell.selectionStyle = UITableViewCellSelectionStyleDefault;
@@ -158,11 +162,22 @@
 -(void)simpleChooser:(SimpleChooserViewController *)chooser didChooseItem:(NSString *)item atIndex:(NSInteger)index
 {
     if (chooser == orientationChooser)
-        self.orientationCell.detailTextLabel.text = item;
+    {
+        self.request.orientation = (index ? MPOrientationLandscape : MPOrientationPortrait);
+    }
     else if (chooser == pagesChooser)
-        self.pagesPerSheetCell.detailTextLabel.text = item;
+    {
+        self.request.pagesPerSheet = [@[@1, @2, @4, @6, @9, @16][index] integerValue];;
+    }
     else if (chooser == doubleSidedChooser)
-        self.doubleSidedCell.detailTextLabel.text = item;
+    {
+        switch (index)
+        {
+            case 0: self.request.doubleSided = MPDoubleSidedNo; break;
+            case 1: self.request.doubleSided = MPDoubleSidedLongEdge; break;
+            case 2: self.request.doubleSided = MPDoubleSidedShortEdge; break;
+        }
+    }
 }
 
 #pragma mark - ChoosePrinterViewControllerDelegate

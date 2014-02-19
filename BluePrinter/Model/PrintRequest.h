@@ -14,12 +14,40 @@
 @class PrintJob;
 @class MPrintResponse;
 
+typedef NS_ENUM(NSInteger, MPOrientation)
+{
+    MPOrientationPortrait,
+    MPOrientationLandscape,
+};
+
+typedef NS_ENUM(NSInteger, MPDoubleSided)
+{
+    MPDoubleSidedNo,
+    MPDoubleSidedLongEdge,
+    MPDoubleSidedShortEdge,
+};
+
 @interface PrintRequest : NSObject
 
 @property ServiceFile *file;
-@property NSInteger copies;
 @property Location *printLocation;
 
+@property NSInteger copies;
+@property MPOrientation orientation;
+@property NSInteger pagesPerSheet;
+@property MPDoubleSided doubleSided;
+
+@property BOOL fitToPage;
+
+@property(copy) NSString *pageRange;
+
 -(void)send:(void (^)(PrintJob *job, MPrintResponse *response))completion;
+
+@end
+
+@interface PrintRequest (Descriptions)
+
+-(NSString *)orientationDescription;
+-(NSString *)doubleSidedDescription;
 
 @end

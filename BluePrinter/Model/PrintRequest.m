@@ -22,6 +22,11 @@
 -(void)attachFileToRequest;
 -(void)attachLocalFileToRequest;
 -(void)realSend:(void (^)(PrintJob *, MPrintResponse *))completion;
+
+-(id)orientationValue;
+-(id)doubleSidedValue;
+-(id)fitToPageValue;
+
 @end
 
 @implementation PrintRequest
@@ -31,6 +36,9 @@
     self = [super init];
     if (self) {
         self.copies = 1;
+        self.pagesPerSheet = 1;
+        self.fitToPage = YES;
+        self.orientation = MPOrientationPortrait;
     }
     return self;
 }
@@ -84,11 +92,80 @@
 
 -(void)createRequestDictionary
 {
-    id dict = @{
+    
+    id d = @{
+                @"copies" : @(self.copies),
                 @"queue" : self.printLocation.name,
+                @"orientation" : [self orientationValue],
+                @"sides" : [self doubleSidedValue],
+                @"pages-per-sheet" : @(self.pagesPerSheet),
+
+//              @"range" : @"1-45",
+                
+//              @"size" : @[ @"letter", @"tabloid", @"custom" ],
+//              @"size_width" : @(8.5),
+//              @"size_height" : @(11),
+
+                @"scale" : [self fitToPageValue],
                 };
     
-    self.requestDictionary = [dict mutableCopy];
+    NSMutableDictionary *dict = [d mutableCopy];
+    
+    if (self.pageRange.length)
+        dict[@"range"] = self.pageRange;
+    
+    self.requestDictionary = dict;
+}
+
+-(id)orientationValue
+{
+    if (_orientation == MPOrientationPortrait)
+        return @"portrait";
+    if (_orientation == MPOrientationLandscape)
+        return @"landscape";
+    return [NSNull null];
+}
+
+-(id)doubleSidedValue
+{
+    if (_doubleSided == MPDoubleSidedNo)
+        return @"one-sided";
+    if (_doubleSided == MPDoubleSidedShortEdge)
+        return @"two-sided-short-edge";
+    if (_doubleSided == MPDoubleSidedLongEdge)
+        return @"two-sided-long-edge";
+    return [NSNull null];
+}
+
+-(id)fitToPageValue
+{
+    if (_fitToPage)
+        return @"on";
+    return @"off";
+}
+
+@end
+
+@implementation PrintRequest (Descriptions)
+
+-(NSString *)orientationDescription
+{
+    if (_orientation == MPOrientationLandscape)
+        return @"Landscape";
+    if (_orientation == MPOrientationPortrait)
+        return @"Portrait";
+    return nil;
+}
+
+-(NSString *)doubleSidedDescription
+{
+    if (_doubleSided == MPDoubleSidedNo)
+        return @"No";
+    if (_doubleSided == MPDoubleSidedLongEdge)
+        return @"Bind on long edge";
+    if (_doubleSided == MPDoubleSidedShortEdge)
+        return @"Bind on short edge";
+    return nil;
 }
 
 @end
