@@ -262,7 +262,7 @@
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"Connection failed");
+    NSLog(@"Connection failed: %@", error);
     if (self.mycompletion)
         self.mycompletion(nil);
 }
