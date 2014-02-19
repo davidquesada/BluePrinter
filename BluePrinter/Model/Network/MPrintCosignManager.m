@@ -7,12 +7,22 @@
 //
 
 #import "MPrintCosignManager.h"
+#import "Account.h"
+
+NSString * const MPrintUserDidLogInNotification = @"MPrintUserDidLogInNotification";
+NSString * const MPrintUserDidLogOutNotification = @"MPrintUserDidLogOutNotification";
 
 static NSString * const MPCMEnabledKey = @"MPCMEnabled";
 static NSString * const MPCMCosignKey = @"MPCMCosign";
 static NSString * const MPCMMPrintCosignKey = @"MPCMMPrintCosign";
 
 static NSString *getCookieValue(NSString *domain, NSString *name);
+
+@interface MPrintCosignManager ()
+
++(void)attemptRestoreCosign;
+
+@end
 
 @implementation MPrintCosignManager
 
@@ -26,6 +36,14 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
     
     if (![self isPersistentCosignEnabled])
         return;
+    
+    [self attemptRestoreCosign];
+}
+
++(void)attemptRestoreCosign
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSHTTPCookieStorage *cookieStore = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     
     NSString *cosign = [def stringForKey:MPCMCosignKey];
     NSString *mprintcosign = [def stringForKey:MPCMMPrintCosignKey];
@@ -55,10 +73,17 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
                                                         NSHTTPCookiePath : @"/"
                                                         }];
     [cookieStore setCookie:cookie];
+    
+    [Account checkLoginStatus:^(BOOL isLoggedIn) {
+        if (isLoggedIn)
+            [self userDidLogIn];
+    }];
 }
 
-+(void)didLogIn
++(void)userDidLogIn
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:MPrintUserDidLogInNotification object:nil];
+    
     if (![self isPersistentCosignEnabled])
         return;
     
@@ -77,8 +102,10 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
     [def synchronize];
 }
 
-+(void)didLogOut
++(void)userDidLogOut
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:MPrintUserDidLogOutNotification object:nil];
+ 
     if (![self isPersistentCosignEnabled])
         return;
     
@@ -98,7 +125,7 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
 {
     [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:MPCMEnabledKey];
     if (!enabled)
-        [self didLogOut];
+        [self userDidLogOut];
 }
 
 @end

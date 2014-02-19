@@ -10,6 +10,8 @@
 #import "MPrintResponse.h"
 #import "MPrintLocalService.h"
 
+NSString * const MPrintDidRefreshServicesNotification = @"MPrintDidRefreshServicesNotification";
+
 NSDictionary *typedServices;
 NSArray *allServices;
 
@@ -23,7 +25,6 @@ NSArray *allServices;
 
 -(instancetype)initWithServiceType:(ServiceType)type;
 -(void)updateStatus:(NSDictionary *)status;
-
 
 +(MPrintLocalService *)loadLocalService;
 
@@ -101,6 +102,7 @@ NSArray *allServices;
                 Service *svc = typedServices[@(type)];
                 [svc updateStatus:dict];
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:MPrintDidRefreshServicesNotification object:nil];
         }
         
         if (completion)

@@ -68,7 +68,7 @@
             completion(YES);
     }];
     
-    [MPrintCosignManager didLogOut];
+    [MPrintCosignManager userDidLogOut];
 }
 
 @end

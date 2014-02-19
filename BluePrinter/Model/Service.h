@@ -36,6 +36,8 @@ typedef NS_ENUM(NSInteger, ServiceError)
     ServiceErrorFileExists,
 };
 
+extern NSString * const MPrintDidRefreshServicesNotification;
+
 @interface Service : MPrintObject
 
 +(void)refreshServices:(MPrintFetchHandler)completion;

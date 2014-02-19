@@ -9,6 +9,7 @@
 #import "ServicesViewController.h"
 #import "Service.h"
 #import "FilesViewController.h"
+#import "MPrintCosignManager.h"
 
 @interface ServicesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -18,6 +19,9 @@
 
 @property NSArray *sections;
 -(void)createSections;
+
+-(void)didRefreshServices:(NSNotification *)note;
+
 @end
 
 @implementation ServicesViewController
@@ -36,6 +40,13 @@
     [self createSections];
     
     [self reload:(id)self.tableView.tableHeaderView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRefreshServices:) name:MPrintDidRefreshServicesNotification object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -77,6 +88,14 @@
         else
             [_sections[2] addObject:service];
     }
+}
+
+#pragma mark - Notification Handlers
+
+-(void)didRefreshServices:(NSNotification *)note
+{
+    [self createSections];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView Methods

@@ -8,8 +8,17 @@
 
 #import "AppDelegate.h"
 #import "MPrintLocalService.h"
+#import "MPrintCosignManager.h"
+#import "Location.h"
+#import "Service.h"
 
 AppDelegate *sharedDelegate;
+
+@interface AppDelegate ()
+
+-(void)didLogIn:(NSNotification *)note;
+
+@end
 
 @implementation AppDelegate
 
@@ -28,8 +37,8 @@ AppDelegate *sharedDelegate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     sharedDelegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogIn:) name:MPrintUserDidLogInNotification object:nil];
     return YES;
 }
 							
@@ -66,6 +75,14 @@ AppDelegate *sharedDelegate;
     [[Service localService] importFileAtLocalPath:path];
     [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     return YES;
+}
+
+-(void)didLogIn:(NSNotification *)note
+{
+    NSLog(@"Refreshing Stuff");
+    [Location refreshLocations:nil];
+    [Location refreshRecentLocations:nil];
+    [Service refreshServices:nil];
 }
 
 @end

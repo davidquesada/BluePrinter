@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MPrintObject.h"
 
+extern NSString * const MPrintDidRefreshLocationsNotification;
+
 @interface Location : MPrintObject
 
 +(int)locationCount;

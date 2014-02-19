@@ -13,6 +13,9 @@
 
 @interface LocationsViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak) IBOutlet UITableView *tableView;
+
+-(void)didRefreshLocations:(NSNotification *)note;
+
 @end
 
 @implementation LocationsViewController
@@ -23,6 +26,13 @@
     UIRefreshControl *c = [[UIRefreshControl alloc] initWithFrame:CGRectZero];
     [self.tableView addSubview:c];
     [c addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRefreshLocations:) name:MPrintDidRefreshLocationsNotification object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -62,6 +72,13 @@
 {
     LoginViewController *view = [[LoginViewController alloc] init];
     [self presentViewController:view animated:YES completion:nil];
+}
+
+#pragma mark - Notification Handlers
+
+-(void)didRefreshLocations:(NSNotification *)note
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate/DataSource

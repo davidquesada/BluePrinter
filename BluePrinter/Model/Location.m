@@ -9,6 +9,8 @@
 #import "Location.h"
 #import "Network.h"
 
+NSString * const MPrintDidRefreshLocationsNotification = @"MPrintDidRefreshLocationsNotification";
+
 NSArray *locations;
 NSArray *recentLocations;
 
@@ -35,7 +37,10 @@ NSArray *recentLocations;
     // Less data, less conversion, less waste...
     [self fetchWithArguments:@{ @"list" : @"" } completion:^(NSMutableArray *objects, MPrintResponse *response) {
         if (response.success)
+        {
             locations = objects;
+            [[NSNotificationCenter defaultCenter] postNotificationName:MPrintDidRefreshLocationsNotification object:nil];
+        }
         if (completion)
             completion(response.success);
     }];
@@ -50,7 +55,10 @@ NSArray *recentLocations;
 {
     [self fetchWithArguments:@{ @"list" : @"", @"recent" : @"" } completion:^(NSMutableArray *objects, MPrintResponse *response) {
         if (response.success)
+        {
             recentLocations = objects;
+            [[NSNotificationCenter defaultCenter] postNotificationName:MPrintDidRefreshLocationsNotification object:nil];
+        }
         if (completion)
             completion(response.success);
     }];

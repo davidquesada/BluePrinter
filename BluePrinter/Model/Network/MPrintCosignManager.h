@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const MPrintUserDidLogInNotification;
+extern NSString * const MPrintUserDidLogOutNotification;
+
 @interface MPrintCosignManager : NSObject
 
-+(void)didLogIn;
-+(void)didLogOut;
++(void)userDidLogIn;
++(void)userDidLogOut;
 
 +(BOOL)isPersistentCosignEnabled;
 +(void)setPersistentCosignEnabled:(BOOL)enabled;
