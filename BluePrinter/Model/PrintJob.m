@@ -51,10 +51,9 @@ NSArray *userJobs;
         if (response.success)
             userJobs = objects;
         if (completion)
-        {
             completion(response.success);
+        if (response.success)
             [[NSNotificationCenter defaultCenter] postNotificationName:MPrintDidRefreshUserJobsNotification object:nil];
-        }
     }];
 }
 
