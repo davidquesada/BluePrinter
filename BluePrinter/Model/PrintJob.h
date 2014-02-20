@@ -11,6 +11,14 @@
 
 extern NSString * const MPrintDidRefreshUserJobsNotification;
 
+typedef NS_ENUM(NSInteger, PrintJobState)
+{
+    PrintJobStateProcessing,
+    PrintJobStateCompleted,
+    PrintJobStateFailed,
+    PrintJobStateCancelled,
+};
+
 @interface PrintJob : MPrintObject
 
 +(NSArray *)userJobs;
@@ -27,8 +35,8 @@ extern NSString * const MPrintDidRefreshUserJobsNotification;
 @property(readonly) NSInteger progress;
 @property(readonly) BOOL cancellable; // returned as 1/0
 
-// TODO: Figure out what the values for this are. ("completed", ...)
-@property(readonly) NSString *state;
+// TODO: Figure out what the values for this are. ("completed", "failed", "cancelled")
+@property(readonly) PrintJobState state;
 
 -(void)refresh:(MPrintFetchHandler)completion;
 -(void)cancel:(MPrintFetchHandler)completion;

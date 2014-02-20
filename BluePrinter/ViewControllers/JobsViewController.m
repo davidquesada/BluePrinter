@@ -10,6 +10,15 @@
 #import "Account.h"
 #import "PrintJob.h"
 
+
+@interface JobCell : UITableViewCell
+{
+    __weak IBOutlet UIView *colorView;
+}
+-(void)setPrintJob:(PrintJob *)job;
+@end
+
+
 @interface JobsViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(weak) UIRefreshControl *refreshControl;
 @property(weak) IBOutlet UITableView *tableView;
@@ -66,12 +75,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"jobCell"];
+    JobCell *cell = [tableView dequeueReusableCellWithIdentifier:@"jobCell"];
     
     PrintJob *job = [PrintJob userJobs][indexPath.row];
-    
-    cell.textLabel.text = job.name;
-    cell.detailTextLabel.text = job.printerDisplayName;
+    [cell setPrintJob:job];
     
     return cell;
 }
@@ -105,6 +112,39 @@
             [self.tableView reloadData];
         }];
     }];
+}
+
+@end
+
+@interface JobCell()
++(UIColor *)colorForPrintJobState:(PrintJobState)state;
+@end
+
+@implementation JobCell
+
++(UIColor *)colorForPrintJobState:(PrintJobState)state
+{
+    static NSDictionary *dict = nil;
+    if (!dict)
+        dict = @{
+                 @(PrintJobStateCancelled) : [UIColor blackColor],
+                 @(PrintJobStateCompleted) : [UIColor colorWithRed:0 green:.8 blue:0 alpha:1.0],
+                 @(PrintJobStateFailed) : [UIColor colorWithRed:1.0 green:.1 blue:.1 alpha:1.0],
+                 @(PrintJobStateProcessing) : [UIColor colorWithRed:0 green:0 blue:.8 alpha:1.0],
+//                  @(PrintJobStateCancelled) : [UIColor blackColor],
+//                  @(PrintJobStateCompleted) : [UIColor greenColor],
+//                  @(PrintJobStateFailed) : [UIColor redColor],
+//                  @(PrintJobStateProcessing) : [UIColor blueColor],
+                  };
+    return dict[@(state)];
+}
+
+-(void)setPrintJob:(PrintJob *)job
+{
+    self.textLabel.text = job.name;
+    self.detailTextLabel.text = job.printerDisplayName;
+    
+    colorView.backgroundColor = [self.class colorForPrintJobState:job.state];
 }
 
 @end

@@ -25,7 +25,7 @@ NSArray *userJobs;
 @property(readwrite) NSString *printerName;
 @property(readwrite) NSInteger progress;
 @property(readwrite) BOOL cancellable;
-@property(readwrite) NSString *state;
+@property(readwrite) PrintJobState state;
 
 -(void)populateWithJSONDictionary:(NSDictionary *)dictionary;
 -(NSString *)updateAPIEndpoint;
@@ -73,6 +73,15 @@ NSArray *userJobs;
         formatter.dateFormat = @"";
     }
     
+    static NSDictionary *stateDict = nil;
+    if (!stateDict)
+        stateDict = @{
+                      @"processing" : @(PrintJobStateProcessing),
+                      @"completed" : @(PrintJobStateCompleted),
+                      @"cancelled" : @(PrintJobStateCancelled),
+                      @"failed" : @(PrintJobStateFailed),
+                      };
+    
     self.uniqname = dictionary[@"uniqname"];
     self.jobID = dictionary[@"id"];
     self.creationTime = [formatter dateFromString:dictionary[@"creation_time"]];
@@ -81,7 +90,7 @@ NSArray *userJobs;
     self.printerName = dictionary[@"printer_name"];
     self.progress = [dictionary[@"progress"] integerValue];
     self.cancellable = (BOOL)[dictionary[@"cancellable"] intValue];
-    self.state = dictionary[@"state"];
+    self.state = (PrintJobState)[stateDict[dictionary[@"state"]] integerValue];
 }
 
 -(NSString *)updateAPIEndpoint
