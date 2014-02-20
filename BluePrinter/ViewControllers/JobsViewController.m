@@ -14,6 +14,7 @@
 @interface JobCell : UITableViewCell
 {
     __weak IBOutlet UIView *colorView;
+    __weak IBOutlet UIProgressView *progressView;
 }
 -(void)setPrintJob:(PrintJob *)job;
 @end
@@ -145,6 +146,14 @@
     self.detailTextLabel.text = job.printerDisplayName;
     
     colorView.backgroundColor = [self.class colorForPrintJobState:job.state];
+    
+    if (job.state == PrintJobStateProcessing)
+    {
+        progressView.hidden = NO;
+        progressView.progress = (job.progress / 100.0);
+    }
+    else
+        progressView.hidden = YES;
 }
 
 @end
