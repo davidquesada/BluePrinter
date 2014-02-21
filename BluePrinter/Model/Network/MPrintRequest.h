@@ -81,6 +81,8 @@ typedef NS_ENUM(NSInteger, Method)
 @property NSURL *customURL;
 @property NSTimeInterval timeout;
 
+@property BOOL useMutableContainers;
+
 @property (readonly) NSMutableURLRequest *urlRequest;
 
 @end

@@ -23,6 +23,8 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString);
 
 +(instancetype)successResponse;
 
++(NSString *)lastUniqname;
+
 @property NSData *data;
 @property MPrintStatusCode statusCode;
 @property NSDictionary *jsonObject;
@@ -32,5 +34,6 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString);
 @property (readonly) NSInteger count;
 @property (readonly) NSArray *results; // An array of JSON dictionaries;
 @property (readonly) NSString *message;
+@property (readonly) NSString *uniqname;
 
 @end

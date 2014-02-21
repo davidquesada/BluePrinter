@@ -8,6 +8,8 @@
 
 #import "MPrintResponse.h"
 
+MPrintResponse *lastSuccessfulResponse;
+
 MPrintStatusCode statusCodeForStatusString(NSString *statusString)
 {
     if (!statusString || [statusString isEqualToString:@"failure"])
@@ -17,13 +19,39 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString)
     return MPrintStatusCodeOther;
 }
 
+@interface MPrintResponse ()
+{
+    NSDictionary *_jsonObject;
+}
+@end
+
 @implementation MPrintResponse
+
++(NSString *)lastUniqname
+{
+    return lastSuccessfulResponse.uniqname;
+}
 
 +(instancetype)successResponse
 {
     MPrintResponse *response = [[MPrintResponse alloc] init];
     response.jsonObject = @{ @"status" : @"success" };
     return response;
+}
+
+#pragma mark - Properties
+
+-(NSDictionary *)jsonObject
+{
+    return _jsonObject;
+}
+
+-(void)setJsonObject:(NSDictionary *)jsonObject
+{
+    _jsonObject = jsonObject;
+    self.statusCode = statusCodeForStatusString(self.statusString);
+    if (self.success)
+        lastSuccessfulResponse = self;
 }
 
 -(NSString *)statusString
@@ -49,6 +77,11 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString)
 -(NSString *)message
 {
     return [self.jsonObject valueForKey:@"status_message"];
+}
+
+-(NSString *)uniqname
+{
+    return [self.jsonObject valueForKey:@"uniqname"];
 }
 
 @end

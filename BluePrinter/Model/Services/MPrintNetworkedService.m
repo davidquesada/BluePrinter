@@ -35,22 +35,37 @@
     return [NSURL URLWithString:url];
 }
 
+-(ServiceFile *)fileFromJSONDictionary:(NSDictionary *)dict
+{
+    return [[ServiceFile alloc] initWithJSONDictionary:dict service:self];
+}
+
+-(void)willPerformRequest:(MPrintRequest *)request
+{
+}
+
+-(void)didReceiveResponse:(MPrintResponse *)response
+{
+}
+
 #pragma mark - Service Methods
 
 -(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion
 {
     NSURL *url = [self urlForDirectoryAtPath:path];
     MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:url method:GET];
+    [self willPerformRequest:req];
     
     [req performWithCompletion:^(MPrintResponse *response) {
         
+        [self didReceiveResponse:response];
         NSMutableArray *files = nil;
         if (response.success)
         {
             files = [[NSMutableArray alloc] initWithCapacity:response.count];
             for (NSDictionary *dict in response.results)
             {
-                ServiceFile *file = [[ServiceFile alloc] initWithJSONDictionary:dict service:self];
+                ServiceFile *file = [self fileFromJSONDictionary:dict];
                 [files addObject:file];
             }
         }

@@ -14,6 +14,7 @@
 		63613C9E1898CC10007CD749 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9D1898CC10007CD749 /* Service.m */; };
 		63613CA11898D095007CD749 /* ServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613CA01898D095007CD749 /* ServicesViewController.m */; };
 		6374DD3818B7091C0036129A /* MPrintDriveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3718B7091C0036129A /* MPrintDriveService.m */; };
+		6374DD3B18B70C240036129A /* MPrintIFSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3A18B70C240036129A /* MPrintIFSService.m */; };
 		637E8295189B811000DA9A35 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 637E8294189B811000DA9A35 /* ServiceFile.m */; };
 		63AA558B1888B44F0073D214 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558A1888B44F0073D214 /* Account.m */; };
 		63AA558E1888F2980073D214 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558D1888F2980073D214 /* LoginViewController.m */; };
@@ -57,6 +58,8 @@
 		63613CA01898D095007CD749 /* ServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServicesViewController.m; path = ViewControllers/ServicesViewController.m; sourceTree = "<group>"; };
 		6374DD3618B7091C0036129A /* MPrintDriveService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintDriveService.h; path = Model/Services/MPrintDriveService.h; sourceTree = "<group>"; };
 		6374DD3718B7091C0036129A /* MPrintDriveService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintDriveService.m; path = Model/Services/MPrintDriveService.m; sourceTree = "<group>"; };
+		6374DD3918B70C240036129A /* MPrintIFSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintIFSService.h; path = Model/Services/MPrintIFSService.h; sourceTree = "<group>"; };
+		6374DD3A18B70C240036129A /* MPrintIFSService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintIFSService.m; path = Model/Services/MPrintIFSService.m; sourceTree = "<group>"; };
 		637E8293189B811000DA9A35 /* ServiceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceFile.h; path = Model/ServiceFile.h; sourceTree = "<group>"; };
 		637E8294189B811000DA9A35 /* ServiceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceFile.m; path = Model/ServiceFile.m; sourceTree = "<group>"; };
 		63AA55891888B44F0073D214 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Account.h; path = Model/Account.h; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 				B28CE7FB18B6F40F00443E7A /* MPrintDropboxService.m */,
 				6374DD3618B7091C0036129A /* MPrintDriveService.h */,
 				6374DD3718B7091C0036129A /* MPrintDriveService.m */,
+				6374DD3918B70C240036129A /* MPrintIFSService.h */,
+				6374DD3A18B70C240036129A /* MPrintIFSService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,
 				637E8295189B811000DA9A35 /* ServiceFile.m in Sources */,
+				6374DD3B18B70C240036129A /* MPrintIFSService.m in Sources */,
 				63613C9B1898B308007CD749 /* MPrintObject.m in Sources */,
 				B20C18AE188641520088EE73 /* JobsViewController.m in Sources */,
 				63C50C7B18AA10AA00D63876 /* PrintJob.m in Sources */,

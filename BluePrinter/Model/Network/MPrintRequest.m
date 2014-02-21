@@ -292,8 +292,8 @@
     NSString *cont = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
     NSLog(@"Contents: %@", cont);
     
-    self.response.jsonObject = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:nil];
-    self.response.statusCode = statusCodeForStatusString(self.response.statusString);
+    NSJSONReadingOptions opt = (self.useMutableContainers ? NSJSONReadingMutableContainers : kNilOptions);
+    self.response.jsonObject = [NSJSONSerialization JSONObjectWithData:self.data options:opt error:nil];
     
     if (self.mycompletion)
         self.mycompletion(self.response);

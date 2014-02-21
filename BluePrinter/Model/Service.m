@@ -11,6 +11,7 @@
 #import "MPrintLocalService.h"
 #import "MPrintDropboxService.h"
 #import "MPrintDriveService.h"
+#import "MPrintIFSService.h"
 
 NSString * const MPrintDidRefreshServicesNotification = @"MPrintDidRefreshServicesNotification";
 
@@ -132,9 +133,7 @@ NSArray *allServices;
             case ServiceTypeDropbox:
                 return [[MPrintDropboxService alloc] init];
             case ServiceTypeIFS:
-                self.name = @"ifs";
-                self.description = @"MFile IFS";
-                break;
+                return [[MPrintIFSService alloc] init];
             case ServiceTypeLocker:
                 self.name = @"locker";
                 self.description = @"MPrint Locker";
