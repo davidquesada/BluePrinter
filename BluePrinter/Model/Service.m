@@ -9,6 +9,7 @@
 #import "Service.h"
 #import "MPrintResponse.h"
 #import "MPrintLocalService.h"
+#import "MPrintDropboxService.h"
 
 NSString * const MPrintDidRefreshServicesNotification = @"MPrintDidRefreshServicesNotification";
 
@@ -130,9 +131,7 @@ NSArray *allServices;
                 self.description = @"Google Drive";
                 break;
             case ServiceTypeDropbox:
-                self.name = @"dropbox";
-                self.description = @"Dropbox";
-                break;
+                return [[MPrintDropboxService alloc] init];
             case ServiceTypeIFS:
                 self.name = @"ifs";
                 self.description = @"MFile IFS";

@@ -9,6 +9,9 @@
 #import "ServiceFile.h"
 
 @interface ServiceFile ()
+{
+    Service *_service;
+}
 @property (readwrite) ServiceType serviceType;
 @property (readwrite) BOOL isDirectory;
 @property (readwrite) NSString *name;
@@ -45,6 +48,18 @@
     return self;
 }
 
+-(id)initWithJSONDictionary:(NSDictionary *)dict service:(Service *)service
+{
+    if ((self = [self init]))
+    {
+        _service = service;
+        _name = dict[@"name"];
+        _path = dict[@"path"];
+        _isDirectory = [dict[@"type"] isEqualToString:@"dir"];
+    }
+    return self;
+}
+
 -(BOOL)isDownloadable
 {
     return self.service.supportsDownload;
@@ -52,7 +67,9 @@
 
 -(Service *)service
 {
-    return [Service serviceWithType:self.serviceType];
+    if (_service)
+        return _service;
+    return _service = [Service serviceWithType:self.serviceType];
 }
 
 -(NSString *)fullpath

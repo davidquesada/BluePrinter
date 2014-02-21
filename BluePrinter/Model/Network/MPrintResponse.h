@@ -29,6 +29,7 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString);
 @property (readonly) NSString *statusString;
 
 @property (readonly) BOOL success;
+@property (readonly) NSInteger count;
 @property (readonly) NSArray *results; // An array of JSON dictionaries;
 @property (readonly) NSString *message;
 

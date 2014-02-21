@@ -36,6 +36,11 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString)
     return self.statusCode == MPrintStatusCodeSuccess;
 }
 
+-(NSInteger)count
+{
+    return [[self.jsonObject valueForKey:@"count"] integerValue];
+}
+
 -(NSArray *)results
 {
     return [self.jsonObject valueForKey:@"result"];

@@ -40,6 +40,11 @@
 {
     return self = [self initWithService:service path:@"/"];
 }
+-(id)initWithServiceFile:(ServiceFile *)file
+{
+    NSAssert(file.isDirectory, @"ServiceFile 'file' must be a directory.");
+    return self = [self initWithService:file.service path:file.fullpath];
+}
 
 -(void)loadView
 {
@@ -54,7 +59,10 @@
     [self.tableView addSubview:ref];
     [ref addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
-    self.navigationItem.title = [self.path lastPathComponent];
+    if (![self.path isEqualToString:@"/"])
+        self.navigationItem.title = [self.path lastPathComponent];
+    else
+        self.navigationItem.title = self.service.description;
 }
 
 - (void)viewDidLoad
@@ -91,6 +99,8 @@
     
     cell.textLabel.text = file.name;
     
+    cell.accessoryType = (file.isDirectory ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone);
+    
     return cell;
 }
 
@@ -113,7 +123,8 @@
     ServiceFile *file = _files[indexPath.row];
     if (file.isDirectory)
     {
-        NSLog(@"I Still need to support directories.");
+        FilesViewController *controller = [[FilesViewController alloc] initWithServiceFile:file];
+        [self.navigationController pushViewController:controller animated:YES];
         return;
     }
     

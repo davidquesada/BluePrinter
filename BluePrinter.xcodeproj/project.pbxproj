@@ -38,6 +38,8 @@
 		B20C18B2188641AA0088EE73 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = B20C18B1188641AA0088EE73 /* Location.m */; };
 		B20C18B61886458C0088EE73 /* MPrintRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B20C18B51886458C0088EE73 /* MPrintRequest.m */; };
 		B20C18B9188646EF0088EE73 /* MPrintResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B20C18B8188646EF0088EE73 /* MPrintResponse.m */; };
+		B28CE7F918B6F3B000443E7A /* MPrintNetworkedService.m in Sources */ = {isa = PBXBuildFile; fileRef = B28CE7F818B6F3B000443E7A /* MPrintNetworkedService.m */; };
+		B28CE7FC18B6F40F00443E7A /* MPrintDropboxService.m in Sources */ = {isa = PBXBuildFile; fileRef = B28CE7FB18B6F40F00443E7A /* MPrintDropboxService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +99,10 @@
 		B20C18B51886458C0088EE73 /* MPrintRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintRequest.m; path = Model/Network/MPrintRequest.m; sourceTree = "<group>"; };
 		B20C18B7188646EF0088EE73 /* MPrintResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintResponse.h; path = Model/Network/MPrintResponse.h; sourceTree = "<group>"; };
 		B20C18B8188646EF0088EE73 /* MPrintResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintResponse.m; path = Model/Network/MPrintResponse.m; sourceTree = "<group>"; };
+		B28CE7F718B6F3B000443E7A /* MPrintNetworkedService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintNetworkedService.h; path = Model/Services/MPrintNetworkedService.h; sourceTree = "<group>"; };
+		B28CE7F818B6F3B000443E7A /* MPrintNetworkedService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintNetworkedService.m; path = Model/Services/MPrintNetworkedService.m; sourceTree = "<group>"; };
+		B28CE7FA18B6F40F00443E7A /* MPrintDropboxService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintDropboxService.h; path = Model/Services/MPrintDropboxService.h; sourceTree = "<group>"; };
+		B28CE7FB18B6F40F00443E7A /* MPrintDropboxService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintDropboxService.m; path = Model/Services/MPrintDropboxService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +132,10 @@
 			children = (
 				63C50C7018A9F7E300D63876 /* MPrintLocalService.h */,
 				63C50C7118A9F7E300D63876 /* MPrintLocalService.m */,
+				B28CE7F718B6F3B000443E7A /* MPrintNetworkedService.h */,
+				B28CE7F818B6F3B000443E7A /* MPrintNetworkedService.m */,
+				B28CE7FA18B6F40F00443E7A /* MPrintDropboxService.h */,
+				B28CE7FB18B6F40F00443E7A /* MPrintDropboxService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -327,7 +337,9 @@
 				6355364818B07BE100E88433 /* ChoosePrinterViewController.m in Sources */,
 				63613C9E1898CC10007CD749 /* Service.m in Sources */,
 				63C50C7518AA107F00D63876 /* PrintRequest.m in Sources */,
+				B28CE7F918B6F3B000443E7A /* MPrintNetworkedService.m in Sources */,
 				63C50C7218A9F7E300D63876 /* MPrintLocalService.m in Sources */,
+				B28CE7FC18B6F40F00443E7A /* MPrintDropboxService.m in Sources */,
 				63AA558B1888B44F0073D214 /* Account.m in Sources */,
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,

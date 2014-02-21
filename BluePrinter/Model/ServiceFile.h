@@ -19,7 +19,7 @@
 @property (readonly) Service *service;
 @property (readonly) NSString *fullpath;
 
--(id)init;
+-(id)initWithJSONDictionary:(NSDictionary *)dict service:(Service *)service;
 -(id)initWithLocalPath:(NSString *)path;
 
 -(void)fetchDirectoryContentsWithCompletion:(MPrintFetchHandler)completion;

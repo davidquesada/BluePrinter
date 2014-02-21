@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class Service;
+@class ServiceFile;
 
 @interface FilesViewController : UIViewController
 
 -(id)initWithService:(Service *)service;
 -(id)initWithService:(Service *)service path:(NSString *)path;
+-(id)initWithServiceFile:(ServiceFile *)file;
 
 @property(readonly) Service *service;
 @property(readonly) NSString *path;
