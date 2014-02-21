@@ -12,6 +12,8 @@
 #import "MPrintDropboxService.h"
 #import "MPrintDriveService.h"
 #import "MPrintIFSService.h"
+#import "MPrintLockerService.h"
+#import "MPrintBoxService.h"
 
 NSString * const MPrintDidRefreshServicesNotification = @"MPrintDidRefreshServicesNotification";
 
@@ -125,9 +127,7 @@ NSArray *allServices;
         self.type = type;
         switch (type) {
             case ServiceTypeBox:
-                self.name = @"box";
-                self.description = @"Box";
-                break;
+                return [[MPrintBoxService alloc] init];
             case ServiceTypeDrive:
                 return [[MPrintDriveService alloc] init];
             case ServiceTypeDropbox:
@@ -135,14 +135,12 @@ NSArray *allServices;
             case ServiceTypeIFS:
                 return [[MPrintIFSService alloc] init];
             case ServiceTypeLocker:
-                self.name = @"locker";
-                self.description = @"MPrint Locker";
-                break;
+                return [[MPrintLockerService alloc] init];
             case ServiceTypeLocal:
-                self.description = @"Saved Files";
-                break;
+                return [[MPrintLocalService alloc] init];
             default:
-                break;
+                NSLog(@"Unrecognized ServiceType: %d", (int)type);
+                return nil;
         }
     }
     return self;
