@@ -31,6 +31,8 @@
         
         [view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://weblogin.umich.edu/?cosign-mprint&https://mprint.umich.edu/api"]]];
         view.delegate = self;
+        
+        self.modalPresentationStyle = UIModalPresentationFormSheet;
     }
     return self;
 }
