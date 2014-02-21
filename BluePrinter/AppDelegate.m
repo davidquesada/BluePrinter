@@ -18,6 +18,7 @@ AppDelegate *sharedDelegate;
 @interface AppDelegate ()
 
 -(void)didLogIn:(NSNotification *)note;
+-(void)addv7Appearance:(UIApplication *)application;
 
 @end
 
@@ -40,7 +41,40 @@ AppDelegate *sharedDelegate;
 {
     sharedDelegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogIn:) name:MPrintUserDidLogInNotification object:nil];
+    
+    [self addv7Appearance:application];
+    
     return YES;
+}
+
+-(void)addv7Appearance:(UIApplication *)application
+{
+    UIColor *barColor = [UIColor colorWithRed:0 green:0 blue:.2 alpha:0.4];
+    UIColor *thingColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:1.0];
+    
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
+    
+    [[UINavigationBar appearance] setBarTintColor:barColor];
+    [[UITabBar appearance] setBarTintColor:barColor];
+    
+    // We need to wait a tick for this, because application.keyWindow is nil right now.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        application.keyWindow.tintColor = thingColor;
+    });
+    
+    UIColor *controlColor = [UIColor colorWithRed:0 green:0 blue:.4 alpha:1.0];
+    
+    [[UITextField appearance] setTintColor:controlColor];
+    [[UIStepper appearance] setTintColor:controlColor];
+    [[UITableViewCell appearance] setTintColor:controlColor];
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:@{ UITextAttributeTextColor : controlColor} forState:UIControlStateNormal];
+    
+    [[UISwitch appearance] setOnTintColor:controlColor];
+    
+    // Not entirely sure on this. I think whiting out the search bar completely does look pretty cool.
+    [[UISearchBar appearance] setBarTintColor:[UIColor whiteColor]];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
