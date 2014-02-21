@@ -133,6 +133,7 @@
     
     PrintJobTableViewController *controller = [[PrintJobTableViewController alloc] initWithPrintRequest:req];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+    nav.navigationBar.translucent = NO;
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:nav animated:YES completion:nil];
 }

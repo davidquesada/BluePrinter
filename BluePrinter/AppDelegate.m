@@ -13,6 +13,8 @@
 #import "Service.h"
 #import "PrintJob.h"
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 AppDelegate *sharedDelegate;
 
 @interface AppDelegate ()
@@ -49,8 +51,16 @@ AppDelegate *sharedDelegate;
 
 -(void)addv7Appearance:(UIApplication *)application
 {
-    UIColor *barColor = [UIColor colorWithRed:0 green:0 blue:.2 alpha:0.4];
-    UIColor *thingColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:1.0];
+    UIColor *officialBlue = UIColorFromRGB(0x00274c);
+    UIColor *officialMaize = UIColorFromRGB(0xffcb05);
+    
+    UIColor *barColor = [UIColor colorWithRed:0 green:.15 blue:.30 alpha:0.4];
+    UIColor *tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:1.0];
+    UIColor *controlColor = [UIColor colorWithRed:0 green:0 blue:.4 alpha:1.0];
+    
+    
+    tintColor = officialMaize;
+    controlColor = officialBlue;
     
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
@@ -60,10 +70,8 @@ AppDelegate *sharedDelegate;
     
     // We need to wait a tick for this, because application.keyWindow is nil right now.
     dispatch_async(dispatch_get_main_queue(), ^{
-        application.keyWindow.tintColor = thingColor;
+        application.keyWindow.tintColor = tintColor;
     });
-    
-    UIColor *controlColor = [UIColor colorWithRed:0 green:0 blue:.4 alpha:1.0];
     
     [[UITextField appearance] setTintColor:controlColor];
     [[UIStepper appearance] setTintColor:controlColor];

@@ -33,6 +33,7 @@
         view.delegate = self;
         
         self.modalPresentationStyle = UIModalPresentationFormSheet;
+        self.navigationBar.translucent = NO;
     }
     return self;
 }
