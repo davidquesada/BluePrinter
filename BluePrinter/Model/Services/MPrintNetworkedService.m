@@ -14,6 +14,7 @@
 @interface MPrintNetworkedService ()
 
 -(NSURL *)urlForDirectoryAtPath:(NSString *)path;
+-(NSURL *)urlForDisconnect;
 
 @end
 
@@ -48,6 +49,12 @@
 {
 }
 
+-(NSURL *)urlForDisconnect
+{
+    NSString *url = [NSString stringWithFormat:@"https://mprint.umich.edu/api/services/%@", self.name];
+    return [NSURL URLWithString:url];
+}
+
 #pragma mark - Service Methods
 
 -(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion
@@ -72,6 +79,30 @@
         
         if (completion)
             completion(files, response);
+        
+    }];
+}
+
+-(BOOL)supportsDisconnect
+{
+    return YES;
+}
+
+-(void)disconnect:(void (^)())completion
+{
+    MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:[self urlForDisconnect] method:DELETE];
+
+    [req performWithCompletion:^(MPrintResponse *response) {
+        
+        // TODO: We actually want to refresh the status of the service after sending this request.
+        // It would be simple to check the "success" status of the response, but we can't do that
+        // because we're tentatively using a URL that returns an HTML page, so we can't easily grab
+        // the success status. For now, assumed the disconnect succeeded.
+        if (response.success)
+            [self setValue:@(0) forKey:@"connectedStatus"];
+        
+        if (completion)
+            completion();
         
     }];
 }

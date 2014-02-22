@@ -20,6 +20,9 @@
     return @"MPrint Locker";
 }
 
-//#pragma mark - MPrintNetworkedService Methods
+-(ServiceType)type
+{
+    return ServiceTypeLocker;
+}
 
 @end

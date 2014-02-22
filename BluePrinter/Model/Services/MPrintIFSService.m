@@ -34,6 +34,11 @@
     return @"MFile IFS";
 }
 
+-(ServiceType)type
+{
+    return ServiceTypeIFS;
+}
+
 -(NSString *)afsPrefix
 {
     NSString *uniqname = [MPrintResponse lastUniqname];

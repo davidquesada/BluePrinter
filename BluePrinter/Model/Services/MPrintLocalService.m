@@ -71,6 +71,11 @@
     return YES;
 }
 
+-(BOOL)supportsDisconnect
+{
+    return NO;
+}
+
 #pragma mark - Directory/File Methods
 
 -(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion

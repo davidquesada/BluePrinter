@@ -62,6 +62,11 @@ extern NSString * const MPrintDidImportFileNotification;
 @property (readonly) BOOL supportsImport;
 @property (readonly) BOOL supportsRename;
 
+@property (readonly) BOOL supportsDisconnect;
+-(void)connect:(void (^)())completion;
+-(void)disconnect:(void (^)())completion;
+
+
 // The 'objects' property of the completion is an array of ServiceFile objects.
 -(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion;
 -(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion;

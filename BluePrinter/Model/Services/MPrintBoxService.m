@@ -20,4 +20,9 @@
     return @"Box";
 }
 
+-(ServiceType)type
+{
+    return ServiceTypeBox;
+}
+
 @end

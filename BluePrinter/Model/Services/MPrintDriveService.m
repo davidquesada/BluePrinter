@@ -20,6 +20,11 @@
     return @"Google Drive";
 }
 
+-(ServiceType)type
+{
+    return ServiceTypeDrive;
+}
+
 -(NSString *)preparePathForDirectory:(NSString *)directory
 {
     // For some reason, the Google Drive service doesn't like / as a path.

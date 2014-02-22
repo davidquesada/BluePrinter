@@ -22,19 +22,20 @@ NSString * const MPrintDidImportFileNotification = @"MPrintDidImportFileNotifica
 
 NSDictionary *typedServices;
 NSArray *allServices;
+Service *localService;
 
 @interface Service ()
+{
+    ServiceType _type;
+}
 @property (readwrite) NSString *description;
 @property (readwrite) int connectedStatus;
 @property (readwrite) NSString *name;
-@property (readwrite) ServiceType type;
 
 @property MPrintLocalService *localService;
 
 -(instancetype)initWithServiceType:(ServiceType)type;
 -(void)updateStatus:(NSDictionary *)status;
-
-+(MPrintLocalService *)loadLocalService;
 
 @end
 
@@ -60,15 +61,7 @@ NSArray *allServices;
 
 +(instancetype)localService
 {
-    return [self loadLocalService];
-}
-
-+(MPrintLocalService *)loadLocalService
-{
-    static MPrintLocalService *local = nil;
-    if (!local)
-        local = [[MPrintLocalService alloc] init];
-    return local;
+    return localService;
 }
 
 +(NSArray *)allServices
@@ -81,13 +74,15 @@ NSArray *allServices;
     Service *local, *ifs, *locker, *dropbox, *drive, *box;
     
     allServices = @[
-                    local =     [self localService],
+                    local =     [[Service alloc] initWithServiceType:ServiceTypeLocal],
                     ifs =       [[Service alloc] initWithServiceType:ServiceTypeIFS],
                     locker =    [[Service alloc] initWithServiceType:ServiceTypeLocker],
                     dropbox =   [[Service alloc] initWithServiceType:ServiceTypeDropbox],
                     drive =     [[Service alloc] initWithServiceType:ServiceTypeDrive],
                     box =       [[Service alloc] initWithServiceType:ServiceTypeBox],
                     ];
+    
+    localService = local;
     
     typedServices = @{
                       @(ServiceTypeLocal) : local,
@@ -127,7 +122,7 @@ NSArray *allServices;
 {
     if ((self = [self init]))
     {
-        self.type = type;
+        _type = type;
         switch (type) {
             case ServiceTypeBox:
                 return [[MPrintBoxService alloc] init];
@@ -149,6 +144,11 @@ NSArray *allServices;
     return self;
 }
 
+-(ServiceType)type
+{
+    return _type;
+}
+
 -(BOOL)isConnected
 {
     return self.connectedStatus != 0;
@@ -159,6 +159,18 @@ NSArray *allServices;
     self.connectedStatus = [status[@"is_connected"] intValue];
     self.name = status[@"name"];
     self.description = status[@"description"];
+}
+
+-(void)connect:(void (^)())completion
+{
+    if (completion)
+        completion();
+}
+
+-(void)disconnect:(void (^)())completion
+{
+    if (completion)
+        completion();
 }
 
 #pragma mark - Service Support Stubs
@@ -181,6 +193,11 @@ NSArray *allServices;
 -(BOOL)supportsRename
 {
     return NO;
+}
+
+-(BOOL)supportsDisconnect
+{
+    return YES;
 }
 
 #pragma mark - Fetching Stuff
