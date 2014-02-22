@@ -9,6 +9,7 @@
 #import "MPrintResponse.h"
 
 MPrintResponse *lastSuccessfulResponse;
+NSString *lastUniqname;
 
 MPrintStatusCode statusCodeForStatusString(NSString *statusString)
 {
@@ -29,7 +30,7 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString)
 
 +(NSString *)lastUniqname
 {
-    return lastSuccessfulResponse.uniqname;
+    return lastUniqname;
 }
 
 +(instancetype)successResponse
@@ -51,7 +52,12 @@ MPrintStatusCode statusCodeForStatusString(NSString *statusString)
     _jsonObject = jsonObject;
     self.statusCode = statusCodeForStatusString(self.statusString);
     if (self.success)
+    {
         lastSuccessfulResponse = self;
+        NSString *name;
+        if ((name = [self uniqname]))
+            lastUniqname = name;
+    }
 }
 
 -(NSString *)statusString
