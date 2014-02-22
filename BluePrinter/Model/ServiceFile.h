@@ -17,6 +17,7 @@
 @property (readonly) NSString *path;
 @property (readonly) NSString *extension;
 @property (readonly) BOOL isDownloadable;
+@property (readonly) BOOL isDeletable;
 @property (readonly) Service *service;
 @property (readonly) NSString *fullpath;
 @property (readonly) NSDate *modifiedDate;
@@ -27,5 +28,6 @@
 -(void)fetchDirectoryContentsWithCompletion:(MPrintFetchHandler)completion;
 -(void)downloadFileContentsWithCompletion:(MPrintDataHandler)completion;
 -(NSData *)downloadFileContentsBlocking:(MPrintResponse **)response;
+-(void)deleteWithCompletion:(void (^)(BOOL wasDeleted))completion;
 
 @end

@@ -21,10 +21,12 @@
 @property(readwrite) Service *service;
 @property(readwrite) NSString *path;
 
-@property NSArray *files;
+@property NSMutableArray *files;
 
 @property(weak) UITableView *tableView;
 @property(weak) UIRefreshControl *refresh;
+
+-(void)updateFooter;
 @end
 
 @implementation FilesViewController
@@ -69,7 +71,7 @@
         self.navigationItem.title = self.service.description;
     
     _footerObject = [NSObject new];
-    self.files = @[ _footerObject ];
+    self.files = @[ _footerObject ].mutableCopy;
 }
 
 - (void)viewDidLoad
@@ -100,6 +102,14 @@
         [sender endRefreshing];
         [self.tableView reloadData];
     }];
+}
+
+-(void)updateFooter
+{
+    NSIndexPath *last = self.tableView.indexPathsForVisibleRows.lastObject;
+    if ((_files[last.row] != _footerObject) || !last)
+        return;
+    [self.tableView reloadRowsAtIndexPaths:@[ last ] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - UITableView Stuff
@@ -158,9 +168,30 @@
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.service.supportsDelete)
+    ServiceFile *file = self.files[indexPath.row];
+    if ([file isKindOfClass:[ServiceFile class]] && file.isDeletable)
         return UITableViewCellEditingStyleDelete;
     return UITableViewCellEditingStyleNone;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ServiceFile *file = self.files[indexPath.row];
+    NSAssert([file isKindOfClass:[ServiceFile class]], @"Attempting to delete a file that is not a ServiceFile.");
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [file deleteWithCompletion:^(BOOL wasDeleted) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        if (wasDeleted)
+        {
+            [self.files removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self updateFooter];
+        }
+        else
+            [self.tableView setEditing:NO animated:YES];
+    }];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

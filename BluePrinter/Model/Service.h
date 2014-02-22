@@ -65,7 +65,7 @@ extern NSString * const MPrintDidRefreshServicesNotification;
 #pragma mark - File Manipulation Methods
 
 -(ServiceError)importFileAtLocalPath:(NSString *)path;
--(ServiceError)deleteFileAtPath:(NSString *)path;
+-(void)deleteFileAtPath:(NSString *)path completion:(void (^)(ServiceError error))completion;
 -(ServiceError)renameFileAtPath:(NSString *)path toNewPath:(NSString *)newPath;
 
 @end

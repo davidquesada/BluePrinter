@@ -199,9 +199,10 @@ NSArray *allServices;
     return ServiceErrorNotSupported;
 }
 
--(ServiceError)deleteFileAtPath:(NSString *)path
+-(void)deleteFileAtPath:(NSString *)path completion:(void (^)(ServiceError))completion
 {
-    return ServiceErrorNotSupported;
+    if (completion)
+        completion(ServiceErrorNotSupported);
 }
 
 -(ServiceError)renameFileAtPath:(NSString *)path toNewPath:(NSString *)newPath

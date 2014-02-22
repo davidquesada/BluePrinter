@@ -124,9 +124,16 @@
     return ServiceErrorNone;
 }
 
--(ServiceError)deleteFileAtPath:(NSString *)path
+-(void)deleteFileAtPath:(NSString *)path completion:(void (^)(ServiceError))completion
 {
-    return ServiceErrorFailure;
+    NSFileManager *fileman = [NSFileManager defaultManager];
+    NSError *error = nil;
+    BOOL result = [fileman removeItemAtPath:path error:&error];
+    if (!result)
+        NSLog(@"Unable to delete file from MPrintLocalService: %@", error);
+    
+    if (completion)
+        completion(result ? ServiceErrorNone : ServiceErrorFailure);
 }
 
 -(ServiceError)renameFileAtPath:(NSString *)path toNewPath:(NSString *)newPath

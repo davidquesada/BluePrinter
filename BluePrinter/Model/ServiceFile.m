@@ -64,6 +64,11 @@
     return self.service.supportsDownload;
 }
 
+-(BOOL)isDeletable
+{
+    return !_isDirectory && self.service.supportsDelete;
+}
+
 -(Service *)service
 {
     if (_service)
@@ -99,6 +104,14 @@
 -(void)downloadFileContentsWithCompletion:(MPrintDataHandler)completion
 {
     [self.service downloadFileWithName:self.name inPath:self.path completion:completion];
+}
+
+-(void)deleteWithCompletion:(void (^)(BOOL))completion
+{
+    [self.service deleteFileAtPath:self.fullpath completion:^(ServiceError error) {
+        if (completion)
+            completion(error == ServiceErrorNone);
+    }];
 }
 
 -(NSData *)downloadFileContentsBlocking:(MPrintResponse *__autoreleasing *)response
