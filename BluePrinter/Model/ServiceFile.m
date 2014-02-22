@@ -11,6 +11,8 @@
 @interface ServiceFile ()
 {
     Service *_service;
+    NSInteger _modifiedTimestamp;
+    NSDate *_cachedModifiedDate;
 }
 @property (readwrite) ServiceType serviceType;
 @property (readwrite) BOOL isDirectory;
@@ -20,14 +22,6 @@
 @end
 
 @implementation ServiceFile
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
 
 -(id)initWithLocalPath:(NSString *)path
 {
@@ -45,6 +39,7 @@
             NSLog(@"Invalid path for local ServiceFile: %@", path);
             return nil;
         }
+        _cachedModifiedDate = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil].fileModificationDate;
         self.isDirectory = isdir;
     }
     return self;
@@ -59,6 +54,7 @@
         _path = dict[@"path"];
         _isDirectory = [dict[@"type"] isEqualToString:@"dir"];
         _extension = dict[@"extension"];
+        _modifiedTimestamp = [dict[@"modified"] integerValue];
     }
     return self;
 }
@@ -84,6 +80,15 @@
     if (!path)
         return name;
     return [path stringByAppendingPathComponent:name];
+}
+
+-(NSDate *)modifiedDate
+{
+    if (_cachedModifiedDate)
+        return _cachedModifiedDate;
+    if (_modifiedTimestamp)
+        return [NSDate dateWithTimeIntervalSince1970:_modifiedTimestamp];
+    return nil;
 }
 
 -(void)fetchDirectoryContentsWithCompletion:(MPrintFetchHandler)completion

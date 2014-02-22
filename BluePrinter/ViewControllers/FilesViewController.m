@@ -16,6 +16,7 @@
 @interface FilesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     BOOL _hasAppeared;
+    NSObject *_footerObject;
 }
 @property(readwrite) Service *service;
 @property(readwrite) NSString *path;
@@ -55,6 +56,8 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 52.0;
     [self.tableView registerNib:[UINib nibWithNibName:@"FileCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"fileCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"DirectoryCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"directoryCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"FooterCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"footerCell"];
     
     UIRefreshControl *ref = [[UIRefreshControl alloc] init];
     [self.tableView addSubview:ref];
@@ -64,6 +67,9 @@
         self.navigationItem.title = [self.path lastPathComponent];
     else
         self.navigationItem.title = self.service.description;
+    
+    _footerObject = [NSObject new];
+    self.files = @[ _footerObject ];
 }
 
 - (void)viewDidLoad
@@ -84,7 +90,12 @@
 {
     if (!self.refresh.isRefreshing)
         [self.refresh beginRefreshing];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self.service fetchDirectoryInfoForPath:self.path completion:^(NSMutableArray *objects, MPrintResponse *response) {
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        [objects addObject:_footerObject];
         self.files = objects;
         [sender endRefreshing];
         [self.tableView reloadData];
@@ -95,12 +106,47 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"fileCell"];
     ServiceFile *file = _files[indexPath.row];
+    if (file == (id)_footerObject)
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"footerCell"];
+        NSInteger count = self.files.count - 1;
+        if (count < 1)
+            cell.textLabel.text = @"No Files";
+        else if (count == 1)
+            cell.textLabel.text = @"1 File";
+        else
+            cell.textLabel.text = [NSString stringWithFormat:@"%d Files", count];
+        return cell;
+    }
+    
+    
+    BOOL isDir = file.isDirectory;
+    static NSDateFormatter *formatter = nil;
+    
+    if (!formatter)
+    {
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterLongStyle;
+    }
+    
+    UITableViewCell *cell;
+    if (!isDir)
+        cell = [tableView dequeueReusableCellWithIdentifier:@"fileCell"];
+    else
+        cell = [tableView dequeueReusableCellWithIdentifier:@"directoryCell"];
     
     cell.imageView.image = [file imageRepresentationInListView];
     cell.textLabel.text = file.name;
-    cell.accessoryType = (file.isDirectory ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone);
+    
+    if (!isDir)
+    {
+        NSDate *moddate = file.modifiedDate;
+        if (moddate)
+        {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Modified %@", [formatter stringFromDate:moddate]];
+        }
+    }
     
     return cell;
 }
@@ -122,6 +168,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ServiceFile *file = _files[indexPath.row];
+    
+    if (file == (id)_footerObject)
+        return;
+    
     if (file.isDirectory)
     {
         FilesViewController *controller = [[FilesViewController alloc] initWithServiceFile:file];

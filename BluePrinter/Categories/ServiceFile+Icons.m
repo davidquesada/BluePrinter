@@ -54,7 +54,7 @@ static NSString * const ServiceFileExtensionGeneric = @"..///..//";
       @"page_white_acrobat" : @[ @"pdf" ],
       @"page_white_actionscript" : @[ @"as" ],
       @"page_white_c" : @[ @"c" ],
-      @"page_white_code" : @[ @"asm", @"htm", @"html", @"css", @"bat", @"sh", @"py", ], // TODO: Get more extensions.
+      @"page_white_code" : @[ @"asm", @"htm", @"html", @"css", @"bat", @"sh", @"py", @"m", ], // TODO: Get more extensions.
       @"page_white_compressed" : @[ @"zip", @"gz", @"bz", @"7z", @"tar", ],
       @"page_white_cplusplus" : @[ @"cc", @"cxx", @"cpp", ],
       @"page_white_csharp" : @[ @"cs" ],

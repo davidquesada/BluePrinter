@@ -19,6 +19,7 @@
 @property (readonly) BOOL isDownloadable;
 @property (readonly) Service *service;
 @property (readonly) NSString *fullpath;
+@property (readonly) NSDate *modifiedDate;
 
 -(id)initWithJSONDictionary:(NSDictionary *)dict service:(Service *)service;
 -(id)initWithLocalPath:(NSString *)path;
