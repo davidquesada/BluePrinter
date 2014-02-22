@@ -11,9 +11,13 @@
 #import "Service.h"
 #import "MPrintRequest.h"
 #import "MPrintResponse.h"
+#import "MPrintNetworkedService.h"
 
 
 @interface PrintRequest ()
+{
+    NSMutableDictionary *_additionalParameters;
+}
 
 @property MPrintRequest *internalRequest;
 @property NSMutableDictionary *requestDictionary;
@@ -21,6 +25,7 @@
 -(void)createRequestDictionary;
 -(void)attachFileToRequest;
 -(void)attachLocalFileToRequest;
+-(void)attachNetworkedFileToRequest;
 -(void)realSend:(void (^)(PrintJob *, MPrintResponse *))completion;
 
 -(id)orientationValue;
@@ -64,6 +69,12 @@
         [printReq addFormValue:obj forKey:key];
     }];
     
+    
+//    NSLog(@"Not Actually sending request.");
+//    if (completion)
+//        completion(nil, nil);
+//    return;
+    NSLog(@"Dictionary: %@", [_requestDictionary debugDescription]);
     NSLog(@"About to send print request.");
     
     [printReq performWithCompletion:^(MPrintResponse *response) {
@@ -75,21 +86,31 @@
 
 -(void)attachFileToRequest
 {
-    if (self.file.serviceType != ServiceTypeLocal)
-    {
-        NSLog(@"Only local files are supported for now.");
-        return;
-    }
-    [self attachLocalFileToRequest];
+    if (self.file.serviceType == ServiceTypeLocal)
+        [self attachLocalFileToRequest];
+    else if ([self.file.service isKindOfClass:[MPrintNetworkedService class]])
+        [self attachNetworkedFileToRequest];
+    else
+        NSLog(@"Unknown or nil file for request: %@", self.file);
 }
 
 -(void)attachLocalFileToRequest
 {
+    NSAssert(_file, @"There must be a file associated with the request.");
     NSData *data = [self.file downloadFileContentsBlocking:nil];
-    
-    // Don't actually put the file in "file". So I can test the requests without actually
-    // printing stuff every 5 minutes as I debug.
+
     [self.internalRequest addFormData:data forKey:@"file" withFilename:self.file.name contentType:nil];
+}
+
+-(void)attachNetworkedFileToRequest
+{
+    if (!_additionalParameters)
+        _additionalParameters = [NSMutableDictionary new];
+    
+    NSAssert(_file, @"There must be a file associated with the request.");
+    
+    _additionalParameters[@"service"] = self.file.service.name;
+    _additionalParameters[@"filepath"] = self.file.fullpath;
 }
 
 -(void)createRequestDictionary
@@ -116,6 +137,8 @@
     if (self.pageRange.length)
         dict[@"range"] = self.pageRange;
     
+    if (_additionalParameters)
+        [dict addEntriesFromDictionary:_additionalParameters];
     self.requestDictionary = dict;
 }
 
