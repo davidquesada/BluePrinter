@@ -26,6 +26,10 @@
 @property(weak) UITableView *tableView;
 @property(weak) UIRefreshControl *refresh;
 
+-(void)insertFile:(ServiceFile *)file atIndex:(NSInteger)index;
+-(NSInteger)indexToInsertFile:(ServiceFile *)file;
+
+-(void)didImportFile:(NSNotification *)note;
 -(void)updateFooter;
 @end
 
@@ -62,6 +66,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"FooterCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"footerCell"];
     
     UIRefreshControl *ref = [[UIRefreshControl alloc] init];
+    self.refresh = ref;
     [self.tableView addSubview:ref];
     [ref addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
@@ -77,6 +82,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (_service.supportsImport)
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didImportFile:) name:MPrintDidImportFileNotification object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -99,7 +111,7 @@
         
         [objects addObject:_footerObject];
         self.files = objects;
-        [sender endRefreshing];
+        [self.refresh endRefreshing];
         [self.tableView reloadData];
     }];
 }
@@ -110,6 +122,68 @@
     if ((_files[last.row] != _footerObject) || !last)
         return;
     [self.tableView reloadRowsAtIndexPaths:@[ last ] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+-(NSInteger)indexToInsertFile:(ServiceFile *)file
+{
+    // Don't count the _footerObject at the end.
+    NSRange range = NSMakeRange(0, self.files.count - 1);
+    
+    NSInteger index = [self.files indexOfObject:file inSortedRange:range options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(ServiceFile *obj1, ServiceFile *obj2) {
+        return [obj1.name compare:obj2.name];
+    }];
+    return index;
+}
+
+-(void)insertFile:(ServiceFile *)file atIndex:(NSInteger)index
+{
+    if (!file)
+    {
+        NSLog(@"File must be non-nil for inserting");
+        return;
+    }
+    if (index == NSNotFound)
+    {
+        NSLog(@"Index must be a valid index");
+        return;
+    }
+    
+    [self.files insertObject:file atIndex:index];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    });
+    
+    [self updateFooter];
+}
+
+#pragma mark - Notification Handlers
+
+-(void)didImportFile:(NSNotification *)note
+{
+    ServiceFile *file = note.object;
+    
+    // If the service wasn't able to generate a ServiceFile record upon import, we should
+    // refresh the view, just in case we imported the file into the current directory.
+    if (!file)
+    {
+        [self refresh:nil];
+        return;
+    }
+    
+    NSLog(@"Woop");
+    
+    double delayInSeconds = 0.75;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSInteger index = [self indexToInsertFile:file];
+        [self insertFile:file atIndex:index];
+    });
 }
 
 #pragma mark - UITableView Stuff

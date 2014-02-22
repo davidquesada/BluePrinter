@@ -82,8 +82,9 @@
     NSFileManager *manager = [NSFileManager defaultManager];
     for (NSString *filename in [manager contentsOfDirectoryAtPath:path error:nil])
     {
-        NSString *fullpath = [path stringByAppendingPathComponent:filename];
-        ServiceFile *file = [[ServiceFile alloc] initWithLocalPath:fullpath];
+        // This will make the assumption that we're not going to add support right now for
+        // files in the local service.
+        ServiceFile *file = [[ServiceFile alloc] initWithPath:filename rootPath:_directory];
         if (file)
             [files addObject:file];
     }
@@ -93,8 +94,10 @@
 
 -(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion
 {
-    path = _directory;
-    NSString *fullpath = [path stringByAppendingPathComponent:filename];
+    NSString *fullpath = _directory;
+    if (path)
+        fullpath = [fullpath stringByAppendingPathComponent:path];
+    fullpath = [fullpath stringByAppendingPathComponent:filename];
     NSData *data = [NSData dataWithContentsOfFile:fullpath];
     if (completion)
         completion(data, [MPrintResponse successResponse]);
@@ -120,15 +123,19 @@
         NSLog(@"Error importing file to local service: %@", err);
         return ServiceErrorFailure;
     }
+    
+    ServiceFile *file = [[ServiceFile alloc] initWithPath:[path lastPathComponent] rootPath:_directory];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MPrintDidImportFileNotification object:file];
 
     return ServiceErrorNone;
 }
 
 -(void)deleteFileAtPath:(NSString *)path completion:(void (^)(ServiceError))completion
 {
+    NSString *physicalPath = [_directory stringByAppendingPathComponent:path];
     NSFileManager *fileman = [NSFileManager defaultManager];
     NSError *error = nil;
-    BOOL result = [fileman removeItemAtPath:path error:&error];
+    BOOL result = [fileman removeItemAtPath:physicalPath error:&error];
     if (!result)
         NSLog(@"Unable to delete file from MPrintLocalService: %@", error);
     

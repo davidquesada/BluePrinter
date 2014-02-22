@@ -23,7 +23,7 @@
 @property (readonly) NSDate *modifiedDate;
 
 -(id)initWithJSONDictionary:(NSDictionary *)dict service:(Service *)service;
--(id)initWithLocalPath:(NSString *)path;
+-(id)initWithPath:(NSString *)path rootPath:(NSString *)base;
 
 -(void)fetchDirectoryContentsWithCompletion:(MPrintFetchHandler)completion;
 -(void)downloadFileContentsWithCompletion:(MPrintDataHandler)completion;

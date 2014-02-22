@@ -17,6 +17,9 @@
 
 NSString * const MPrintDidRefreshServicesNotification = @"MPrintDidRefreshServicesNotification";
 
+// Currently, services which implement file imports are responsible for posting this notification themselves.
+NSString * const MPrintDidImportFileNotification = @"MPrintDidImportFileNotification";
+
 NSDictionary *typedServices;
 NSArray *allServices;
 

@@ -23,7 +23,7 @@
 
 @implementation ServiceFile
 
--(id)initWithLocalPath:(NSString *)path
+-(id)initWithPath:(NSString *)path rootPath:(NSString *)base
 {
     if ((self = [self init]))
     {
@@ -32,14 +32,16 @@
         self.path = [path stringByDeletingLastPathComponent];
         self.extension = [_name pathExtension];
         
+        NSString *entirePath = [base stringByAppendingPathComponent:path];
+        
         BOOL exists, isdir;
-        exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isdir];
+        exists = [[NSFileManager defaultManager] fileExistsAtPath:entirePath isDirectory:&isdir];
         if (!exists)
         {
-            NSLog(@"Invalid path for local ServiceFile: %@", path);
+            NSLog(@"Invalid entirePath for local ServiceFile: %@", entirePath);
             return nil;
         }
-        _cachedModifiedDate = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil].fileModificationDate;
+        _cachedModifiedDate = [[NSFileManager defaultManager] attributesOfItemAtPath:entirePath error:nil].fileModificationDate;
         self.isDirectory = isdir;
     }
     return self;

@@ -38,6 +38,10 @@ typedef NS_ENUM(NSInteger, ServiceError)
 
 extern NSString * const MPrintDidRefreshServicesNotification;
 
+// The notification object will be a ServiceFile, if the service is able to generate one
+// on import. Otherwise, the notification object will be nil.
+extern NSString * const MPrintDidImportFileNotification;
+
 @interface Service : MPrintObject
 
 +(void)refreshServices:(MPrintFetchHandler)completion;

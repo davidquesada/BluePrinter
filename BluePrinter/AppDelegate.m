@@ -114,9 +114,12 @@ AppDelegate *sharedDelegate;
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    NSString *path = [url path];
-    [[Service localService] importFileAtLocalPath:path];
-    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *path = [url path];
+        [[Service localService] importFileAtLocalPath:path];
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    });
+
     return YES;
 }
 
