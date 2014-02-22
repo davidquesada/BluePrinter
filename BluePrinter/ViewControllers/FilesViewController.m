@@ -11,6 +11,7 @@
 #import "ServiceFile.h"
 #import "PrintRequest.h"
 #import "PrintJobTableViewController.h"
+#import "ServiceFile+Icons.h"
 
 @interface FilesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -52,7 +53,7 @@
     self.tableView = (id)self.view;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 64.0;
+    self.tableView.rowHeight = 52.0;
     [self.tableView registerNib:[UINib nibWithNibName:@"FileCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"fileCell"];
     
     UIRefreshControl *ref = [[UIRefreshControl alloc] init];
@@ -97,8 +98,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"fileCell"];
     ServiceFile *file = _files[indexPath.row];
     
+    cell.imageView.image = [file imageRepresentationInListView];
     cell.textLabel.text = file.name;
-    
     cell.accessoryType = (file.isDirectory ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone);
     
     return cell;

@@ -16,6 +16,7 @@
 @property (readwrite) BOOL isDirectory;
 @property (readwrite) NSString *name;
 @property (readwrite) NSString *path;
+@property (readwrite) NSString *extension;
 @end
 
 @implementation ServiceFile
@@ -35,6 +36,7 @@
         self.serviceType = ServiceTypeLocal;
         self.name = [path lastPathComponent];
         self.path = [path stringByDeletingLastPathComponent];
+        self.extension = [_name pathExtension];
         
         BOOL exists, isdir;
         exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isdir];
@@ -56,6 +58,7 @@
         _name = dict[@"name"];
         _path = dict[@"path"];
         _isDirectory = [dict[@"type"] isEqualToString:@"dir"];
+        _extension = dict[@"extension"];
     }
     return self;
 }

@@ -15,6 +15,7 @@
 @property (readonly) BOOL isDirectory;
 @property (readonly) NSString *name;
 @property (readonly) NSString *path;
+@property (readonly) NSString *extension;
 @property (readonly) BOOL isDownloadable;
 @property (readonly) Service *service;
 @property (readonly) NSString *fullpath;
