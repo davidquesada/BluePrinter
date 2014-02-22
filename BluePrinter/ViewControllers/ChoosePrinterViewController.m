@@ -30,6 +30,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Printing Locations";
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 -(void)loadView
@@ -140,6 +141,15 @@
 {
     [self loadSearchResultsForString:searchString];
     return YES;
+}
+
+-(void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
+{
+    // Fix a bug in iOS. It's possible to make the search bar disappear out of the view
+    // hierarchy and then cause an EXC_BAD_ACCESS. So here's basically where it ordinarily
+    // would leave, but let's steal it back before it gets lost.
+    self.tableView.tableHeaderView = controller.searchBar;
+    [self.tableView addSubview:controller.searchBar];
 }
 
 #pragma mark - UITableView Stuff
