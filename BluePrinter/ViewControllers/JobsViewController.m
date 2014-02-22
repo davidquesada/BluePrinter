@@ -14,7 +14,6 @@
 @interface JobCell : UITableViewCell
 {
     __weak IBOutlet UIView *colorView;
-    __weak IBOutlet UIProgressView *progressView;
 }
 -(void)setPrintJob:(PrintJob *)job;
 @end
@@ -132,28 +131,25 @@
                  @(PrintJobStateCompleted) : [UIColor colorWithRed:0 green:.8 blue:0 alpha:1.0],
                  @(PrintJobStateFailed) : [UIColor colorWithRed:1.0 green:.1 blue:.1 alpha:1.0],
                  @(PrintJobStateProcessing) : [UIColor colorWithRed:0 green:0 blue:.8 alpha:1.0],
-//                  @(PrintJobStateCancelled) : [UIColor blackColor],
-//                  @(PrintJobStateCompleted) : [UIColor greenColor],
-//                  @(PrintJobStateFailed) : [UIColor redColor],
-//                  @(PrintJobStateProcessing) : [UIColor blueColor],
                   };
     return dict[@(state)];
 }
 
 -(void)setPrintJob:(PrintJob *)job
 {
+    static NSDateFormatter *formatter = nil;
+    if (!formatter)
+    {
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterShortStyle;
+    }
+    
     self.textLabel.text = job.name;
-    self.detailTextLabel.text = job.printerDisplayName;
+    NSString *dateString = [formatter stringFromDate:job.creationTime];
+    self.detailTextLabel.text = [NSString stringWithFormat:@"Submitted %@\n%@", dateString, job.printerDisplayName ];
     
     colorView.backgroundColor = [self.class colorForPrintJobState:job.state];
-    
-    if (job.state == PrintJobStateProcessing)
-    {
-        progressView.hidden = NO;
-        progressView.progress = (job.progress / 100.0);
-    }
-    else
-        progressView.hidden = YES;
 }
 
 @end

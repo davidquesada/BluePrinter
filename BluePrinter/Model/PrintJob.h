@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, PrintJobState)
 // TODO: Figure out what the values for this are. ("completed", "failed", "cancelled")
 @property(readonly) PrintJobState state;
 
+@property(readonly) NSString *stateDescription;
+
 -(void)refresh:(MPrintFetchHandler)completion;
 -(void)cancel:(MPrintFetchHandler)completion;
 

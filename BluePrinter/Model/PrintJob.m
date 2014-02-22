@@ -70,7 +70,8 @@ NSArray *userJobs;
     if (!formatter)
     {
         formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"";
+//        formatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     }
     
     static NSDictionary *stateDict = nil;
@@ -124,6 +125,18 @@ NSArray *userJobs;
         if (completion)
             completion(nil, response);
     }];
+}
+
+-(NSString *)stateDescription
+{
+    static NSDictionary *dict = nil;
+    if (!dict)
+        dict = @{ @(PrintJobStateCancelled) : @"Cancelled",
+                  @(PrintJobStateCompleted) : @"Completed",
+                  @(PrintJobStateFailed) : @"Failed",
+                  @(PrintJobStateProcessing) : @"Processing",
+                  };
+    return dict[@(self.state)];
 }
 
 @end
