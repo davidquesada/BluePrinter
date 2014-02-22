@@ -90,6 +90,7 @@
 {
     ChoosePrinterViewController *controller = [[ChoosePrinterViewController alloc] init];
     controller.delegate = self;
+    controller.selectedLocation = self.request.printLocation;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

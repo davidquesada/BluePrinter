@@ -202,6 +202,12 @@
     cell.textLabel.text = location.displayName;
     cell.detailTextLabel.text = location.location;
     
+    UITableViewCellAccessoryType acc = UITableViewCellAccessoryNone;
+    if ([_selectedLocation.name isEqualToString:location.name])
+        acc = UITableViewCellAccessoryCheckmark;
+    
+    cell.accessoryType = acc;
+    
     return cell;
 }
 

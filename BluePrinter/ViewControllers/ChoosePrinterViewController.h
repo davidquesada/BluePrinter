@@ -19,5 +19,6 @@
 
 @interface ChoosePrinterViewController : UIViewController
 @property(weak) id<ChoosePrinterViewControllerDelegate> delegate;
+@property(weak) Location *selectedLocation;
 
 @end
