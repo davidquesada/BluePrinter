@@ -13,6 +13,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (readonly) UIStoryboard *mainStoryboard;
 
+-(void)showLoginViewController;
+
 +(instancetype)sharedDelegate;
 
 @end

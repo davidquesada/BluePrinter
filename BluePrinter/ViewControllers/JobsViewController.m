@@ -55,15 +55,6 @@
     }];
 }
 
-#pragma mark - IBActions
-
--(IBAction)logout:(id)sender
-{
-    [Account logout:^(BOOL success) {
-        NSLog(@"YO");
-    }];
-}
-
 #pragma mark - Notification Handlers
 
 -(void)didRefreshJobs:(NSNotification *)note

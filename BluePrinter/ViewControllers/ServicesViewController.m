@@ -10,10 +10,21 @@
 #import "Service.h"
 #import "FilesViewController.h"
 #import "MPrintCosignManager.h"
+#import "MPrintResponse.h"
+#import "Account.h"
+#import "AppDelegate.h"
+
+typedef NS_ENUM(NSInteger, AccountButtonMode)
+{
+    AccountButtonModeLogIn,
+    AccountButtonModeLogOut,
+    AccountButtonModeLoading,
+};
 
 @interface ServicesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     BOOL _hasReloaded;
+    __weak UIRefreshControl *_refreshControl;
 }
 @property (weak) IBOutlet UITableView *tableView;
 
@@ -21,6 +32,14 @@
 -(void)createSections;
 
 -(void)didRefreshServices:(NSNotification *)note;
+
+-(void)logIn:(id)sender;
+-(void)logOut:(id)sender;
+
+-(void)userDidLogIn:(NSNotification *)note;
+-(void)userDidLogOut:(NSNotification *)note;
+
+-(void)setAccountButtonMode:(AccountButtonMode)mode;
 
 @end
 
@@ -31,6 +50,7 @@
     [super viewDidLoad];
     UIRefreshControl *ref = [[UIRefreshControl alloc] init];
     [ref addTarget:self action:@selector(reload:) forControlEvents:UIControlEventValueChanged];
+    _refreshControl = ref;
     [self.tableView addSubview:ref];
     
     self.tableView.rowHeight = 60.0;
@@ -42,6 +62,9 @@
     [self reload:(id)self.tableView.tableHeaderView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRefreshServices:) name:MPrintDidRefreshServicesNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogIn:) name:MPrintUserDidLogInNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogOut:) name:MPrintUserDidLogOutNotification object:nil];
+    [self setAccountButtonMode:AccountButtonModeLogIn];
 }
 
 -(void)dealloc
@@ -61,12 +84,18 @@
 
 -(void)reload:(UIRefreshControl *)sender
 {
-    if (!sender.isRefreshing)
-        [sender beginRefreshing];
+    if (!_refreshControl.isRefreshing)
+        [_refreshControl beginRefreshing];
+    [self setAccountButtonMode:AccountButtonModeLoading];
     [Service refreshServices:^(NSMutableArray *objects, MPrintResponse *response) {
         [self createSections];
-        [sender endRefreshing];
+        [_refreshControl endRefreshing];
         [self.tableView reloadData];
+        
+        if (response.uniqname)
+            [self setAccountButtonMode:AccountButtonModeLogOut];
+        else
+            [self setAccountButtonMode:AccountButtonModeLogIn];
     }];
 }
 
@@ -90,12 +119,55 @@
     }
 }
 
+-(void)setAccountButtonMode:(AccountButtonMode)mode
+{
+    UIBarButtonItem *item = nil;
+    UIActivityIndicatorView *view = nil;
+    
+    if (mode == AccountButtonModeLoading)
+    {
+        view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        item = [[UIBarButtonItem alloc] initWithCustomView:view];
+    } else if (mode == AccountButtonModeLogIn)
+    {
+        item = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStyleBordered target:self action:@selector(logIn:)];
+    } else if (mode == AccountButtonModeLogOut)
+    {
+        item = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logOut:)];
+    }
+    
+    self.navigationItem.leftBarButtonItem = item;
+    [view startAnimating];
+}
+
+-(void)logOut:(id)sender
+{
+    [Account logout:^(BOOL success) {
+
+    }];
+}
+
+-(void)logIn:(id)sender
+{
+    [[AppDelegate sharedDelegate] showLoginViewController];
+}
+
 #pragma mark - Notification Handlers
 
 -(void)didRefreshServices:(NSNotification *)note
 {
     [self createSections];
     [self.tableView reloadData];
+}
+
+-(void)userDidLogIn:(NSNotification *)note
+{
+    [self setAccountButtonMode:AccountButtonModeLogOut];
+}
+
+-(void)userDidLogOut:(NSNotification *)note
+{
+    [self setAccountButtonMode:AccountButtonModeLogIn];
 }
 
 #pragma mark - UITableView Methods

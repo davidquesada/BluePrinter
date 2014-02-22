@@ -18,18 +18,7 @@
                             <outlet property="delegate" destination="wcC-ek-sAg" id="ViN-tq-00l"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Locations" id="dkv-W1-ixU">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="WQx-Y1-2lQ">
-                            <connections>
-                                <action selector="showLogin:" destination="wcC-ek-sAg" id="7Ik-GG-0qf"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Check Login" id="ALp-Cv-H6w">
-                            <connections>
-                                <action selector="check:" destination="wcC-ek-sAg" id="5xj-BV-7lI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Locations" id="dkv-W1-ixU"/>
                     <connections>
                         <outlet property="tableView" destination="eDs-8r-Wrw" id="khF-XP-OyO"/>
                     </connections>
@@ -86,13 +75,7 @@
                             <outlet property="delegate" destination="GBO-PJ-P0K" id="Q3I-U7-UYz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Jobs" id="O9U-oe-cYS">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Npk-6u-CyF">
-                            <connections>
-                                <action selector="logout:" destination="GBO-PJ-P0K" id="zVc-Yt-JeQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Jobs" id="O9U-oe-cYS"/>
                     <connections>
                         <outlet property="tableView" destination="ZfY-Jd-5pr" id="xYb-B9-sL6"/>
                     </connections>
@@ -106,7 +89,7 @@
             <objects>
                 <viewController id="ls7-eW-5b2" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Roa-gs-aH2">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </tableView>
@@ -413,7 +396,6 @@
                         <segue destination="MXl-5y-lRx" kind="relationship" relationship="viewControllers" id="F19-DB-TYx"/>
                         <segue destination="U34-v6-ria" kind="relationship" relationship="viewControllers" id="eDf-fD-izw"/>
                         <segue destination="VOw-ca-1AH" kind="relationship" relationship="viewControllers" id="NvP-QR-dYM"/>
-                        <segue destination="j3h-Q2-E6l" kind="relationship" relationship="viewControllers" id="llh-7E-Wji"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Otr-6O-Oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,7 +462,7 @@
         <!--Navigation Controller - Options-->
         <scene sceneID="6KY-3d-78j">
             <objects>
-                <navigationController id="j3h-Q2-E6l" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="optionsNavController" id="j3h-Q2-E6l" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Options" id="Dp0-bP-eoJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uDx-Qd-eux">

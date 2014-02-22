@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 #import "MPrintLocalService.h"
 #import "MPrintCosignManager.h"
 #import "Location.h"
@@ -130,6 +131,15 @@ AppDelegate *sharedDelegate;
     [Location refreshRecentLocations:nil];
     [Service refreshServices:nil];
     [PrintJob refreshUserJobs:nil];
+}
+
+-(void)showLoginViewController
+{
+    LoginViewController *view = [[LoginViewController alloc] init];
+    UIApplication *application = [UIApplication sharedApplication];
+    UIViewController *target = application.keyWindow.rootViewController;
+    
+    [target presentViewController:view animated:YES completion:nil];
 }
 
 @end
