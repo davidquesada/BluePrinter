@@ -102,6 +102,7 @@
 		636833D718B839E000720C4B /* ServiceFile+Icons.m in Sources */ = {isa = PBXBuildFile; fileRef = 636833D618B839E000720C4B /* ServiceFile+Icons.m */; };
 		636833D918B8451B00720C4B /* DirectoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636833D818B8451B00720C4B /* DirectoryCell.xib */; };
 		636833DB18B8596900720C4B /* FooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636833DA18B8596900720C4B /* FooterCell.xib */; };
+		636833DE18B9781500720C4B /* MPrintServiceAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 636833DD18B9781500720C4B /* MPrintServiceAuthenticationViewController.m */; };
 		6374DD3818B7091C0036129A /* MPrintDriveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3718B7091C0036129A /* MPrintDriveService.m */; };
 		6374DD3B18B70C240036129A /* MPrintIFSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3A18B70C240036129A /* MPrintIFSService.m */; };
 		637E8295189B811000DA9A35 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 637E8294189B811000DA9A35 /* ServiceFile.m */; };
@@ -237,6 +238,8 @@
 		636833D618B839E000720C4B /* ServiceFile+Icons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ServiceFile+Icons.m"; path = "Categories/ServiceFile+Icons.m"; sourceTree = "<group>"; };
 		636833D818B8451B00720C4B /* DirectoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DirectoryCell.xib; path = Nibs/DirectoryCell.xib; sourceTree = "<group>"; };
 		636833DA18B8596900720C4B /* FooterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FooterCell.xib; path = Nibs/FooterCell.xib; sourceTree = "<group>"; };
+		636833DC18B9781500720C4B /* MPrintServiceAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintServiceAuthenticationViewController.h; path = Model/Services/MPrintServiceAuthenticationViewController.h; sourceTree = "<group>"; };
+		636833DD18B9781500720C4B /* MPrintServiceAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintServiceAuthenticationViewController.m; path = Model/Services/MPrintServiceAuthenticationViewController.m; sourceTree = "<group>"; };
 		6374DD3618B7091C0036129A /* MPrintDriveService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintDriveService.h; path = Model/Services/MPrintDriveService.h; sourceTree = "<group>"; };
 		6374DD3718B7091C0036129A /* MPrintDriveService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintDriveService.m; path = Model/Services/MPrintDriveService.m; sourceTree = "<group>"; };
 		6374DD3918B70C240036129A /* MPrintIFSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintIFSService.h; path = Model/Services/MPrintIFSService.h; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 				6359D54918B7E31F001698F7 /* MPrintLockerService.m */,
 				6359D54B18B7E43E001698F7 /* MPrintBoxService.h */,
 				6359D54C18B7E43E001698F7 /* MPrintBoxService.m */,
+				636833DC18B9781500720C4B /* MPrintServiceAuthenticationViewController.h */,
+				636833DD18B9781500720C4B /* MPrintServiceAuthenticationViewController.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -738,6 +743,7 @@
 				B20C18AE188641520088EE73 /* JobsViewController.m in Sources */,
 				63C50C7B18AA10AA00D63876 /* PrintJob.m in Sources */,
 				B20C18B2188641AA0088EE73 /* Location.m in Sources */,
+				636833DE18B9781500720C4B /* MPrintServiceAuthenticationViewController.m in Sources */,
 				B20C18B61886458C0088EE73 /* MPrintRequest.m in Sources */,
 				63F9CD8318B2B90900B6B63A /* MPrintCosignManager.m in Sources */,
 				63AA558E1888F2980073D214 /* LoginViewController.m in Sources */,

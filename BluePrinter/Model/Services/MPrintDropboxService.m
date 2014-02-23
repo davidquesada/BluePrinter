@@ -25,4 +25,9 @@
     return ServiceTypeDropbox;
 }
 
+-(MPrintNetworkedServiceConnectionMethod)connectionMethod
+{
+    return MPrintNetworkedServiceConnectionMethodAuthenticated;
+}
+
 @end

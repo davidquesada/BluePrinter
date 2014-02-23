@@ -12,7 +12,16 @@
 @class MPrintResponse;
 @class ServiceFile;
 
+typedef NS_ENUM(NSInteger, MPrintNetworkedServiceConnectionMethod)
+{
+    MPrintNetworkedServiceConnectionMethodNone,
+    MPrintNetworkedServiceConnectionMethodSimple,
+    MPrintNetworkedServiceConnectionMethodAuthenticated,
+};
+
 @interface MPrintNetworkedService : Service
+
+@property(readonly) MPrintNetworkedServiceConnectionMethod connectionMethod;
 
 -(NSString *)preparePathForDirectory:(NSString *)directory;
 -(void)willPerformRequest:(MPrintRequest *)request;

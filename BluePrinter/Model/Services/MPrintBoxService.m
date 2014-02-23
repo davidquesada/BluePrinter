@@ -25,4 +25,9 @@
     return ServiceTypeBox;
 }
 
+-(MPrintNetworkedServiceConnectionMethod)connectionMethod
+{
+    return MPrintNetworkedServiceConnectionMethodAuthenticated;
+}
+
 @end

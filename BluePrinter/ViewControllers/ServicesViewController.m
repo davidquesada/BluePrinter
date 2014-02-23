@@ -41,6 +41,9 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 
 -(void)setAccountButtonMode:(AccountButtonMode)mode;
 
+-(NSInteger)indexToInsertService:(Service *)service inSection:(NSInteger)section;
+-(void)moveServiceAtIndexPath:(NSIndexPath *)indexPath toSection:(NSInteger)section;
+
 @end
 
 @implementation ServicesViewController
@@ -164,6 +167,43 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     return nil;
 }
 
+-(NSInteger)indexToInsertService:(Service *)service inSection:(NSInteger)section
+{
+    if (_sections.count < 3)
+        return 0;
+    NSArray *dcSection = _sections[section];
+    if (dcSection.count == 0)
+        return 0;
+    
+    NSRange range = NSMakeRange(0, dcSection.count);
+    return [dcSection indexOfObject:service inSortedRange:range options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(Service *obj1, Service *obj2) {
+        
+        int a = (int)obj1.type, b = (int)obj2.type;
+        if (a == b)
+            return NSOrderedSame;
+        if (a < b)
+            return NSOrderedAscending;
+        return NSOrderedDescending;
+        //        return [[obj1 valueForKey:@"type"] compare:[obj2 valueForKey:@"type"]];
+    }];
+}
+
+-(void)moveServiceAtIndexPath:(NSIndexPath *)indexPath toSection:(NSInteger)section
+{
+    Service *service = _sections[indexPath.section][indexPath.row];
+    int idx = [self indexToInsertService:service inSection:section];
+    NSIndexPath *dest = [NSIndexPath indexPathForRow:idx inSection:section];
+    
+    [_sections[indexPath.section] removeObject:service];
+    [_sections[dest.section] insertObject:service atIndex:dest.row];
+    
+    [self.tableView beginUpdates];
+    [self.tableView moveRowAtIndexPath:indexPath toIndexPath:dest];
+    [self.tableView endUpdates];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[ dest ] withRowAnimation:UITableViewRowAnimationFade];
+}
+
 #pragma mark - Notification Handlers
 
 -(void)didRefreshServices:(NSNotification *)note
@@ -209,10 +249,8 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     Service *service = _sections[indexPath.section][indexPath.row];
     
     cell.textLabel.text = service.description;
-    
+    cell.detailTextLabel.text = (service.isConnected ? nil : @"Tap to connect");
     cell.accessoryType = (service.isConnected ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone);
-    
-    cell.selectionStyle = (service.isConnected ? UITableViewCellSelectionStyleDefault : UITableViewCellSelectionStyleNone);
     
     return cell;
 }
@@ -222,11 +260,24 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     Service *service = _sections[indexPath.section][indexPath.row];
-    if (!service.isConnected)
-        return;
     
-    FilesViewController *controller = [[FilesViewController alloc] initWithService:service];
-    [self.navigationController pushViewController:controller animated:YES];
+    if (service.isConnected)
+    {
+        FilesViewController *controller = [[FilesViewController alloc] initWithService:service];
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [service connect:^{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        // The connect didn't work, so don't try to do any fancy animations.
+        if (!service.isConnected)
+            return;
+        
+        [self moveServiceAtIndexPath:indexPath toSection:1];
+    }];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -240,27 +291,6 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     if (service.isConnected && service.supportsDisconnect)
         return UITableViewCellEditingStyleDelete;
     return UITableViewCellEditingStyleNone;
-}
-
--(NSInteger)indexToInsertNewlyDisconnectedService:(Service *)service;
-{
-    if (_sections.count < 3)
-        return 0;
-    NSArray *dcSection = _sections[2];
-    if (dcSection.count == 0)
-        return 0;
-    
-    NSRange range = NSMakeRange(0, dcSection.count);
-    return [dcSection indexOfObject:service inSortedRange:range options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(Service *obj1, Service *obj2) {
-        
-        int a = (int)obj1.type, b = (int)obj2.type;
-        if (a == b)
-            return NSOrderedSame;
-        if (a < b)
-            return NSOrderedAscending;
-        return NSOrderedDescending;
-//        return [[obj1 valueForKey:@"type"] compare:[obj2 valueForKey:@"type"]];
-    }];
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -281,18 +311,8 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
         // The disconnect didn't work, so don't try to do any fancy animations.
         if (service.isConnected)
             return;
-        
-        int idx = [self indexToInsertNewlyDisconnectedService:service];
-        NSIndexPath *dest = [NSIndexPath indexPathForRow:idx inSection:2];
 
-        [_sections[indexPath.section] removeObject:service];
-        [_sections[dest.section] insertObject:service atIndex:dest.row];
-        
-        [self.tableView beginUpdates];
-        [self.tableView moveRowAtIndexPath:indexPath toIndexPath:dest];
-        [self.tableView endUpdates];
-        
-        [self.tableView reloadRowsAtIndexPaths:@[ dest ] withRowAnimation:UITableViewRowAnimationFade];
+        [self moveServiceAtIndexPath:indexPath toSection:2];
     }];
 }
 

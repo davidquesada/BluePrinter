@@ -25,6 +25,11 @@
     return ServiceTypeDrive;
 }
 
+-(MPrintNetworkedServiceConnectionMethod)connectionMethod
+{
+    return MPrintNetworkedServiceConnectionMethodAuthenticated;
+}
+
 -(NSString *)preparePathForDirectory:(NSString *)directory
 {
     // For some reason, the Google Drive service doesn't like / as a path.

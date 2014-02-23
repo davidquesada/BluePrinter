@@ -25,4 +25,9 @@
     return ServiceTypeLocker;
 }
 
+-(MPrintNetworkedServiceConnectionMethod)connectionMethod
+{
+    return MPrintNetworkedServiceConnectionMethodSimple;
+}
+
 @end

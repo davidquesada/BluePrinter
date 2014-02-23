@@ -10,11 +10,23 @@
 #import "MPrintRequest.h"
 #import "MPrintResponse.h"
 #import "ServiceFile.h"
+#import "MPrintServiceAuthenticationViewController.h"
 
-@interface MPrintNetworkedService ()
+@interface MPrintNetworkedService ()<MPrintServiceAuthenticationViewControllerDelegate>
+
+@property(copy) void(^completionHandler)();
 
 -(NSURL *)urlForDirectoryAtPath:(NSString *)path;
+
+-(NSURL *)serviceURL;
 -(NSURL *)urlForDisconnect;
+-(NSURL *)urlForConnect;
+
+-(void)doSimpleConnect:(void (^)())completion;
+-(void)doAuthenticatedConnect:(void (^)())completion;
+
+-(UIViewController *)targetViewController;
+-(void)getAuthenticationURL:(void (^)(NSURL *url))completion;
 
 @end
 
@@ -49,10 +61,25 @@
 {
 }
 
--(NSURL *)urlForDisconnect
+-(NSURL *)serviceURL
 {
     NSString *url = [NSString stringWithFormat:@"https://mprint.umich.edu/api/services/%@", self.name];
     return [NSURL URLWithString:url];
+}
+
+-(NSURL *)urlForDisconnect
+{
+    return [self serviceURL];
+}
+
+-(NSURL *)urlForConnect
+{
+    return [self serviceURL];
+}
+
+-(MPrintNetworkedServiceConnectionMethod)connectionMethod
+{
+    return MPrintNetworkedServiceConnectionMethodNone;
 }
 
 #pragma mark - Service Methods
@@ -93,11 +120,7 @@
     MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:[self urlForDisconnect] method:DELETE];
 
     [req performWithCompletion:^(MPrintResponse *response) {
-        
-        // TODO: We actually want to refresh the status of the service after sending this request.
-        // It would be simple to check the "success" status of the response, but we can't do that
-        // because we're tentatively using a URL that returns an HTML page, so we can't easily grab
-        // the success status. For now, assumed the disconnect succeeded.
+
         if (response.success)
             [self setValue:@(0) forKey:@"connectedStatus"];
         
@@ -105,6 +128,96 @@
             completion();
         
     }];
+}
+
+-(void)connect:(void (^)())completion
+{
+    MPrintNetworkedServiceConnectionMethod method = [self connectionMethod];
+    if (method == MPrintNetworkedServiceConnectionMethodSimple)
+        [self doSimpleConnect:completion];
+    else if (method == MPrintNetworkedServiceConnectionMethodAuthenticated)
+        [self doAuthenticatedConnect:completion];
+    else
+    {
+        NSLog(@"This Networked service doesn't support connection.");
+        if (completion)
+            completion();
+    }
+}
+
+#pragma Connection related Methods
+
+-(void)doSimpleConnect:(void (^)())completion
+{
+    MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:[self urlForConnect] method:PUT];
+    [req addBodyValue:@"" forKey:@"enable"];
+    [req performWithCompletion:^(MPrintResponse *response) {
+
+        if (response.success)
+            [self setValue:@(1) forKey:@"connectedStatus"];
+        
+        if (completion)
+            completion();
+        
+    }];
+}
+
+-(void)doAuthenticatedConnect:(void (^)())completion
+{
+    self.completionHandler = completion;
+    [self getAuthenticationURL:^(NSURL *url) {
+        
+        if (!url)
+        {
+            if (completion)
+                completion();
+            return;
+        }
+        
+        MPrintServiceAuthenticationViewController *controller = [[MPrintServiceAuthenticationViewController alloc] initWithURL:url service:self];
+        controller.delegate = self;
+        UIViewController *target = [self targetViewController];
+        [target presentViewController:controller animated:YES completion:nil];
+        
+    }];
+}
+
+-(UIViewController *)targetViewController
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    UIWindow *window = app.keyWindow;
+    return window.rootViewController;
+}
+
+// completion must be non-nil
+-(void)getAuthenticationURL:(void (^)(NSURL *))completion
+{
+    NSURL *infourl = [self serviceURL];
+    MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:infourl method:GET];
+    
+    [req performWithCompletion:^(MPrintResponse *response) {
+        
+        NSURL *url = nil;
+        
+        if (!response.success || !response.count)
+            completion(nil);
+        
+        NSString *str = response.results[0][@"authorization_url"];
+        url = [NSURL URLWithString:str];
+        
+        completion(url);
+    }];
+}
+
+#pragma mark - MPrintServiceAuthenticationViewControllerDelegate Methods
+
+-(void)authenticationController:(MPrintServiceAuthenticationViewController *)controller willDismissWithAuthenticationStatus:(BOOL)authenticated
+{
+    if (authenticated)
+        [self setValue:@(1) forKey:@"connectedStatus"];
+    
+    if (self.completionHandler)
+        self.completionHandler();
 }
 
 @end

@@ -39,6 +39,11 @@
     return ServiceTypeIFS;
 }
 
+-(MPrintNetworkedServiceConnectionMethod)connectionMethod
+{
+    return MPrintNetworkedServiceConnectionMethodSimple;
+}
+
 -(NSString *)afsPrefix
 {
     NSString *uniqname = [MPrintResponse lastUniqname];
