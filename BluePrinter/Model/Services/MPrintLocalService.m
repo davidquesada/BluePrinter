@@ -118,7 +118,7 @@
     
     NSString *destination = [_directory stringByAppendingPathComponent:[path lastPathComponent]];
     if ([manager fileExistsAtPath:destination])
-        return ServiceErrorFileExists;
+        [manager removeItemAtPath:destination error:nil];
     
     NSError *err = nil;
     BOOL r = [manager copyItemAtPath:path toPath:destination error:&err];
