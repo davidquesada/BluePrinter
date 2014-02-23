@@ -13,6 +13,9 @@
 #import "MPrintServiceAuthenticationViewController.h"
 
 @interface MPrintNetworkedService ()<MPrintServiceAuthenticationViewControllerDelegate>
+{
+    NSURL *_authenticationURL;
+}
 
 @property(copy) void(^completionHandler)();
 
@@ -174,7 +177,7 @@
             return;
         }
         
-        MPrintServiceAuthenticationViewController *controller = [[MPrintServiceAuthenticationViewController alloc] initWithURL:url service:self];
+        MPrintServiceAuthenticationViewController *controller = [[MPrintServiceAuthenticationViewController alloc] initWithService:self];
         controller.delegate = self;
         UIViewController *target = [self targetViewController];
         [target presentViewController:controller animated:YES completion:nil];
@@ -205,8 +208,28 @@
         NSString *str = response.results[0][@"authorization_url"];
         url = [NSURL URLWithString:str];
         
+        if (url)
+            _authenticationURL = url;
+        
         completion(url);
     }];
+}
+
+-(NSURL *)authorizationURL
+{
+    return _authenticationURL;
+}
+
+-(MPrintNetworkedServiceAuthResult)actionForIntermediateURL:(NSURL *)url
+{
+    if (![url.host isEqualToString:@"mprint.umich.edu"])
+        return MPrintNetworkedServiceAuthResultNone;
+    return [self actionForMPrintURL:url];
+}
+
+-(MPrintNetworkedServiceAuthResult)actionForMPrintURL:(NSURL *)url
+{
+    return MPrintNetworkedServiceAuthResultNone;
 }
 
 #pragma mark - MPrintServiceAuthenticationViewControllerDelegate Methods

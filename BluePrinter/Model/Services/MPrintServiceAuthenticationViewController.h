@@ -21,6 +21,6 @@ willDismissWithAuthenticationStatus:(BOOL)authenticated;
 
 @property(weak, nonatomic) id<MPrintServiceAuthenticationViewControllerDelegate> delegate;
 
--(id)initWithURL:(NSURL *)url service:(MPrintNetworkedService *)service;
+-(id)initWithService:(MPrintNetworkedService *)service;
 
 @end

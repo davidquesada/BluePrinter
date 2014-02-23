@@ -23,7 +23,7 @@
 
 @implementation MPrintServiceAuthenticationViewController
 
--(id)initWithURL:(NSURL *)url service:(MPrintNetworkedService *)service
+-(id)initWithService:(MPrintNetworkedService *)service
 {
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectZero];
     UIViewController *root = [[UIViewController alloc] init];
@@ -38,7 +38,7 @@
         web.delegate = self;
         _service = service;
         webView = web;
-        _url = url;
+        _url = service.authorizationURL;
     }
     return self;
 }
@@ -64,10 +64,14 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSURL *url = request.URL;
-    NSLog(@"AUTHURL: %@", url);
-    if ([url.host isEqualToString:@"mprint.umich.edu"])
+    MPrintNetworkedServiceAuthResult result = [_service actionForIntermediateURL:url];
+    if (result == MPrintNetworkedServiceAuthResultApproved)
     {
         _authd = YES;
+        [self dismiss:nil];
+        return YES;
+    } else if (result == MPrintNetworkedServiceAuthResultDenied)
+    {
         [self dismiss:nil];
         return YES;
     }

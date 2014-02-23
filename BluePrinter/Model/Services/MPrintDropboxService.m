@@ -30,4 +30,16 @@
     return MPrintNetworkedServiceConnectionMethodAuthenticated;
 }
 
+-(MPrintNetworkedServiceAuthResult)actionForMPrintURL:(NSURL *)url
+{
+    NSString *query = url.query;
+    if (!query)
+        return MPrintNetworkedServiceAuthResultNone;
+    if ([query rangeOfString:@"oauth_token"].location != NSNotFound)
+        return MPrintNetworkedServiceAuthResultApproved;
+    if ([query rangeOfString:@"not_approved"].location != NSNotFound)
+        return MPrintNetworkedServiceAuthResultDenied;
+    return MPrintNetworkedServiceAuthResultNone;
+}
+
 @end

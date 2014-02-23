@@ -30,6 +30,18 @@
     return MPrintNetworkedServiceConnectionMethodAuthenticated;
 }
 
+-(MPrintNetworkedServiceAuthResult)actionForMPrintURL:(NSURL *)url
+{
+    NSString *query = url.query;
+    if (!query)
+        return MPrintNetworkedServiceAuthResultNone;
+    if ([query rangeOfString:@"code"].location != NSNotFound)
+        return MPrintNetworkedServiceAuthResultApproved;
+    if ([query rangeOfString:@"access_denied"].location != NSNotFound)
+        return MPrintNetworkedServiceAuthResultDenied;
+    return MPrintNetworkedServiceAuthResultNone;
+}
+
 -(NSString *)preparePathForDirectory:(NSString *)directory
 {
     // For some reason, the Google Drive service doesn't like / as a path.

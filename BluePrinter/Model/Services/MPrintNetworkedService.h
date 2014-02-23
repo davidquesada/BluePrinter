@@ -19,6 +19,13 @@ typedef NS_ENUM(NSInteger, MPrintNetworkedServiceConnectionMethod)
     MPrintNetworkedServiceConnectionMethodAuthenticated,
 };
 
+typedef NS_ENUM(NSInteger, MPrintNetworkedServiceAuthResult)
+{
+    MPrintNetworkedServiceAuthResultNone,
+    MPrintNetworkedServiceAuthResultApproved,
+    MPrintNetworkedServiceAuthResultDenied,
+};
+
 @interface MPrintNetworkedService : Service
 
 @property(readonly) MPrintNetworkedServiceConnectionMethod connectionMethod;
@@ -27,5 +34,9 @@ typedef NS_ENUM(NSInteger, MPrintNetworkedServiceConnectionMethod)
 -(void)willPerformRequest:(MPrintRequest *)request;
 -(void)didReceiveResponse:(MPrintResponse *)response;
 -(ServiceFile *)fileFromJSONDictionary:(NSDictionary *)dict;
+
+-(NSURL *)authorizationURL;
+-(MPrintNetworkedServiceAuthResult)actionForIntermediateURL:(NSURL *)url;
+-(MPrintNetworkedServiceAuthResult)actionForMPrintURL:(NSURL *)url;
 
 @end
