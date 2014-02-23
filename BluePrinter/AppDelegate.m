@@ -13,15 +13,25 @@
 #import "Location.h"
 #import "Service.h"
 #import "PrintJob.h"
+#import "PrintRequest.h"
+#import "PrintJobTableViewController.h"
+#import "Account.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 AppDelegate *sharedDelegate;
 
 @interface AppDelegate ()
+{
+    BOOL _hasRegisteredNotifications;
+}
 
 -(void)didLogIn:(NSNotification *)note;
+-(void)didImportDocument:(NSNotification *)note;
 -(void)addv7Appearance:(UIApplication *)application;
+
+-(UIViewController *)targetViewController;
+-(void)registerForNotifications;
 
 @end
 
@@ -43,11 +53,25 @@ AppDelegate *sharedDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     sharedDelegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogIn:) name:MPrintUserDidLogInNotification object:nil];
+    [self registerForNotifications];
     
     [self addv7Appearance:application];
-    
     return YES;
+}
+
+-(void)registerForNotifications
+{
+    if (_hasRegisteredNotifications)
+        return;
+    _hasRegisteredNotifications = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogIn:) name:MPrintUserDidLogInNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didImportDocument:) name:MPrintDidImportFileNotification object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)addv7Appearance:(UIApplication *)application
@@ -115,6 +139,7 @@ AppDelegate *sharedDelegate;
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    [self registerForNotifications];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *path = [url path];
         [[Service localService] importFileAtLocalPath:path];
@@ -133,11 +158,39 @@ AppDelegate *sharedDelegate;
     [PrintJob refreshUserJobs:nil];
 }
 
+-(void)didImportDocument:(NSNotification *)note
+{
+    ServiceFile *file = note.object;
+    if (!file)
+        return;
+    [Account checkLoginStatus:^(BOOL isLoggedIn) {
+        if (isLoggedIn)
+            [self showViewControllerForServiceFile:file];
+    }];
+}
+
+-(void)showViewControllerForServiceFile:(ServiceFile *)file
+{
+    PrintRequest *req = [[PrintRequest alloc] init];
+    req.file = file;
+    
+    PrintJobTableViewController *table = [[PrintJobTableViewController alloc] initWithPrintRequest:req];
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:table];
+    controller.navigationBar.translucent = NO;
+    controller.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self.targetViewController presentViewController:controller animated:YES completion:nil];
+}
+
+-(UIViewController *)targetViewController
+{
+    UIApplication *application = [UIApplication sharedApplication];
+    return application.keyWindow.rootViewController;
+}
+
 -(void)showLoginViewController
 {
     LoginViewController *view = [[LoginViewController alloc] init];
-    UIApplication *application = [UIApplication sharedApplication];
-    UIViewController *target = application.keyWindow.rootViewController;
+    UIViewController *target = [self targetViewController];
     
     [target presentViewController:view animated:YES completion:nil];
 }
