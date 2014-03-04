@@ -15,6 +15,9 @@
 		63613C9B1898B308007CD749 /* MPrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9A1898B308007CD749 /* MPrintObject.m */; };
 		63613C9E1898CC10007CD749 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613C9D1898CC10007CD749 /* Service.m */; };
 		63613CA11898D095007CD749 /* ServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613CA01898D095007CD749 /* ServicesViewController.m */; };
+		6364B40418C54371002555FA /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6364B40118C54371002555FA /* SVProgressHUD.bundle */; };
+		6364B40518C54371002555FA /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6364B40318C54371002555FA /* SVProgressHUD.m */; };
+		6364B40718C544DB002555FA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6364B40618C544DB002555FA /* QuartzCore.framework */; };
 		6368338018B8399A00720C4B /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6368332C18B8399A00720C4B /* folder.png */; };
 		6368338118B8399A00720C4B /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6368332D18B8399A00720C4B /* folder@2x.png */; };
 		6368338218B8399A00720C4B /* folder_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 6368332E18B8399A00720C4B /* folder_app.png */; };
@@ -108,6 +111,10 @@
 		637E8295189B811000DA9A35 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 637E8294189B811000DA9A35 /* ServiceFile.m */; };
 		63AA558B1888B44F0073D214 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558A1888B44F0073D214 /* Account.m */; };
 		63AA558E1888F2980073D214 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558D1888F2980073D214 /* LoginViewController.m */; };
+		63AFA41B18C52DF60036EF18 /* UsageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AFA41A18C52DF60036EF18 /* UsageViewController.m */; };
+		63AFA41E18C52E830036EF18 /* Usage.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AFA41D18C52E830036EF18 /* Usage.m */; };
+		63AFA42118C530750036EF18 /* UsageCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AFA42018C530750036EF18 /* UsageCategory.m */; };
+		63AFA42418C5318C0036EF18 /* UsageAllocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AFA42318C5318C0036EF18 /* UsageAllocation.m */; };
 		63C50C7218A9F7E300D63876 /* MPrintLocalService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50C7118A9F7E300D63876 /* MPrintLocalService.m */; };
 		63C50C7518AA107F00D63876 /* PrintRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50C7418AA107F00D63876 /* PrintRequest.m */; };
 		63C50C7B18AA10AA00D63876 /* PrintJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C50C7A18AA10AA00D63876 /* PrintJob.m */; };
@@ -150,6 +157,10 @@
 		63613C9D1898CC10007CD749 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Service.m; path = Model/Service.m; sourceTree = "<group>"; };
 		63613C9F1898D095007CD749 /* ServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServicesViewController.h; path = ViewControllers/ServicesViewController.h; sourceTree = "<group>"; };
 		63613CA01898D095007CD749 /* ServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServicesViewController.m; path = ViewControllers/ServicesViewController.m; sourceTree = "<group>"; };
+		6364B40118C54371002555FA /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = Libraries/SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
+		6364B40218C54371002555FA /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = Libraries/SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
+		6364B40318C54371002555FA /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = Libraries/SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
+		6364B40618C544DB002555FA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6368332C18B8399A00720C4B /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		6368332D18B8399A00720C4B /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
 		6368332E18B8399A00720C4B /* folder_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder_app.png; sourceTree = "<group>"; };
@@ -251,6 +262,14 @@
 		63AA558C1888F2980073D214 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
 		63AA558D1888F2980073D214 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllers/LoginViewController.m; sourceTree = "<group>"; };
 		63AA558F188903940073D214 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Network.h; path = Model/Network/Network.h; sourceTree = "<group>"; };
+		63AFA41918C52DF60036EF18 /* UsageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsageViewController.h; path = ViewControllers/UsageViewController.h; sourceTree = "<group>"; };
+		63AFA41A18C52DF60036EF18 /* UsageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsageViewController.m; path = ViewControllers/UsageViewController.m; sourceTree = "<group>"; };
+		63AFA41C18C52E830036EF18 /* Usage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Usage.h; path = Model/Usage.h; sourceTree = "<group>"; };
+		63AFA41D18C52E830036EF18 /* Usage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Usage.m; path = Model/Usage.m; sourceTree = "<group>"; };
+		63AFA41F18C530750036EF18 /* UsageCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsageCategory.h; path = Model/UsageCategory.h; sourceTree = "<group>"; };
+		63AFA42018C530750036EF18 /* UsageCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsageCategory.m; path = Model/UsageCategory.m; sourceTree = "<group>"; };
+		63AFA42218C5318C0036EF18 /* UsageAllocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsageAllocation.h; path = Model/UsageAllocation.h; sourceTree = "<group>"; };
+		63AFA42318C5318C0036EF18 /* UsageAllocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsageAllocation.m; path = Model/UsageAllocation.m; sourceTree = "<group>"; };
 		63C50C7018A9F7E300D63876 /* MPrintLocalService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintLocalService.h; path = Model/Services/MPrintLocalService.h; sourceTree = "<group>"; };
 		63C50C7118A9F7E300D63876 /* MPrintLocalService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintLocalService.m; path = Model/Services/MPrintLocalService.m; sourceTree = "<group>"; };
 		63C50C7318AA107F00D63876 /* PrintRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintRequest.h; path = Model/PrintRequest.h; sourceTree = "<group>"; };
@@ -300,6 +319,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6364B40718C544DB002555FA /* QuartzCore.framework in Frameworks */,
 				B20C187218863E890088EE73 /* UIKit.framework in Frameworks */,
 				B20C187418863E890088EE73 /* Foundation.framework in Frameworks */,
 				B20C187618863E890088EE73 /* CoreGraphics.framework in Frameworks */,
@@ -317,6 +337,24 @@
 				636833DA18B8596900720C4B /* FooterCell.xib */,
 			);
 			name = Nibs;
+			sourceTree = "<group>";
+		};
+		6364B3FF18C54347002555FA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				6364B40018C5434C002555FA /* SVProgressHUD */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		6364B40018C5434C002555FA /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				6364B40118C54371002555FA /* SVProgressHUD.bundle */,
+				6364B40218C54371002555FA /* SVProgressHUD.h */,
+				6364B40318C54371002555FA /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		6368332B18B8399A00720C4B /* Graphics */ = {
@@ -462,6 +500,7 @@
 		B20C187018863E890088EE73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6364B40618C544DB002555FA /* QuartzCore.framework */,
 				B20C187118863E890088EE73 /* UIKit.framework */,
 				B20C187318863E890088EE73 /* Foundation.framework */,
 				B20C187518863E890088EE73 /* CoreGraphics.framework */,
@@ -472,15 +511,16 @@
 		B20C187718863E890088EE73 /* BluePrinter */ = {
 			isa = PBXGroup;
 			children = (
-				636833D418B839AB00720C4B /* Categories */,
-				6368332B18B8399A00720C4B /* Graphics */,
-				6355364018B067FF00E88433 /* Nibs */,
 				B20C188018863E890088EE73 /* AppDelegate.h */,
 				B20C188118863E890088EE73 /* AppDelegate.m */,
 				B20C188918863E890088EE73 /* MainStoryboard.storyboard */,
-				B20C189F18863EBF0088EE73 /* ViewControllers */,
+				636833D418B839AB00720C4B /* Categories */,
+				6368332B18B8399A00720C4B /* Graphics */,
+				6364B3FF18C54347002555FA /* Libraries */,
 				B20C18AF188641840088EE73 /* Model */,
+				6355364018B067FF00E88433 /* Nibs */,
 				B20C187818863E890088EE73 /* Supporting Files */,
+				B20C189F18863EBF0088EE73 /* ViewControllers */,
 			);
 			path = BluePrinter;
 			sourceTree = "<group>";
@@ -520,6 +560,8 @@
 				6355364718B07BE100E88433 /* ChoosePrinterViewController.m */,
 				63F9CD8418B31F7600B6B63A /* SimpleChooserViewController.h */,
 				63F9CD8518B31F7600B6B63A /* SimpleChooserViewController.m */,
+				63AFA41918C52DF60036EF18 /* UsageViewController.h */,
+				63AFA41A18C52DF60036EF18 /* UsageViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -541,6 +583,12 @@
 				63C50C7418AA107F00D63876 /* PrintRequest.m */,
 				63C50C7918AA10AA00D63876 /* PrintJob.h */,
 				63C50C7A18AA10AA00D63876 /* PrintJob.m */,
+				63AFA41C18C52E830036EF18 /* Usage.h */,
+				63AFA41D18C52E830036EF18 /* Usage.m */,
+				63AFA41F18C530750036EF18 /* UsageCategory.h */,
+				63AFA42018C530750036EF18 /* UsageCategory.m */,
+				63AFA42218C5318C0036EF18 /* UsageAllocation.h */,
+				63AFA42318C5318C0036EF18 /* UsageAllocation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -666,6 +714,7 @@
 				6368339C18B8399A00720C4B /* page_white_actionscript.png in Resources */,
 				636833CE18B8399A00720C4B /* page_white_visualstudio.png in Resources */,
 				636833BF18B8399A00720C4B /* page_white_php@2x.png in Resources */,
+				6364B40418C54371002555FA /* SVProgressHUD.bundle in Resources */,
 				636833A018B8399A00720C4B /* page_white_code.png in Resources */,
 				636833B918B8399A00720C4B /* page_white_jef@2x.png in Resources */,
 				636833C018B8399A00720C4B /* page_white_picture.png in Resources */,
@@ -719,6 +768,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63AFA42118C530750036EF18 /* UsageCategory.m in Sources */,
 				63F9CD8618B31F7600B6B63A /* SimpleChooserViewController.m in Sources */,
 				636833D718B839E000720C4B /* ServiceFile+Icons.m in Sources */,
 				63613CA11898D095007CD749 /* ServicesViewController.m in Sources */,
@@ -735,6 +785,7 @@
 				63AA558B1888B44F0073D214 /* Account.m in Sources */,
 				6359D54D18B7E43E001698F7 /* MPrintBoxService.m in Sources */,
 				6359D54A18B7E31F001698F7 /* MPrintLockerService.m in Sources */,
+				6364B40518C54371002555FA /* SVProgressHUD.m in Sources */,
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,
 				637E8295189B811000DA9A35 /* ServiceFile.m in Sources */,
@@ -742,10 +793,13 @@
 				63613C9B1898B308007CD749 /* MPrintObject.m in Sources */,
 				B20C18AE188641520088EE73 /* JobsViewController.m in Sources */,
 				63C50C7B18AA10AA00D63876 /* PrintJob.m in Sources */,
+				63AFA41E18C52E830036EF18 /* Usage.m in Sources */,
 				B20C18B2188641AA0088EE73 /* Location.m in Sources */,
 				636833DE18B9781500720C4B /* MPrintServiceAuthenticationViewController.m in Sources */,
+				63AFA42418C5318C0036EF18 /* UsageAllocation.m in Sources */,
 				B20C18B61886458C0088EE73 /* MPrintRequest.m in Sources */,
 				63F9CD8318B2B90900B6B63A /* MPrintCosignManager.m in Sources */,
+				63AFA41B18C52DF60036EF18 /* UsageViewController.m in Sources */,
 				63AA558E1888F2980073D214 /* LoginViewController.m in Sources */,
 				6355364518B0716900E88433 /* PrintJobTableViewController.m in Sources */,
 				B20C18B9188646EF0088EE73 /* MPrintResponse.m in Sources */,

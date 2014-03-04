@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class MPrintResponse;
+#import "MPrintRequest.h"
+#import "MPrintResponse.h"
 
 typedef void (^MPrintDataHandler)(NSData *data, MPrintResponse *response);
 typedef void (^MPrintFetchHandler)(NSMutableArray *objects, MPrintResponse *response);
