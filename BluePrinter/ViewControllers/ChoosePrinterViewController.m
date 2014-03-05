@@ -45,6 +45,11 @@
     table.rowHeight = 52;
     
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+
+    // I like the subtle effect this has.
+    UIView *bg = [[[[[[searchBar subviews]lastObject]subviews]lastObject]subviews]lastObject]; // WOO!
+    if ([[[[bg class] description] lowercaseString] rangeOfString:@"backgroundview"].location != NSNotFound)
+        [bg removeFromSuperview];
     
     table.tableHeaderView = searchBar;
 
