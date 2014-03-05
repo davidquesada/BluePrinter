@@ -16,7 +16,6 @@
 @interface FilesViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     BOOL _hasAppeared;
-    NSObject *_footerObject;
 }
 @property(readwrite) Service *service;
 @property(readwrite) NSString *path;
@@ -74,9 +73,6 @@
         self.navigationItem.title = [self.path lastPathComponent];
     else
         self.navigationItem.title = self.service.description;
-    
-    _footerObject = [NSObject new];
-    self.files = @[ _footerObject ].mutableCopy;
 }
 
 - (void)viewDidLoad
@@ -109,7 +105,6 @@
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
-        [objects addObject:_footerObject];
         self.files = objects;
         [self.refresh endRefreshing];
         [self.tableView reloadData];
@@ -118,16 +113,14 @@
 
 -(void)updateFooter
 {
-    NSIndexPath *last = self.tableView.indexPathsForVisibleRows.lastObject;
-    if ((_files[last.row] != _footerObject) || !last)
-        return;
-    [self.tableView reloadRowsAtIndexPaths:@[ last ] withRowAnimation:UITableViewRowAnimationFade];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
+    [self.tableView reloadRowsAtIndexPaths:@[ path ] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(NSInteger)indexToInsertFile:(ServiceFile *)file
 {
     // Don't count the _footerObject at the end.
-    NSRange range = NSMakeRange(0, self.files.count - 1);
+    NSRange range = NSMakeRange(0, self.files.count);
     
     NSInteger index = [self.files indexOfObject:file inSortedRange:range options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(ServiceFile *obj1, ServiceFile *obj2) {
         return [obj1.name compare:obj2.name];
@@ -190,11 +183,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ServiceFile *file = _files[indexPath.row];
-    if (file == (id)_footerObject)
+    if (indexPath.section == 1)
     {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"footerCell"];
-        NSInteger count = self.files.count - 1;
+        NSInteger count = self.files.count;
         if (count < 1)
             cell.textLabel.text = @"No Files";
         else if (count == 1)
@@ -204,6 +196,7 @@
         return cell;
     }
     
+    ServiceFile *file = _files[indexPath.row];
     
     BOOL isDir = file.isDirectory;
     static NSDateFormatter *formatter = nil;
@@ -235,13 +228,23 @@
     return cell;
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 1)
+        return 1;
     return _files.count;
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 1)
+        return UITableViewCellEditingStyleNone;
+    
     ServiceFile *file = self.files[indexPath.row];
     if ([file isKindOfClass:[ServiceFile class]] && file.isDeletable)
         return UITableViewCellEditingStyleDelete;
@@ -272,10 +275,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ServiceFile *file = _files[indexPath.row];
-    
-    if (file == (id)_footerObject)
+    if (indexPath.section == 1)
         return;
+    
+    ServiceFile *file = _files[indexPath.row];
     
     if (file.isDirectory)
     {
