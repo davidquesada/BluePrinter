@@ -9,6 +9,7 @@
 #import "UsageViewController.h"
 #import "Usage.h"
 #import "SVProgressHUD.h"
+#import "UITableView+Notice.h"
 
 #define DIVIDER_FOOTER_CELL_TAG 875
 
@@ -22,28 +23,23 @@ static Usage *lastUsage;
 @property Usage *usage;
 -(UITableViewCell *)cellForRow:(NSInteger)row inCategory:(UsageCategory *)category;
 -(UITableViewCell *)dividerFooterCell;
+
+-(void)loadUsage:(UIRefreshControl *)sender;
 @end
 
 @implementation UsageViewController
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _isShowingHUD = YES;
-    [SVProgressHUD show];
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] initWithFrame:CGRectZero];
+    [self.tableView addSubview:refresh];
+    [refresh addTarget:self action:@selector(loadUsage:) forControlEvents:UIControlEventValueChanged];
+    [self loadUsage:nil];
     
-    [Usage fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
-        if (response.success)
-        {
-            self.usage = [objects lastObject];
-            lastUsage = self.usage;
-            [self.tableView reloadData];
-        }
-        
-        _isShowingHUD = NO;
-        [SVProgressHUD dismiss];
-    }];
+//    refresh.tintColor = [UIColor grayColor];
+    
     self.usage = lastUsage;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"dividerFooter"];
 }
@@ -59,6 +55,33 @@ static Usage *lastUsage;
     [super viewWillAppear:animated];
     if (_isShowingHUD)
         [SVProgressHUD show];
+}
+
+-(void)loadUsage:(UIRefreshControl *)sender
+{
+    _isShowingHUD = YES;
+    [SVProgressHUD show];
+    
+    [Usage fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
+        if (response.success)
+        {
+            self.usage = [objects lastObject];
+            lastUsage = self.usage;
+            self.tableView.noticeText = nil;
+        }
+        else
+        {
+            self.usage = nil;
+            lastUsage = nil;
+            self.tableView.noticeText = @"Unable to get usage info.";
+        }
+        
+        [self.tableView reloadData];
+        _isShowingHUD = NO;
+        [SVProgressHUD dismiss];
+        
+        [sender endRefreshing];
+    }];
 }
 
 -(UITableViewCell *)cellForRow:(NSInteger)row inCategory:(UsageCategory *)category
@@ -95,7 +118,6 @@ static Usage *lastUsage;
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"dividerFooter"];
     if (cell.tag != DIVIDER_FOOTER_CELL_TAG)
     {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dividerFooter"];
         cell.frame = CGRectMake(0, 0, 320, 12);
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(15, 11, 290, .5)];

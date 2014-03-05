@@ -44,7 +44,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRefreshJobs:) name:MPrintDidRefreshUserJobsNotification object:nil];
     
-
+    self.tableView.noticeBackgroundColor = [UIColor whiteColor];
 }
 
 -(void)dealloc

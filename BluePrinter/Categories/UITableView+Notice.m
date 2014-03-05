@@ -73,9 +73,11 @@
         // UIRefresh control and the notice view would briefly appear
         // as a white sliver while the table view is scrolling.
         self.backgroundView = [UIView new];
+        self.backgroundView.backgroundColor = self.noticeBackgroundColor;
     } else
     {
         self.tableHeaderView = nil;
+        self.backgroundView = nil;
     }
     
     UIColor *newBackgroundColor = (noticeText ? self.noticeBackgroundColor : self.backgroundColor);
