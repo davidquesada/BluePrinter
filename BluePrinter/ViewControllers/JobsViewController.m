@@ -9,6 +9,7 @@
 #import "JobsViewController.h"
 #import "Account.h"
 #import "PrintJob.h"
+#import "UITableView+Notice.h"
 
 
 @interface JobCell : UITableViewCell
@@ -20,6 +21,9 @@
 
 
 @interface JobsViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    BOOL _hasAppeared;
+}
 @property(weak) UIRefreshControl *refreshControl;
 @property(weak) IBOutlet UITableView *tableView;
 
@@ -39,6 +43,8 @@
     [ref addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRefreshJobs:) name:MPrintDidRefreshUserJobsNotification object:nil];
+    
+
 }
 
 -(void)dealloc
@@ -55,11 +61,33 @@
     }];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // This fixes a weird thing that causes one of two bugs when the
+    // 'notice' property of the tableview is set:
+    // 1. Cell dividers are shown overlaying the notice view.
+    // 2. Effectively, the contentSize of the tableview is ~80 pt too
+    //    much, and the tableview can be scrollable when it shouldn't be.
+    if (!_hasAppeared)
+    {
+        _hasAppeared = YES;
+        [self didRefreshJobs:nil];
+    }
+}
+
 #pragma mark - Notification Handlers
 
 -(void)didRefreshJobs:(NSNotification *)note
 {
+    if ([PrintJob userJobs].count)
+        self.tableView.noticeText = nil;
+    else
+        self.tableView.noticeText = @"No Recent Jobs";
     [self.tableView reloadData];
+    
+    self.tableView.tableHeaderView = self.tableView.tableHeaderView;
 }
 
 #pragma mark - UITableView Stuff
