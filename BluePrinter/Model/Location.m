@@ -62,7 +62,20 @@ NSArray *recentLocations;
         if (completion)
             completion(response.success);
     }];
-}  
+}
+
+-(instancetype)initWithJSONDictionary:(NSDictionary *)dictionary
+{
+    self = [super initWithJSONDictionary:dictionary];
+    if (self)
+    {
+        _status = LocationStatusOK;
+        NSString *reason = dictionary[@"state_reasons"];
+        if ([reason hasSuffix:@"warning"] || [reason hasSuffix:@"error"])
+            _status = LocationStatusError;
+    }
+    return self;
+}
 
 #pragma mark - MPrintObject fields
 

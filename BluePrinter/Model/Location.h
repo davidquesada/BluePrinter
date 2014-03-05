@@ -11,6 +11,13 @@
 
 extern NSString * const MPrintDidRefreshLocationsNotification;
 
+typedef NS_ENUM(NSInteger, LocationStatus)
+{
+    LocationStatusOK,
+    LocationStatusError,
+    /* LocationStateWarning, */
+};
+
 @interface Location : MPrintObject
 
 +(int)locationCount;
@@ -27,5 +34,7 @@ extern NSString * const MPrintDidRefreshLocationsNotification;
 
 @property NSString *subCampusArea;
 @property NSString *location;
+
+@property LocationStatus status;
 
 @end

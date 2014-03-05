@@ -193,20 +193,45 @@
     }
     
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"yo"];
-    if (!cell)
+    UITableViewCell *cell;
+    
+    if (location.status == LocationStatusOK)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"yo"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"enabled"];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"enabled"];
+        }
+    }
+    else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"disabled"];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"disabled"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.textColor = [UIColor lightGrayColor];
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            
+            UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+            lbl.text = @"🚫";
+            lbl.font = [UIFont systemFontOfSize:25];
+            lbl.textAlignment = NSTextAlignmentRight;
+            cell.accessoryView = lbl;
+        }
     }
     
     cell.textLabel.text = location.displayName;
     cell.detailTextLabel.text = location.location;
     
-    UITableViewCellAccessoryType acc = UITableViewCellAccessoryNone;
-    if ([_selectedLocation.name isEqualToString:location.name])
-        acc = UITableViewCellAccessoryCheckmark;
-    
-    cell.accessoryType = acc;
+    if (location.status == LocationStatusOK)
+    {
+        UITableViewCellAccessoryType acc = UITableViewCellAccessoryNone;
+        if ([_selectedLocation.name isEqualToString:location.name])
+            acc = UITableViewCellAccessoryCheckmark;
+        
+        cell.accessoryType = acc;
+    }
     
     return cell;
 }
@@ -229,6 +254,9 @@
         loc = _searchResults[indexPath.row];
     
     if (loc == (id)[NSNull null])
+        return;
+    
+    if (loc.status != LocationStatusOK)
         return;
     
     if ([self.delegate respondsToSelector:@selector(choosePrinterViewController:didChoosePrintLocation:)])
