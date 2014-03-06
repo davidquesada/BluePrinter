@@ -12,8 +12,9 @@
 #import "PrintRequest.h"
 #import "PrintJobTableViewController.h"
 #import "ServiceFile+Icons.h"
+#import "UITableView+Notice.h"
 
-@interface FilesViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface FilesViewController ()
 {
     BOOL _hasAppeared;
 }
@@ -30,6 +31,12 @@
 
 -(void)didImportFile:(NSNotification *)note;
 -(void)updateFooter;
+@end
+
+@interface FilesViewController ()
+
+@property(readonly) NSString *noticeTextForEmptyFolder;
+
 @end
 
 @implementation FilesViewController
@@ -107,6 +114,19 @@
         
         self.files = objects;
         [self.refresh endRefreshing];
+        
+        if (response.success)
+        {
+            if (self.files.count)
+                self.tableView.noticeText = nil;
+            else
+                self.tableView.noticeText = self.noticeTextForEmptyFolder;
+        }
+        else
+        {
+            self.tableView.noticeText = @"Unable to load folder.";
+        }
+        
         [self.tableView reloadData];
     }];
 }
@@ -114,7 +134,8 @@
 -(void)updateFooter
 {
     NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:1];
-    [self.tableView reloadRowsAtIndexPaths:@[ path ] withRowAnimation:UITableViewRowAnimationFade];
+    if (!self.tableView.isShowingNotice)
+        [self.tableView reloadRowsAtIndexPaths:@[ path ] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(NSInteger)indexToInsertFile:(ServiceFile *)file
@@ -142,6 +163,16 @@
     }
     
     [self.files insertObject:file atIndex:index];
+    
+    if (self.tableView.isShowingNotice)
+    {
+        self.tableView.noticeText = nil;
+        [self.tableView reloadData];
+        [self updateFooter];
+        return;
+    }
+    
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
@@ -230,6 +261,8 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (tableView.isShowingNotice)
+        return 0;
     return 2;
 }
 
@@ -263,7 +296,10 @@
         if (wasDeleted)
         {
             [self.files removeObjectAtIndex:indexPath.row];
-            [self.tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if (self.files.count == 0)
+                self.tableView.noticeText = self.noticeTextForEmptyFolder;
+            else
+                [self.tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self updateFooter];
         }
         else
@@ -273,6 +309,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView.isEditing)
+        return;
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 1)
@@ -295,6 +334,13 @@
     nav.navigationBar.translucent = NO;
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+        return NO;
+    return YES;
 }
 
 @end

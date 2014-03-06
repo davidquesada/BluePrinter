@@ -116,6 +116,24 @@
     }];
 }
 
+-(BOOL)deleteBlocking
+{
+    if (!self.service)
+        return NO;
+    
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    
+    __block BOOL ret = NO;
+    [NSThread sleepForTimeInterval:.2];
+    [self deleteWithCompletion:^(BOOL wasDeleted) {
+        ret = wasDeleted;
+        dispatch_semaphore_signal(sema);
+    }];
+    
+    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    return ret;
+}
+
 -(NSData *)downloadFileContentsBlocking:(MPrintResponse *__autoreleasing *)response
 {
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);

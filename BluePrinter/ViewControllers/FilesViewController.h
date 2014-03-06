@@ -11,7 +11,7 @@
 @class Service;
 @class ServiceFile;
 
-@interface FilesViewController : UIViewController
+@interface FilesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 -(id)initWithService:(Service *)service;
 -(id)initWithService:(Service *)service path:(NSString *)path;

@@ -9,6 +9,7 @@
 #import "ServicesViewController.h"
 #import "Service.h"
 #import "FilesViewController.h"
+#import "LocalFilesViewController.h"
 #import "MPrintCosignManager.h"
 #import "MPrintResponse.h"
 #import "Account.h"
@@ -258,6 +259,12 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0)
+    {
+        [self.navigationController pushViewController:[[LocalFilesViewController alloc] initWithService:_sections[0][0]] animated:YES];
+        return;
+    }
 
     Service *service = _sections[indexPath.section][indexPath.row];
     

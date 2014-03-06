@@ -28,6 +28,8 @@
 -(void)fetchDirectoryContentsWithCompletion:(MPrintFetchHandler)completion;
 -(void)downloadFileContentsWithCompletion:(MPrintDataHandler)completion;
 -(NSData *)downloadFileContentsBlocking:(MPrintResponse **)response;
+
 -(void)deleteWithCompletion:(void (^)(BOOL wasDeleted))completion;
+-(BOOL)deleteBlocking;
 
 @end
