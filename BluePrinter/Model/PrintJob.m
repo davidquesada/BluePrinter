@@ -70,6 +70,7 @@ NSArray *userJobs;
     dict[@"state"] = @"processing";
     [jobs addObject:[[PrintJob alloc] initWithJSONDictionary:dict]];
     
+    dict[@"cancellable"] = @(1);
     dict[@"state"] = @"completed";
     [jobs addObject:[[PrintJob alloc] initWithJSONDictionary:dict]];
     

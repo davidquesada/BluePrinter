@@ -20,7 +20,7 @@
 @end
 
 
-@interface JobsViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface JobsViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
     BOOL _hasAppeared;
 }
@@ -45,6 +45,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRefreshJobs:) name:MPrintDidRefreshUserJobsNotification object:nil];
     
     self.tableView.noticeBackgroundColor = [UIColor whiteColor];
+    
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
+//    pan.cancelsTouchesInView = NO;
+//    pan.delegate = self;
+//    [self.tableView addGestureRecognizer:pan];
+}
+
+//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    return YES;
+//}
+
+-(void)didPan:(UIPanGestureRecognizer *)pan
+{
+    NSLog(@"WOO");
 }
 
 -(void)dealloc
@@ -135,7 +150,13 @@
 
 @end
 
-@interface JobCell()
+@interface JobCell()<UIGestureRecognizerDelegate>
+{
+    UIPanGestureRecognizer *pan;
+    UILabel *stateLabel;
+    CGRect originalColorFrame;
+    BOOL isShowingStatus;
+}
 +(UIColor *)colorForPrintJobState:(PrintJobState)state;
 @end
 
@@ -170,6 +191,131 @@
     self.detailTextLabel.text = [NSString stringWithFormat:@"Submitted %@\n%@", dateString, job.printerDisplayName ];
     
     colorView.backgroundColor = [self.class colorForPrintJobState:job.state];
+    self.backgroundColor = colorView.backgroundColor;
+    self.contentView.backgroundColor = [UIColor whiteColor];
+
+    stateLabel.text = job.stateDescription;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        colorView = [self viewWithTag:7777];
+        colorView.autoresizingMask = 0;
+        
+        stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 135, colorView.frame.size.height)];
+        stateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
+        stateLabel.textColor = [UIColor whiteColor];
+        stateLabel.textAlignment = NSTextAlignmentCenter;
+        [colorView addSubview:stateLabel];
+        
+        self.textLabel.backgroundColor = [UIColor whiteColor];
+        self.detailTextLabel.backgroundColor = [UIColor whiteColor];
+    }
+    return self;
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (!pan)
+    {
+        pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
+        pan.cancelsTouchesInView = NO;
+        pan.delegate = self;
+        [self addGestureRecognizer:pan];
+
+        CGRect frame = colorView.frame;
+        frame.origin.x -= 320;
+        frame.size.width += 320;
+        
+        colorView.frame = frame;
+        colorView.autoresizingMask = 0;
+        colorView.clipsToBounds = YES;
+    }
+}
+
+-(void)didPan:(UIPanGestureRecognizer *)sender
+{
+    if (self.isEditing)
+        return;
+
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        isShowingStatus = YES;
+    }
+    if (sender.state == UIGestureRecognizerStateChanged)
+    {
+        CGFloat xoff = [sender translationInView:self].x;
+        if (xoff < 0) xoff = 0;
+        if (xoff > 160) xoff = 160;
+
+        self.contentView.frame = CGRectOffset(self.contentView.bounds, xoff, 0);
+        
+        CGRect frame = colorView.frame;
+        frame.origin.x = -xoff;
+        frame.size.width = 25 + xoff;
+        colorView.frame = frame;
+    }
+    if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateFailed || sender.state == UIGestureRecognizerStateCancelled)
+    {
+        isShowingStatus = NO;
+        id animations =
+        ^{
+            CGRect frame = colorView.frame;
+            frame.origin.x = 0;
+            frame.size.width = 25;
+            colorView.frame = frame;
+
+            self.contentView.frame = self.contentView.bounds;
+        };
+        [UIView animateWithDuration:.25 delay:0 usingSpringWithDamping:10 initialSpringVelocity:.9 options:0 animations:animations completion:nil];
+    }
+}
+
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    if (editing)
+        self.backgroundColor = [UIColor whiteColor];
+    else
+        self.backgroundColor = colorView.backgroundColor;
+}
+
+#pragma mark - UIGestureRecognizerDelegate Methods
+/* 
+ * These two methods work together to make sure only one of the
+ * three applicable gestures are active:
+ *  - Scrolling
+ *  - Swiping left to reveal the 'Delete' button
+ *  - Swiping right to reveal the status.
+ */
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if (isShowingStatus)
+        return NO;
+    return YES;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    // This might happen for other types of gestures (i.e. There is a UILongPressGestureRecognizer on the cells)
+    if (![gestureRecognizer respondsToSelector:@selector(translationInView:)])
+    {
+        return YES;
+    }
+    CGPoint translation = [gestureRecognizer translationInView:self.superview];
+    //might have to change view to tableView
+    //check for the horizontal gesture
+    if ((fabsf(translation.x) > fabsf(translation.y))
+        && (translation.x > 0)) {
+        return YES;
+        NSLog(@"Panning");
+    }
+    return NO;
 }
 
 @end
