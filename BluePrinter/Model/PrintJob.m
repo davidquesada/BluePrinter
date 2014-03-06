@@ -57,6 +57,34 @@ NSArray *userJobs;
     }];
 }
 
++(void)loadFakeData:(void (^)(BOOL))completion
+{
+    NSMutableArray *jobs = [NSMutableArray new];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    dict[@"name"] = @"DocumentTitle.pdf";
+    dict[@"printer_display_name"] = @"Duderstadt Library";
+    
+    dict[@"state"] = @"converting";
+    [jobs addObject:[[PrintJob alloc] initWithJSONDictionary:dict]];
+    
+    dict[@"state"] = @"processing";
+    [jobs addObject:[[PrintJob alloc] initWithJSONDictionary:dict]];
+    
+    dict[@"state"] = @"completed";
+    [jobs addObject:[[PrintJob alloc] initWithJSONDictionary:dict]];
+    
+    dict[@"state"] = @"cancelled";
+    [jobs addObject:[[PrintJob alloc] initWithJSONDictionary:dict]];
+    
+    dict[@"state"] = @"failed";
+    [jobs addObject:[[PrintJob alloc] initWithJSONDictionary:dict]];
+    
+    userJobs = jobs;
+    if (completion)
+        completion(YES);
+    [[NSNotificationCenter defaultCenter] postNotificationName:MPrintDidRefreshUserJobsNotification object:nil];
+}
+
 -(instancetype)initWithJSONDictionary:(NSDictionary *)dictionary
 {
     if ((self = [super initWithJSONDictionary:dictionary]))
@@ -77,6 +105,7 @@ NSArray *userJobs;
     static NSDictionary *stateDict = nil;
     if (!stateDict)
         stateDict = @{
+                      @"converting" : @(PrintJobStateConverting),
                       @"processing" : @(PrintJobStateProcessing),
                       @"completed" : @(PrintJobStateCompleted),
                       @"cancelled" : @(PrintJobStateCancelled),
@@ -133,6 +162,7 @@ NSArray *userJobs;
     if (!dict)
         dict = @{ @(PrintJobStateCancelled) : @"Cancelled",
                   @(PrintJobStateCompleted) : @"Completed",
+                  @(PrintJobStateConverting) : @"Converting",
                   @(PrintJobStateFailed) : @"Failed",
                   @(PrintJobStateProcessing) : @"Processing",
                   };

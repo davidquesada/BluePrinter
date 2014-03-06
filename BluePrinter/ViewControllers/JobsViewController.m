@@ -147,9 +147,10 @@
     if (!dict)
         dict = @{
                  @(PrintJobStateCancelled) : [UIColor blackColor],
-                 @(PrintJobStateCompleted) : [UIColor colorWithRed:0 green:.8 blue:0 alpha:1.0],
+                 @(PrintJobStateCompleted) : [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0],
+                 @(PrintJobStateConverting) : [UIColor orangeColor],
                  @(PrintJobStateFailed) : [UIColor colorWithRed:1.0 green:.1 blue:.1 alpha:1.0],
-                 @(PrintJobStateProcessing) : [UIColor colorWithRed:0 green:0 blue:.8 alpha:1.0],
+                 @(PrintJobStateProcessing) : [UIColor colorWithRed:.1 green:.1 blue:.7 alpha:1.0],
                   };
     return dict[@(state)];
 }

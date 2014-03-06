@@ -13,6 +13,7 @@ extern NSString * const MPrintDidRefreshUserJobsNotification;
 
 typedef NS_ENUM(NSInteger, PrintJobState)
 {
+    PrintJobStateConverting,
     PrintJobStateProcessing,
     PrintJobStateCompleted,
     PrintJobStateFailed,
