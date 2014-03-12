@@ -9,6 +9,7 @@
 #import "FilesViewController.h"
 #import "Service.h"
 #import "ServiceFile.h"
+#import "ServiceFile+FileTypes.h"
 #import "PrintRequest.h"
 #import "PrintJobTableViewController.h"
 #import "ServiceFile+Icons.h"
@@ -323,6 +324,11 @@
     {
         FilesViewController *controller = [[FilesViewController alloc] initWithServiceFile:file];
         [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
+    if (!file.isPrintingSupportedForFileType)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Bad File Type" message:@"MPrint does not support printing files with this extension." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         return;
     }
     
