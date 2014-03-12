@@ -28,6 +28,7 @@ AppDelegate *sharedDelegate;
 
 -(void)didLogIn:(NSNotification *)note;
 -(void)didImportDocument:(NSNotification *)note;
+-(void)requestDidFail:(NSNotification *)note;
 -(void)addv7Appearance:(UIApplication *)application;
 
 -(UIViewController *)targetViewController;
@@ -67,6 +68,7 @@ AppDelegate *sharedDelegate;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogIn:) name:MPrintUserDidLogInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didImportDocument:) name:MPrintDidImportFileNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:MPrintRequestApplicationDidFailNotification object:nil];
 }
 
 -(void)dealloc
@@ -167,6 +169,22 @@ AppDelegate *sharedDelegate;
         if (isLoggedIn)
             [self showViewControllerForServiceFile:file];
     }];
+}
+
+-(void)requestDidFail:(NSNotification *)note
+{
+    MPrintResponse *response = note.object;
+    NSString *message = response.message;
+    if (!message.length)
+        return;
+    
+    // This is stupid. The server might return the message "The directory listing
+    // could not be retrieved. Array", which is dumb because " Array" doesn't need
+    // to be there.
+    if ([message hasSuffix:@". Array"])
+        message = [message substringToIndex:[message rangeOfString:@" Array"].location];
+    
+    [[[UIAlertView alloc] initWithTitle:message message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 -(void)showViewControllerForServiceFile:(ServiceFile *)file

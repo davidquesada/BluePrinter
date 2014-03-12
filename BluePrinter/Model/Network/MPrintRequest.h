@@ -54,6 +54,9 @@ typedef NS_ENUM(NSInteger, Method)
     DELETE,
 };
 
+extern NSString * const MPrintRequestApplicationDidFailNotification;
+extern NSString * const MPrintRequestConnectionDidFailNotification;
+
 @class MPrintResponse;
 
 @interface MPrintRequest : NSObject

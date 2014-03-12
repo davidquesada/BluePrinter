@@ -9,6 +9,9 @@
 #import "MPrintRequest.h"
 #import "MPrintResponse.h"
 
+NSString * const MPrintRequestApplicationDidFailNotification = @"MPrintRequestApplicationDidFailNotification";
+NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestConnectionDidFailNotification";
+
 @interface MPrintRequest ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 {
     BOOL _isMultipartForm;
@@ -297,6 +300,9 @@
     
     if (self.mycompletion)
         self.mycompletion(self.response);
+    
+    if (self.response.jsonObject && !self.response.success)
+        [[NSNotificationCenter defaultCenter] postNotificationName:MPrintRequestApplicationDidFailNotification object:self.response];
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -304,6 +310,8 @@
     NSLog(@"Connection failed: %@", error);
     if (self.mycompletion)
         self.mycompletion(nil);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MPrintRequestConnectionDidFailNotification object:nil];
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
