@@ -10,11 +10,18 @@
 #import "BaseViewController.h"
 
 @class PrintRequest;
+@class PrintJobTableViewController;
+
+@protocol PrintJobTableViewControllerDelegate <NSObject>
+@optional
+-(void)viewControllerWillDismiss:(PrintJobTableViewController *)controller;
+@end
 
 @interface PrintJobTableViewController : BaseTableViewController
 
 -(id)initWithPrintRequest:(PrintRequest *)request;
 
 @property(readonly) PrintRequest *request;
+@property(weak) id<PrintJobTableViewControllerDelegate> delegate;
 
 @end

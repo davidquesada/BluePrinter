@@ -36,6 +36,7 @@
 
 -(void)updateUI;
 -(void)showChooserForTriggeringCell:(UITableViewCell *)cell;
+-(void)dismiss;
 
 @end
 
@@ -76,7 +77,7 @@
     [self.request send:^(PrintJob *job, MPrintResponse *response) {
         
         [alert dismissWithClickedButtonIndex:0 animated:YES];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismiss];
         
     }];
 }
@@ -151,11 +152,18 @@
     [self.navigationController pushViewController:chooser animated:YES];
 }
 
+-(void)dismiss
+{
+    if ([self.delegate respondsToSelector:@selector(viewControllerWillDismiss:)])
+        [self.delegate viewControllerWillDismiss:self];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - IBActions
 
 -(IBAction)cancel:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismiss];
 }
 
 -(IBAction)stepperDidStep:(UIStepper *)stepper

@@ -15,7 +15,7 @@
 #import "ServiceFile+Icons.h"
 #import "UITableView+Notice.h"
 
-@interface FilesViewController ()
+@interface FilesViewController ()<PrintJobTableViewControllerDelegate>
 {
     BOOL _hasAppeared;
 }
@@ -214,6 +214,14 @@
     });
 }
 
+#pragma mark - PrintJobTableViewControllerDelegate Methods
+
+-(void)viewControllerWillDismiss:(PrintJobTableViewController *)controller
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        [_tableView deselectRowAtIndexPath:_tableView.indexPathForSelectedRow animated:YES];
+}
+
 #pragma mark - UITableView Stuff
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -341,6 +349,7 @@
     req.file = file;
     
     PrintJobTableViewController *controller = [[PrintJobTableViewController alloc] initWithPrintRequest:req];
+    controller.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
     nav.navigationBar.translucent = NO;
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
