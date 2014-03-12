@@ -23,7 +23,6 @@
 
 @end
 
-
 @implementation UITableView (Notice)
 
 -(UIView *)noticeView
@@ -95,13 +94,31 @@
 
 @end
 
+static void (*UITableView_setFrame_IMP)(id self, SEL _cmd, CGRect frame) = nil;
+
 @implementation UITableView (NoticePrivate)
+
++(void)load
+{
+    // WTF?
+    UITableView_setFrame_IMP = (void (*)(id self, SEL _cmd, CGRect frame))
+    method_setImplementation(class_getInstanceMethod([UITableView class], @selector(setFrame:)), [self instanceMethodForSelector:@selector(newSetFrame:)]);
+}
+
+-(void)newSetFrame:(CGRect)frame
+{
+    UITableView_setFrame_IMP(self, _cmd, frame);
+    if ([self actualNoticeView])
+    {
+        [self _resizeNoticeView];
+        self.tableHeaderView = self.tableHeaderView; // WOO!
+    }
+}
 
 -(UILabel *)noticeLabel
 {
     return (UILabel *)[self.noticeView viewWithTag:NOTICE_LABEL_TAG];
 }
-
 
 -(UIView *)actualNoticeView
 {
@@ -139,6 +156,8 @@
     _noticeLabel.textColor = [UIColor grayColor];
     _noticeLabel.textAlignment = NSTextAlignmentCenter;
     _noticeLabel.backgroundColor = [UIColor clearColor];
+    _noticeLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
     [_noticeView addSubview:_noticeLabel];
     
     _noticeView.backgroundColor = [UIColor colorWithWhite:.9 alpha:1.0];
