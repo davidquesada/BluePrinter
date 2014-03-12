@@ -92,7 +92,7 @@ static Usage *lastUsage;
     {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"categoryCell"];
         cell.textLabel.text = category.name;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d / %d %@", category.totalUsage, category.totalAllocation, category.unit];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d / %d %@ used", category.totalUsage, category.totalAllocation, category.unit];
     } else if (row == 1)
     {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"allowancesHeader"];

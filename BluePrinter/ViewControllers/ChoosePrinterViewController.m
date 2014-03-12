@@ -71,7 +71,7 @@
     [self createSections];
     [self.tableView reloadData];
     
-    self.tableView.contentOffset = CGPointMake(0, -44.0);
+    [self.tableView setContentOffset:CGPointMake(0, 44.0) animated:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -79,7 +79,6 @@
     [super viewWillAppear:animated];
     if (![Location locationCount])
         [self performSelector:@selector(refresh) withObject:nil afterDelay:.005];
-    
 }
 
 -(void)refresh
