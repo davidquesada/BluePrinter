@@ -173,6 +173,11 @@ Service *localService;
         completion();
 }
 
+-(void)invalidateConnection
+{
+    self.connectedStatus = 0;
+}
+
 #pragma mark - Service Support Stubs
 
 -(BOOL)supportsDownload

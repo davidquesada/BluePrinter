@@ -92,14 +92,19 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
         [_refreshControl beginRefreshing];
     [self setAccountButtonMode:AccountButtonModeLoading];
     [Service refreshServices:^(NSMutableArray *objects, MPrintResponse *response) {
-        [self createSections];
-        [_refreshControl endRefreshing];
-        [self.tableView reloadData];
         
         if (response.uniqname)
             [self setAccountButtonMode:AccountButtonModeLogOut];
         else
+        {
             [self setAccountButtonMode:AccountButtonModeLogIn];
+            for (Service *service in [Service allServices])
+                [service invalidateConnection];
+        }
+        
+        [self createSections];
+        [_refreshControl endRefreshing];
+        [self.tableView reloadData];
     }];
 }
 

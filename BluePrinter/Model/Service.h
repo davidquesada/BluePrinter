@@ -65,6 +65,7 @@ extern NSString * const MPrintDidImportFileNotification;
 @property (readonly) BOOL supportsDisconnect;
 -(void)connect:(void (^)())completion;
 -(void)disconnect:(void (^)())completion;
+-(void)invalidateConnection;
 
 
 // The 'objects' property of the completion is an array of ServiceFile objects.
