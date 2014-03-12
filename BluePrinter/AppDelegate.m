@@ -24,11 +24,13 @@ AppDelegate *sharedDelegate;
 @interface AppDelegate ()
 {
     BOOL _hasRegisteredNotifications;
+    __weak UIAlertView *_connectionFailedAlertView;
 }
 
 -(void)didLogIn:(NSNotification *)note;
 -(void)didImportDocument:(NSNotification *)note;
 -(void)requestDidFail:(NSNotification *)note;
+-(void)connectionDidFail:(NSNotification *)note;
 -(void)addv7Appearance:(UIApplication *)application;
 
 -(UIViewController *)targetViewController;
@@ -69,6 +71,7 @@ AppDelegate *sharedDelegate;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogIn:) name:MPrintUserDidLogInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didImportDocument:) name:MPrintDidImportFileNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:MPrintRequestApplicationDidFailNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionDidFail:) name:MPrintRequestConnectionDidFailNotification object:nil];
 }
 
 -(void)dealloc
@@ -185,6 +188,18 @@ AppDelegate *sharedDelegate;
         message = [message substringToIndex:[message rangeOfString:@" Array"].location];
     
     [[[UIAlertView alloc] initWithTitle:message message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+-(void)connectionDidFail:(NSNotification *)note
+{
+    if (_connectionFailedAlertView)
+        return;
+    
+    NSString *title = @"Unable to connect.";
+    NSString *message = @"Please check your internet connection.";
+    UIAlertView *view = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    _connectionFailedAlertView = view;
+    [view show];
 }
 
 -(void)showViewControllerForServiceFile:(ServiceFile *)file
