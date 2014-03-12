@@ -12,14 +12,12 @@
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>BluePrinter Document</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Document</string>
 			<key>LSHandlerRank</key>
-			<string>Owner</string>
+			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.dquesada.BluePrinter.bpd</string>
+				<string>public.item</string>
 			</array>
 		</dict>
 	</array>
@@ -69,26 +67,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-	</array>
-	<key>UTExportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>BluePrinter Document</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.dquesada.BluePrinter.bpd</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<string>pdf</string>
-				<key>public.mime-type</key>
-				<string>application/pdf</string>
-			</dict>
-		</dict>
 	</array>
 </dict>
 </plist>
