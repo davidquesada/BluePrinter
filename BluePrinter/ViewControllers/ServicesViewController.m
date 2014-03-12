@@ -152,7 +152,8 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 -(void)logOut:(id)sender
 {
     [Account logout:^(BOOL success) {
-
+        [self createSections];
+        [_tableView reloadData];
     }];
 }
 

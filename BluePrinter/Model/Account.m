@@ -7,6 +7,7 @@
 //
 
 #import "Account.h"
+#import "Service.h"
 #import "MPrintRequest.h"
 #import "MPrintResponse.h"
 #import "MPrintCosignManager.h"
@@ -63,6 +64,10 @@
     [request.urlRequest setHTTPBody:[@"url=https%3A%2F%2Fweblogin.umich.edu%2F&verify=Log+Out" dataUsingEncoding:NSUTF8StringEncoding]];
     
     [request performWithCompletion:^(MPrintResponse *response) {
+        
+        for (Service *svc in [Service allServices])
+            [svc invalidateConnection];
+        
         // TODO: How do we verify the success of a logout?
         if (completion)
             completion(YES);
