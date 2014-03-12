@@ -39,6 +39,9 @@
         _service = service;
         webView = web;
         _url = service.authorizationURL;
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            self.modalPresentationStyle = UIModalPresentationFormSheet;
     }
     return self;
 }
