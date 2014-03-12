@@ -14,6 +14,7 @@
 #import "MPrintResponse.h"
 #import "Account.h"
 #import "AppDelegate.h"
+#import "SVProgressHUD.h"
 
 typedef NS_ENUM(NSInteger, AccountButtonMode)
 {
@@ -87,6 +88,12 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
         _hasReloaded = YES;
         [self reload:(id)self.tableView.tableHeaderView];
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 -(void)reload:(UIRefreshControl *)sender
@@ -286,7 +293,9 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [SVProgressHUD show];
     [service connect:^{
+        [SVProgressHUD dismiss];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         // The connect didn't work, so don't try to do any fancy animations.
@@ -321,8 +330,9 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     NSAssert(service.supportsDisconnect, @"This service doesn't support disconnect: %@", service);
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
+    [SVProgressHUD show];
     [service disconnect:^{
+        [SVProgressHUD dismiss];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         // The disconnect didn't work, so don't try to do any fancy animations.
