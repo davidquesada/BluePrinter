@@ -53,18 +53,13 @@
     [super viewDidLoad];
  
     self.navigationItem.title = self.request.file.name;
+    self.actuallyDeselectRowOnViewWillAppear = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self updateUI];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)print:(id)sender
@@ -220,12 +215,15 @@
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
     if (cell == _printerCell)
         [self choosePrinter:nil];
     else if (cell == _printCell)
+    {
         [self print:nil];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
     else
         [self showChooserForTriggeringCell:cell];
 }

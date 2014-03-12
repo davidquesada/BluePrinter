@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class Service;
 @class ServiceFile;
 
-@interface FilesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface FilesViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 -(id)initWithService:(Service *)service;
 -(id)initWithService:(Service *)service path:(NSString *)path;

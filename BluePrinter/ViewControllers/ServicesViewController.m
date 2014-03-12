@@ -52,6 +52,9 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.actuallyDeselectRowOnViewWillAppear = YES;
+    
     UIRefreshControl *ref = [[UIRefreshControl alloc] init];
     [ref addTarget:self action:@selector(reload:) forControlEvents:UIControlEventValueChanged];
     _refreshControl = ref;
@@ -264,8 +267,7 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     if (indexPath.section == 0)
     {
         [self.navigationController pushViewController:[[LocalFilesViewController alloc] initWithService:_sections[0][0]] animated:YES];
@@ -280,6 +282,8 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
         [self.navigationController pushViewController:controller animated:YES];
         return;
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [service connect:^{

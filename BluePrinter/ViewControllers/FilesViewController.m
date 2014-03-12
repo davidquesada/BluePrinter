@@ -88,6 +88,8 @@
     [super viewDidLoad];
     if (_service.supportsImport)
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didImportFile:) name:MPrintDidImportFileNotification object:nil];
+    
+    self.actuallyDeselectRowOnViewWillAppear = YES;
 }
 
 -(void)dealloc
@@ -97,6 +99,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (!_hasAppeared)
     {
         _hasAppeared = YES;
@@ -313,10 +316,10 @@
     if (tableView.isEditing)
         return;
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     if (indexPath.section == 1)
         return;
+    
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
     ServiceFile *file = _files[indexPath.row];
     
@@ -329,6 +332,8 @@
     if (!file.isPrintingSupportedForFileType)
     {
         [[[UIAlertView alloc] initWithTitle:@"Bad File Type" message:@"MPrint does not support printing files with this extension." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
     

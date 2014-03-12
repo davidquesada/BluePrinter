@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ServicesViewController : UIViewController
+@interface ServicesViewController : BaseViewController
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
 @class PrintRequest;
 
-@interface PrintJobTableViewController : UITableViewController
+@interface PrintJobTableViewController : BaseTableViewController
 
 -(id)initWithPrintRequest:(PrintRequest *)request;
 

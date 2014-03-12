@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6318E49018C7BA8900884021 /* UITableView+Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318E48F18C7BA8900884021 /* UITableView+Notice.m */; };
 		6318E49318C7D75100884021 /* LocalFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318E49218C7D75100884021 /* LocalFilesViewController.m */; };
+		632945F318D0B31600D910FE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 632945F218D0B31600D910FE /* BaseViewController.m */; };
 		6355364218B0682B00E88433 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6355364118B0682B00E88433 /* FileCell.xib */; };
 		6355364518B0716900E88433 /* PrintJobTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6355364418B0716900E88433 /* PrintJobTableViewController.m */; };
 		6355364818B07BE100E88433 /* ChoosePrinterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6355364718B07BE100E88433 /* ChoosePrinterViewController.m */; };
@@ -149,6 +150,8 @@
 		6318E48F18C7BA8900884021 /* UITableView+Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Notice.m"; path = "Categories/UITableView+Notice.m"; sourceTree = "<group>"; };
 		6318E49118C7D75100884021 /* LocalFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalFilesViewController.h; path = ViewControllers/LocalFilesViewController.h; sourceTree = "<group>"; };
 		6318E49218C7D75100884021 /* LocalFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalFilesViewController.m; path = ViewControllers/LocalFilesViewController.m; sourceTree = "<group>"; };
+		632945F118D0B31600D910FE /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = ViewControllers/BaseViewController.h; sourceTree = "<group>"; };
+		632945F218D0B31600D910FE /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = ViewControllers/BaseViewController.m; sourceTree = "<group>"; };
 		6355364118B0682B00E88433 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FileCell.xib; path = Nibs/FileCell.xib; sourceTree = "<group>"; };
 		6355364318B0716900E88433 /* PrintJobTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintJobTableViewController.h; path = ViewControllers/PrintJobTableViewController.h; sourceTree = "<group>"; };
 		6355364418B0716900E88433 /* PrintJobTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintJobTableViewController.m; path = ViewControllers/PrintJobTableViewController.m; sourceTree = "<group>"; };
@@ -577,6 +580,8 @@
 				63AFA41A18C52DF60036EF18 /* UsageViewController.m */,
 				6318E49118C7D75100884021 /* LocalFilesViewController.h */,
 				6318E49218C7D75100884021 /* LocalFilesViewController.m */,
+				632945F118D0B31600D910FE /* BaseViewController.h */,
+				632945F218D0B31600D910FE /* BaseViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,
 				637E8295189B811000DA9A35 /* ServiceFile.m in Sources */,
+				632945F318D0B31600D910FE /* BaseViewController.m in Sources */,
 				6374DD3B18B70C240036129A /* MPrintIFSService.m in Sources */,
 				6318E49318C7D75100884021 /* LocalFilesViewController.m in Sources */,
 				63613C9B1898B308007CD749 /* MPrintObject.m in Sources */,
