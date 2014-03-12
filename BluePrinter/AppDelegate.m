@@ -102,7 +102,7 @@ AppDelegate *sharedDelegate;
     [[UIStepper appearance] setTintColor:controlColor];
     [[UITableViewCell appearance] setTintColor:controlColor];
     
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:@{ UITextAttributeTextColor : controlColor} forState:UIControlStateNormal];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:@{ NSForegroundColorAttributeName : controlColor} forState:UIControlStateNormal];
     
     [[UISwitch appearance] setOnTintColor:controlColor];
     
