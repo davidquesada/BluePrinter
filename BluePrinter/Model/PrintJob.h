@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, PrintJobState)
 
 +(NSArray *)userJobs;
 +(void)refreshUserJobs:(void (^)(BOOL success))completion;
++(void)removeUserJobs;
 
 @property(readonly) NSString *jobID;
 

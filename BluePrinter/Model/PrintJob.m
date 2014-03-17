@@ -57,6 +57,12 @@ NSArray *userJobs;
     }];
 }
 
++(void)removeUserJobs
+{
+    userJobs = @[ ];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MPrintDidRefreshUserJobsNotification object:nil];
+}
+
 +(void)loadFakeData:(void (^)(BOOL))completion
 {
     NSMutableArray *jobs = [NSMutableArray new];

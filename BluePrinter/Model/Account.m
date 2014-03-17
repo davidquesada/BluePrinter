@@ -8,6 +8,7 @@
 
 #import "Account.h"
 #import "Service.h"
+#import "PrintJob.h"
 #import "MPrintRequest.h"
 #import "MPrintResponse.h"
 #import "MPrintCosignManager.h"
@@ -73,6 +74,7 @@
             completion(YES);
     }];
     
+    [PrintJob removeUserJobs];
     [MPrintCosignManager userDidLogOut];
 }
 
