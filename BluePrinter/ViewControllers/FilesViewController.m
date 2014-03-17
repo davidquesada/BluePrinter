@@ -309,7 +309,12 @@
         {
             [self.files removeObjectAtIndex:indexPath.row];
             if (self.files.count == 0)
+            {
                 self.tableView.noticeText = self.noticeTextForEmptyFolder;
+                
+                // We need this because we don't explicitly tell the tableview to remove the row.
+                [self.tableView reloadData];
+            }
             else
                 [self.tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self updateFooter];
