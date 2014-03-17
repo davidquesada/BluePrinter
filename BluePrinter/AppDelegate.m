@@ -100,7 +100,14 @@ AppDelegate *sharedDelegate;
     
     // We need to wait a tick for this, because application.keyWindow is nil right now.
     dispatch_async(dispatch_get_main_queue(), ^{
-        application.keyWindow.tintColor = tintColor;
+        
+        // Apparently after we added the launch images, we can't use UIApp.keyWindow anymore.
+        // That appears to fail when the user has airplane mode on. I guess the keyWindow returns
+        // something related to a UIAlertView, which appears at launch because the network
+        // calls to log in fail immediately. For some reason though, that window doesn't show up
+        // in application.windows, so we can just pull the window from there.
+        UIWindow *window = [application.windows firstObject];
+        window.tintColor = tintColor;
     });
     
     [[UITextField appearance] setTintColor:controlColor];
