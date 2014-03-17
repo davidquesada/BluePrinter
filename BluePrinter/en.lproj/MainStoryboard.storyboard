@@ -483,10 +483,12 @@
                         <outlet property="copiesLabel" destination="wBR-3K-U0A" id="00r-vu-HSh"/>
                         <outlet property="copiesStepper" destination="fyg-aS-SSS" id="32A-CN-LWY"/>
                         <outlet property="doubleSidedCell" destination="RKM-ir-bjM" id="6lt-ly-sh9"/>
+                        <outlet property="fitToPageCell" destination="f44-Fm-rj6" id="sPR-Hk-b9l"/>
                         <outlet property="orientationCell" destination="F31-SO-grR" id="RqG-sZ-Zig"/>
                         <outlet property="pagesPerSheetCell" destination="5SG-wJ-hVQ" id="4ze-qd-cyt"/>
                         <outlet property="printCell" destination="y0M-hz-63R" id="1GN-8Z-RJX"/>
                         <outlet property="printerCell" destination="i8F-su-44a" id="39q-Qu-MpR"/>
+                        <outlet property="rangeCell" destination="L6n-aT-9e0" id="CAM-Z6-50G"/>
                         <outlet property="rangeTextField" destination="GP5-pb-R9F" id="ITh-DU-Fny"/>
                         <outlet property="scaleSwitch" destination="D4w-Mj-7TR" id="hno-OR-v5k"/>
                     </connections>

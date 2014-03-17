@@ -33,6 +33,8 @@
 @property(weak) IBOutlet UITableViewCell *orientationCell;
 @property(weak) IBOutlet UITableViewCell *pagesPerSheetCell;
 @property(weak) IBOutlet UITableViewCell *doubleSidedCell;
+@property(weak) IBOutlet UITableViewCell *rangeCell;
+@property(weak) IBOutlet UITableViewCell *fitToPageCell;
 
 -(void)updateUI;
 -(void)showChooserForTriggeringCell:(UITableViewCell *)cell;
@@ -230,8 +232,21 @@
     
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
-    if (cell == _printerCell)
+    if (cell == _rangeCell)
+    {
+        if (_rangeTextField.isFirstResponder)
+            [_rangeTextField resignFirstResponder];
+        else
+            [_rangeTextField becomeFirstResponder];
+    }
+    else if (cell == _fitToPageCell)
+    {
+        [_scaleSwitch setOn:!_scaleSwitch.on animated:YES];
+    }
+    else if (cell == _printerCell)
+    {
         [self choosePrinter:nil];
+    }
     else if (cell == _printCell)
     {
         [self print:nil];
