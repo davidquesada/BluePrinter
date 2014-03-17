@@ -291,9 +291,11 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
     }
     
     self.response.data = self.data;
-    
+
+#ifdef ENABLE_DEBUG_LOGGING
     NSString *cont = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
     NSDebugLog(@"Contents: %@", cont);
+#endif
     
     NSJSONReadingOptions opt = (self.useMutableContainers ? NSJSONReadingMutableContainers : kNilOptions);
     self.response.jsonObject = [NSJSONSerialization JSONObjectWithData:self.data options:opt error:nil];

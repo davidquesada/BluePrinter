@@ -19,7 +19,8 @@
 #ifdef ENABLE_DEBUG_LOGGING
 #define NSDebugLog(...) NSLog(__VA_ARGS__)
 #else
-#define NSDebugLog(...)
+#define NSDebugLog(...) ___black_hole(0, __VA_ARGS__)
 #endif
 
 
+extern void ___black_hole(int unused, ...);
