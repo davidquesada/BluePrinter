@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="85M-8o-hLO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="85M-8o-hLO">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -10,7 +10,7 @@
             <objects>
                 <viewController id="wcC-ek-sAg" customClass="LocationsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eDs-8r-Wrw">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -130,7 +130,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBU-jt-BjC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2186" y="749"/>
+            <point key="canvasLocation" x="1308" y="1915"/>
         </scene>
         <!--Jobs View Controller - Jobs-->
         <scene sceneID="lOA-tk-KO0">
@@ -182,13 +182,7 @@
                             <outlet property="delegate" destination="GBO-PJ-P0K" id="Q3I-U7-UYz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Jobs" id="O9U-oe-cYS">
-                        <barButtonItem key="rightBarButtonItem" title="Usage" id="cxx-lg-QOU">
-                            <connections>
-                                <segue destination="rdJ-sS-18f" kind="push" id="pse-CS-YB8"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Jobs" id="O9U-oe-cYS"/>
                     <connections>
                         <outlet property="tableView" destination="ZfY-Jd-5pr" id="xYb-B9-sL6"/>
                     </connections>
@@ -196,21 +190,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCM-AS-xoi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1308" y="1259"/>
-        </scene>
-        <!--View Controller - Options-->
-        <scene sceneID="i7Q-Hd-T01">
-            <objects>
-                <viewController id="ls7-eW-5b2" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Roa-gs-aH2">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Options" id="kZs-HK-rlr"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a4f-je-K4J" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1308" y="1915"/>
         </scene>
         <!--Services View Controller - Files-->
         <scene sceneID="hth-4q-GYT">
@@ -514,8 +493,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="MXl-5y-lRx" kind="relationship" relationship="viewControllers" id="F19-DB-TYx"/>
-                        <segue destination="U34-v6-ria" kind="relationship" relationship="viewControllers" id="eDf-fD-izw"/>
                         <segue destination="VOw-ca-1AH" kind="relationship" relationship="viewControllers" id="NvP-QR-dYM"/>
+                        <segue destination="j3h-Q2-E6l" kind="relationship" relationship="viewControllers" id="RIC-UO-4Kv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Otr-6O-Oyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -526,7 +505,7 @@
         <scene sceneID="Z4E-yM-eQG">
             <objects>
                 <navigationController id="MXl-5y-lRx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Files" id="Sa3-OV-isc"/>
+                    <tabBarItem key="tabBarItem" title="Files" image="filesTab.png" id="Sa3-OV-isc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="txP-d1-ls8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -564,7 +543,7 @@
         <scene sceneID="Aai-fp-NER">
             <objects>
                 <navigationController id="VOw-ca-1AH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Jobs" id="juc-Eg-SuJ"/>
+                    <tabBarItem key="tabBarItem" title="Jobs" image="jobsTab.png" id="juc-Eg-SuJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="iDL-wu-kyW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -579,11 +558,11 @@
             </objects>
             <point key="canvasLocation" x="782" y="1259"/>
         </scene>
-        <!--Navigation Controller - Options-->
+        <!--Navigation Controller - Usage-->
         <scene sceneID="6KY-3d-78j">
             <objects>
                 <navigationController storyboardIdentifier="optionsNavController" id="j3h-Q2-E6l" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Options" id="Dp0-bP-eoJ"/>
+                    <tabBarItem key="tabBarItem" title="Usage" image="usageTab.png" id="Dp0-bP-eoJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uDx-Qd-eux">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -591,7 +570,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ls7-eW-5b2" kind="relationship" relationship="rootViewController" id="zvw-2T-Q89"/>
+                        <segue destination="rdJ-sS-18f" kind="relationship" relationship="rootViewController" id="sXE-9D-EiF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xtl-cf-uwQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -599,6 +578,11 @@
             <point key="canvasLocation" x="782" y="1915"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="filesTab.png" width="25" height="25"/>
+        <image name="jobsTab.png" width="25" height="25"/>
+        <image name="usageTab.png" width="25" height="25"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
