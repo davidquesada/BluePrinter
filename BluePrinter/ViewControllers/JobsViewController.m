@@ -59,7 +59,7 @@
 
 -(void)didPan:(UIPanGestureRecognizer *)pan
 {
-    NSLog(@"WOO");
+
 }
 
 -(void)dealloc
@@ -139,9 +139,9 @@
 {
     PrintJob *job = [PrintJob userJobs][indexPath.row];
     [job cancel:^(NSMutableArray *objects, MPrintResponse *response) {
-        NSLog(@"Did finish cancelling job.");
+        NSDebugLog(@"Did finish cancelling job.");
         [job refresh:^(NSMutableArray *objects, MPrintResponse *response) {
-            NSLog(@"Did finish post-cancellation refresh.");
+            NSDebugLog(@"Did finish post-cancellation refresh.");
             
             [self.tableView reloadData];
         }];
@@ -313,7 +313,7 @@
     if ((fabsf(translation.x) > fabsf(translation.y))
         && (translation.x > 0)) {
         return YES;
-        NSLog(@"Panning");
+        NSDebugLog(@"Panning");
     }
     return NO;
 }

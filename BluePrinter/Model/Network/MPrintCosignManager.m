@@ -49,7 +49,7 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
     
     if (!cosign || !mprintcosign)
     {
-        NSLog(@"Stored cosign values not found.");
+        NSDebugLog(@"Stored cosign values not found.");
         return;
     }
     
@@ -91,10 +91,10 @@ static NSString *getCookieValue(NSString *domain, NSString *name);
     NSString *cosign = getCookieValue(@"https://weblogin.umich.edu", @"cosign");
     NSString *mprintcosign = getCookieValue(@"https://mprint.umich.edu", @"cosign-mprint");
     
-    NSLog(@"Storing values (CS,CS-MP) = (%@, %@)", cosign, mprintcosign);
+    NSDebugLog(@"Storing values (CS,CS-MP) = (%@, %@)", cosign, mprintcosign);
     
     if (!cosign || !mprintcosign)
-        NSLog(@"Unable to retrieve cosign values after login!");
+        NSDebugLog(@"Unable to retrieve cosign values after login!");
     
     [def setObject:cosign forKey:MPCMCosignKey];
     [def setObject:mprintcosign forKey:MPCMMPrintCosignKey];

@@ -74,8 +74,8 @@
 //    if (completion)
 //        completion(nil, nil);
 //    return;
-    NSLog(@"Dictionary: %@", [_requestDictionary debugDescription]);
-    NSLog(@"About to send print request.");
+    NSDebugLog(@"Dictionary: %@", [_requestDictionary debugDescription]);
+    NSDebugLog(@"About to send print request.");
     
     [printReq performWithCompletion:^(MPrintResponse *response) {
         PrintJob *job = nil;

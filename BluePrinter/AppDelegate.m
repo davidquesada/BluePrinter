@@ -163,7 +163,7 @@ AppDelegate *sharedDelegate;
 
 -(void)didLogIn:(NSNotification *)note
 {
-    NSLog(@"Refreshing Stuff");
+    NSDebugLog(@"Refreshing Stuff");
     [Location refreshLocations:nil];
     [Location refreshRecentLocations:nil];
     [Service refreshServices:nil];

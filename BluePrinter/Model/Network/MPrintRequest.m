@@ -103,7 +103,7 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
     if (_parameters.count && !_wantsBodyParameters)
         s = [s stringByAppendingString:[self getParameterString]];
     
-    NSLog(@"Building url: %@", s);
+    NSDebugLog(@"Building url: %@", s);
     return [NSURL URLWithString:s];
 }
 
@@ -283,17 +283,17 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSLog(@"Connection completed!");
+    NSDebugLog(@"Connection completed!");
     if (!self.mycompletion)
     {
-        NSLog(@"But nobody cares");
+        NSDebugLog(@"But nobody cares");
         //return;
     }
     
     self.response.data = self.data;
     
     NSString *cont = [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
-    NSLog(@"Contents: %@", cont);
+    NSDebugLog(@"Contents: %@", cont);
     
     NSJSONReadingOptions opt = (self.useMutableContainers ? NSJSONReadingMutableContainers : kNilOptions);
     self.response.jsonObject = [NSJSONSerialization JSONObjectWithData:self.data options:opt error:nil];
@@ -307,7 +307,7 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"Connection failed: %@", error);
+    NSDebugLog(@"Connection failed: %@", error);
     if (self.mycompletion)
         self.mycompletion(nil);
     
@@ -317,7 +317,7 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     NSHTTPURLResponse *res = (id)response;
-    NSLog(@"Got response. StatusCode(%d)", res.statusCode);
+    NSDebugLog(@"Got response. StatusCode(%d)", res.statusCode);
     
     self.response.statusCode = res.statusCode;
     [self.data setLength:0];

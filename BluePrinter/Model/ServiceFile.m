@@ -140,7 +140,7 @@
     
     __block NSData *ret = nil;
     
-    NSLog(@"Waiting for blocking file download...");
+    NSDebugLog(@"Waiting for blocking file download...");
     [self downloadFileContentsWithCompletion:^(NSData *data, MPrintResponse *actualResponse) {
         
         ret = data;
