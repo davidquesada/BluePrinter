@@ -61,6 +61,11 @@
 {
     [super viewWillAppear:animated];
     [self updateUI];
+    
+    // Fixes a weird bug on iPad where upon returning to this VC from any pushed view,
+    // the stepper tint color resets to yellow.
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        _copiesStepper.tintColor = _rangeTextField.tintColor;
 }
 
 -(void)print:(id)sender
