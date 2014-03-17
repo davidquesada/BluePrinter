@@ -292,7 +292,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="fyg-aS-SSS">
+                                                <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="fyg-aS-SSS">
                                                     <rect key="frame" x="213" y="7" width="94" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <connections>
@@ -300,6 +300,10 @@
                                                     </connections>
                                                 </stepper>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fyg-aS-SSS" firstAttribute="centerY" secondItem="wBR-3K-U0A" secondAttribute="centerY" id="HVv-Ud-oGn"/>
+                                                <constraint firstAttribute="trailing" secondItem="fyg-aS-SSS" secondAttribute="trailing" constant="13" id="YK6-Hh-V3m"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="S1L-zf-NPf" style="IBUITableViewCellStyleDefault" id="L6n-aT-9e0">
@@ -316,7 +320,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="e.g. 1-10,12,15-18" textAlignment="right" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="GP5-pb-R9F">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="e.g. 1-10,12,15-18" textAlignment="right" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="GP5-pb-R9F">
                                                     <rect key="frame" x="77" y="7" width="230" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -326,6 +330,12 @@
                                                     </connections>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GP5-pb-R9F" firstAttribute="leading" secondItem="Fre-Yc-zbV" secondAttribute="leading" constant="77" id="3Hb-s0-8gp"/>
+                                                <constraint firstAttribute="trailing" secondItem="GP5-pb-R9F" secondAttribute="trailing" constant="13" id="4iV-Hp-4uE"/>
+                                                <constraint firstAttribute="bottom" secondItem="GP5-pb-R9F" secondAttribute="bottom" constant="6" id="5zx-Mn-FeR"/>
+                                                <constraint firstItem="GP5-pb-R9F" firstAttribute="top" secondItem="Fre-Yc-zbV" secondAttribute="top" constant="7" id="wn9-J1-uJq"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -418,7 +428,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Mj-7TR">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4w-Mj-7TR">
                                                     <rect key="frame" x="257" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
@@ -426,6 +436,10 @@
                                                     </connections>
                                                 </switch>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="D4w-Mj-7TR" firstAttribute="centerY" secondItem="vxc-Fb-doj" secondAttribute="centerY" id="JrQ-db-ff5"/>
+                                                <constraint firstAttribute="trailing" secondItem="D4w-Mj-7TR" secondAttribute="trailing" constant="14" id="XZh-Zt-9Rg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
