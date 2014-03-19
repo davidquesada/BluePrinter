@@ -27,6 +27,16 @@ typedef NS_ENUM(NSInteger, MPDoubleSided)
     MPDoubleSidedShortEdge,
 };
 
+// This notification is posted after a print request returns, after any immediate completion handler.
+extern NSString * const PrintRequestDidSendNotification;
+
+// The PrintRequest object that originally send the request.
+extern NSString * const PrintRequestUserInfoKey;
+
+// The MPrintResponse object that was returned from sending the PrintRequest object.
+extern NSString * const PrintRequestResponseUserInfoKey;
+
+
 @interface PrintRequest : NSObject
 
 @property ServiceFile *file;

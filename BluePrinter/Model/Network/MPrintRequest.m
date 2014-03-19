@@ -158,7 +158,7 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
     [self.request setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
     
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];
-    [connection start];
+    [connection performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
 }
 
 -(void)addGetValue:(NSString *)value forKey:(NSString *)key
@@ -279,6 +279,12 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
     [self appendBoundary];
 }
 
+-(void)callCompletionHandler
+{
+    if (self.mycompletion)
+        self.mycompletion(self.response);
+}
+
 #pragma mark - NSURLConnection Delegate Methods
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -301,7 +307,7 @@ NSString * const MPrintRequestConnectionDidFailNotification = @"MPrintRequestCon
     self.response.jsonObject = [NSJSONSerialization JSONObjectWithData:self.data options:opt error:nil];
     
     if (self.mycompletion)
-        self.mycompletion(self.response);
+        [self performSelectorOnMainThread:@selector(callCompletionHandler) withObject:nil waitUntilDone:NO];
     
     if (self.response.jsonObject && !self.response.success)
         [[NSNotificationCenter defaultCenter] postNotificationName:MPrintRequestApplicationDidFailNotification object:self.response];

@@ -14,6 +14,10 @@
 #import "MPrintNetworkedService.h"
 
 
+NSString * const PrintRequestDidSendNotification = @"PrintRequestDidSendNotification";
+NSString * const PrintRequestUserInfoKey = @"PrintRequestUserInfoKey";
+NSString * const PrintRequestResponseUserInfoKey = @"PrintRequestResponseUserInfoKey";
+
 @interface PrintRequest ()
 {
     NSMutableDictionary *_additionalParameters;
@@ -70,10 +74,6 @@
     }];
     
     
-//    NSLog(@"Not Actually sending request.");
-//    if (completion)
-//        completion(nil, nil);
-//    return;
     NSDebugLog(@"Dictionary: %@", [_requestDictionary debugDescription]);
     NSDebugLog(@"About to send print request.");
     
@@ -81,6 +81,13 @@
         PrintJob *job = nil;
         if (completion)
             completion(job, response);
+        
+        NSMutableDictionary *dict = [NSMutableDictionary new];
+        if (response)
+            dict[PrintRequestResponseUserInfoKey] = response;
+        dict[PrintRequestUserInfoKey] = self;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:PrintRequestDidSendNotification object:nil userInfo:[dict copy]];
     }];
 }
 

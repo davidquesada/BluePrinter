@@ -111,6 +111,7 @@
 		636833DE18B9781500720C4B /* MPrintServiceAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 636833DD18B9781500720C4B /* MPrintServiceAuthenticationViewController.m */; };
 		6374DD3818B7091C0036129A /* MPrintDriveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3718B7091C0036129A /* MPrintDriveService.m */; };
 		6374DD3B18B70C240036129A /* MPrintIFSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3A18B70C240036129A /* MPrintIFSService.m */; };
+		63782E0318D91629002488D7 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63782E0218D91629002488D7 /* NotificationManager.m */; };
 		637C138118D0137A007C14BC /* ServiceFile+FileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */; };
 		637E8295189B811000DA9A35 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 637E8294189B811000DA9A35 /* ServiceFile.m */; };
 		63A234AE18D6D7CF00F7EFD0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A234AD18D6D7CF00F7EFD0 /* Images.xcassets */; };
@@ -272,6 +273,9 @@
 		6374DD3718B7091C0036129A /* MPrintDriveService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintDriveService.m; path = Model/Services/MPrintDriveService.m; sourceTree = "<group>"; };
 		6374DD3918B70C240036129A /* MPrintIFSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrintIFSService.h; path = Model/Services/MPrintIFSService.h; sourceTree = "<group>"; };
 		6374DD3A18B70C240036129A /* MPrintIFSService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPrintIFSService.m; path = Model/Services/MPrintIFSService.m; sourceTree = "<group>"; };
+		63782E0118D91629002488D7 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationManager.h; path = Classes/NotificationManager.h; sourceTree = "<group>"; };
+		63782E0218D91629002488D7 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationManager.m; path = Classes/NotificationManager.m; sourceTree = "<group>"; };
+		63782E0418D916FE002488D7 /* MPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrint.h; path = Model/MPrint.h; sourceTree = "<group>"; };
 		637C137F18D0137A007C14BC /* ServiceFile+FileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ServiceFile+FileTypes.h"; path = "Categories/ServiceFile+FileTypes.h"; sourceTree = "<group>"; };
 		637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ServiceFile+FileTypes.m"; path = "Categories/ServiceFile+FileTypes.m"; sourceTree = "<group>"; };
 		637E8293189B811000DA9A35 /* ServiceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceFile.h; path = Model/ServiceFile.h; sourceTree = "<group>"; };
@@ -488,6 +492,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		63782E0018D915E4002488D7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				63782E0118D91629002488D7 /* NotificationManager.h */,
+				63782E0218D91629002488D7 /* NotificationManager.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		63A234B018D6D8FF00F7EFD0 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,6 +568,7 @@
 		B20C187718863E890088EE73 /* BluePrinter */ = {
 			isa = PBXGroup;
 			children = (
+				63782E0018D915E4002488D7 /* Classes */,
 				B20C188018863E890088EE73 /* AppDelegate.h */,
 				B20C188118863E890088EE73 /* AppDelegate.m */,
 				B20C188918863E890088EE73 /* MainStoryboard.storyboard */,
@@ -638,6 +652,7 @@
 				63AFA42018C530750036EF18 /* UsageCategory.m */,
 				63AFA42218C5318C0036EF18 /* UsageAllocation.h */,
 				63AFA42318C5318C0036EF18 /* UsageAllocation.m */,
+				63782E0418D916FE002488D7 /* MPrint.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -858,6 +873,7 @@
 				63AFA42418C5318C0036EF18 /* UsageAllocation.m in Sources */,
 				637C138118D0137A007C14BC /* ServiceFile+FileTypes.m in Sources */,
 				B20C18B61886458C0088EE73 /* MPrintRequest.m in Sources */,
+				63782E0318D91629002488D7 /* NotificationManager.m in Sources */,
 				63F9CD8318B2B90900B6B63A /* MPrintCosignManager.m in Sources */,
 				63AFA41B18C52DF60036EF18 /* UsageViewController.m in Sources */,
 				63AA558E1888F2980073D214 /* LoginViewController.m in Sources */,

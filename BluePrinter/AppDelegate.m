@@ -16,6 +16,7 @@
 #import "PrintRequest.h"
 #import "PrintJobTableViewController.h"
 #import "Account.h"
+#import "NotificationManager.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -32,6 +33,8 @@ AppDelegate *sharedDelegate;
 -(void)requestDidFail:(NSNotification *)note;
 -(void)connectionDidFail:(NSNotification *)note;
 -(void)addv7Appearance:(UIApplication *)application;
+
+-(void)showJobsTabOfApplication:(UIApplication *)application;
 
 -(UIViewController *)targetViewController;
 -(void)registerForNotifications;
@@ -53,13 +56,34 @@ AppDelegate *sharedDelegate;
     return board;
 }
 
+-(void)showJobsTabOfApplication:(UIApplication *)application
+{
+    UITabBarController *cont = (id)[application.windows.firstObject rootViewController];
+    
+    if ([cont isKindOfClass:[UITabBarController class]])
+        cont.selectedIndex = 1;
+    
+    // Dismiss any notifications from the notification center if a user
+    // tapped one to come here.
+    [application cancelAllLocalNotifications];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     sharedDelegate = self;
     [self registerForNotifications];
     
     [self addv7Appearance:application];
+    
+    if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey])
+        [self showJobsTabOfApplication:application];
     return YES;
+}
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    if (application.applicationState == UIApplicationStateInactive)
+        [self showJobsTabOfApplication:application];
 }
 
 -(void)registerForNotifications
@@ -130,13 +154,12 @@ AppDelegate *sharedDelegate;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[NotificationManager defaultNotificationManager] applicationWillEnterBackground];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[NotificationManager defaultNotificationManager] applicationWillEnterForeground];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

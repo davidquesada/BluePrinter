@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, PrintJobState)
 @interface PrintJob : MPrintObject
 
 +(NSArray *)userJobs;
++(instancetype)userJobWithID:(NSString *)jobID;
 +(void)refreshUserJobs:(void (^)(BOOL success))completion;
 +(void)removeUserJobs;
 
@@ -39,6 +40,10 @@ typedef NS_ENUM(NSInteger, PrintJobState)
 
 // TODO: Figure out what the values for this are. ("completed", "failed", "cancelled")
 @property(readonly) PrintJobState state;
+
+// Whether the job is in a working state where its status may change.
+// Currently corresponds to either 'processing' or 'converting'.
+@property(readonly) BOOL isPending;
 
 @property(readonly) NSString *stateDescription;
 

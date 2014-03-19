@@ -45,6 +45,16 @@ NSArray *userJobs;
     return userJobs;
 }
 
++(instancetype)userJobWithID:(NSString *)jobID
+{
+    // Right now, the API doesn't ever seem to return more than 4 + (# of pending)
+    // print jobs. It's probably not really necesary to bother with a dictionary.
+    for (PrintJob *job in userJobs)
+        if ([job.jobID isEqualToString:jobID])
+            return job;
+    return nil;
+}
+
 +(void)refreshUserJobs:(void (^)(BOOL))completion
 {
     [self fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
@@ -174,6 +184,14 @@ NSArray *userJobs;
                   @(PrintJobStateProcessing) : @"Processing",
                   };
     return dict[@(self.state)];
+}
+
+-(BOOL)isPending
+{
+    PrintJobState state = self.state;
+    if (state == PrintJobStateConverting || state == PrintJobStateProcessing)
+        return YES;
+    return NO;
 }
 
 @end
