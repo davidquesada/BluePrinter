@@ -89,6 +89,11 @@
     return [path stringByAppendingPathComponent:name];
 }
 
+-(NSString *)pathForPrintRequest
+{
+    return [self.service printRequestPathForFile:self];
+}
+
 -(NSDate *)modifiedDate
 {
     if (_cachedModifiedDate)

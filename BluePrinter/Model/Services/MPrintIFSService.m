@@ -57,6 +57,18 @@
     return [NSString stringWithFormat:@"/afs/umich.edu/user/%C/%C/%@", c1, c2, uniqname];
 }
 
+#pragma mark - Service Methods
+
+-(NSString *)printRequestPathForFile:(ServiceFile *)file
+{
+    NSString *prefix = [self afsPrefix];
+    
+    NSString *path = [file fullpath];
+    if ([path hasPrefix:@"/"])
+        return [prefix stringByAppendingString:path];
+    return [NSString stringWithFormat:@"%@/%@", prefix, path];
+}
+
 #pragma mark - MPrintNetworkedService Methods
 
 -(NSString *)preparePathForDirectory:(NSString *)directory

@@ -7,6 +7,7 @@
 //
 
 #import "Service.h"
+#import "ServiceFile.h"
 #import "MPrintResponse.h"
 #import "MPrintLocalService.h"
 #import "MPrintDropboxService.h"
@@ -233,6 +234,11 @@ Service *localService;
 -(ServiceError)renameFileAtPath:(NSString *)path toNewPath:(NSString *)newPath
 {
     return ServiceErrorNotSupported;
+}
+
+-(NSString *)printRequestPathForFile:(ServiceFile *)file
+{
+    return file.fullpath;
 }
 
 @end

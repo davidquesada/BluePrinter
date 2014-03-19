@@ -117,7 +117,7 @@ NSString * const PrintRequestResponseUserInfoKey = @"PrintRequestResponseUserInf
     NSAssert(_file, @"There must be a file associated with the request.");
     
     _additionalParameters[@"service"] = self.file.service.name;
-    _additionalParameters[@"filepath"] = self.file.fullpath;
+    _additionalParameters[@"filepath"] = self.file.pathForPrintRequest;
 }
 
 -(void)createRequestDictionary

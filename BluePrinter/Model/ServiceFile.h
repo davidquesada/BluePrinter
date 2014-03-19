@@ -20,6 +20,8 @@
 @property (readonly) BOOL isDeletable;
 @property (readonly) Service *service;
 @property (readonly) NSString *fullpath;
+// Defaults to self.fullpath.
+@property (readonly) NSString *pathForPrintRequest;
 @property (readonly) NSDate *modifiedDate;
 
 -(id)initWithJSONDictionary:(NSDictionary *)dict service:(Service *)service;

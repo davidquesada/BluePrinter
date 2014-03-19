@@ -42,6 +42,8 @@ extern NSString * const MPrintDidRefreshServicesNotification;
 // on import. Otherwise, the notification object will be nil.
 extern NSString * const MPrintDidImportFileNotification;
 
+@class ServiceFile;
+
 @interface Service : MPrintObject
 
 +(void)refreshServices:(MPrintFetchHandler)completion;
@@ -67,7 +69,6 @@ extern NSString * const MPrintDidImportFileNotification;
 -(void)disconnect:(void (^)())completion;
 -(void)invalidateConnection;
 
-
 // The 'objects' property of the completion is an array of ServiceFile objects.
 -(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion;
 -(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion;
@@ -77,5 +78,9 @@ extern NSString * const MPrintDidImportFileNotification;
 -(ServiceError)importFileAtLocalPath:(NSString *)path;
 -(void)deleteFileAtPath:(NSString *)path completion:(void (^)(ServiceError error))completion;
 -(ServiceError)renameFileAtPath:(NSString *)path toNewPath:(NSString *)newPath;
+
+// A value to be attached to a 'filepath' key of a URL request.
+// By default, returns the 'fullpath' property of the file.
+-(NSString *)printRequestPathForFile:(ServiceFile *)file;
 
 @end
