@@ -75,13 +75,18 @@ AppDelegate *sharedDelegate;
     
     [self addv7Appearance:application];
     
+    // If we're launching the app because the user tapped a notification about a job state,
+    // let's show them the jobs view controller.
     if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey])
         [self showJobsTabOfApplication:application];
+    
     return YES;
 }
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    // We only want to do this if the application is inactive, otherwise the app will forcibly
+    // move to the jobs tab after printing a document (which for now is not what I want, but may change).
     if (application.applicationState == UIApplicationStateInactive)
         [self showJobsTabOfApplication:application];
 }

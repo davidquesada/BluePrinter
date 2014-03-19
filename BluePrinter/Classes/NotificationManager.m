@@ -184,10 +184,9 @@
         NSString *message = [NSString stringWithFormat:fmt, docname];
         [[[UIAlertView alloc] initWithTitle:message message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
-    else
-        [[UIApplication sharedApplication] presentLocalNotificationNow:note];
     
     NSDebugLog(@"Presenting local notification: %@", docname);
+    [[UIApplication sharedApplication] presentLocalNotificationNow:note];
 }
 
 -(void)beginBackgroundTask
