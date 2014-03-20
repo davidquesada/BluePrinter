@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<key>PreferenceSpecifiers</key>
+<array>
+    <dict>
+        <key>Type</key>
+        <string>PSGroupSpecifier</string>
+        <key>Title</key>
+        <string>HEY</string>
+        <key>FooterText</key>
+        <string>WOO!</string>
+    </dict>
+    <dict>
+        <key>Type</key>
+        <string>PSGroupSpecifier</string>
+        <key>Title</key>
+        <string>!</string>
+        <key>FooterText</key>
+        <string>SRCROOT: ${SRCROOT}</string>
+    </dict>
+</array>
+</dict>
+</plist>

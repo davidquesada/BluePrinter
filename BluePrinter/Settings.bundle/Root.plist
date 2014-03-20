@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
+            <key>FooterText</key>
+            <string>When this option is enabled, files you import from other apps will be saved for later use.</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSToggleSwitchSpecifier</string>
+            <key>Title</key>
+            <string>Save Imported Files</string>
+            <key>Key</key>
+            <string>DefaultSaveImportedFiles</string>
+            <key>DefaultValue</key>
+            <true />
+        </dict>
+        
+        
+        <dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Default Printing Options</string>
+		</dict>
+        <dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Orientation</string>
+			<key>Key</key>
+			<string>DefaultOrientation</string>
+			<key>DefaultValue</key>
+			<string>OrientationPortrait</string>
+            <key>Values</key>
+            <array>
+                <string>MPOrientationPortrait</string>
+                <string>MPOrientationLandscape</string>
+            </array>
+            <key>Titles</key>
+            <array>
+                <string>Portrait</string>
+                <string>Landscape</string>
+            </array>
+		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSMultiValueSpecifier</string>
+            <key>Title</key>
+            <string>Pages per Sheet</string>
+            <key>Key</key>
+            <string>DefaultPagesPerSheet</string>
+            <key>DefaultValue</key>
+            <integer>1</integer>
+            <key>Values</key>
+            <array>
+                <integer>1</integer>
+                <integer>2</integer>
+                <integer>4</integer>
+                <integer>6</integer>
+                <integer>9</integer>
+                <integer>16</integer>
+            </array>
+            <key>Titles</key>
+            <array>
+                <string>1</string>
+                <string>2</string>
+                <string>4</string>
+                <string>6</string>
+                <string>9</string>
+                <string>16</string>
+            </array>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSMultiValueSpecifier</string>
+            <key>Title</key>
+            <string>Duplex Printing</string>
+            <key>Key</key>
+            <string>DefaultDoubleSided</string>
+            <key>DefaultValue</key>
+            <string>MPDoubleSidedNo</string>
+            <key>Values</key>
+            <array>
+                <string>MPDoubleSidedNo</string>
+                <string>MPDoubleSidedLongEdge</string>
+                <string>MPDoubleSidedShortEdge</string>
+            </array>
+            <key>Titles</key>
+            <array>
+                <string>Single-sided</string>
+                <string>Bind on long edge</string>
+                <string>Bind on short edge</string>
+            </array>
+        </dict>
+        <dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Fit to Page</string>
+			<key>Key</key>
+			<string>DefaultFitToPage</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+        
+        
+        <dict>
+            <key>Type</key>
+            <string>PSRadioGroupSpecifier</string>
+            <key>Title</key>
+            <string>When Importing Files:</string>
+            <key>FooterText</key>
+            <string>Choose what to do when opening a file in BluePrinter.</string>
+            <key>Key</key>
+            <string>DefaultImportAction</string>
+            <key>DefaultValue</key>
+            <string>MPImportActionPrintIfLoggedIn</string>
+            <key>Values</key>
+            <array>
+                <string>MPImportActionNothing</string>
+                <string>MPImportActionPrintIfLoggedIn</string>
+                <string>MPImportActionPrint</string>
+            </array>
+            <key>Titles</key>
+            <array>
+                <string>Do nothing</string>
+                <string>Print only if I'm logged in</string>
+                <string>Ask me to log in, then print</string>
+            </array>
+        </dict>
+        
+        
+        <dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+        <dict>
+            <key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+            <key>Title</key>
+			<string>Logout When Leaving App</string>
+            <key>Key</key>
+			<string>DefaultLogoutOnBackground</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+        
+        
+        <!--
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>About</string>
+            <key>File</key>
+            <string>About</string>
+        </dict>
+         -->
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+</dict>
+</plist>
