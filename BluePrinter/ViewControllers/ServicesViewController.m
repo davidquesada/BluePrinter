@@ -229,6 +229,10 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     // on a translucent bar.
 //    controller.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:.05 blue:.2 alpha:1.0];
     controller.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:.065 blue:.17 alpha:1.0];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        controller.modalPresentationStyle = UIModalPresentationFormSheet;
+    
     [self presentViewController:controller animated:YES completion:nil];
 }
 
