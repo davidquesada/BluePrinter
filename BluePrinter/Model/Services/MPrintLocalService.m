@@ -97,12 +97,19 @@
         completion(files, [MPrintResponse successResponse]);
 }
 
--(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion
+-(void)downloadFile:(ServiceFile *)file completion:(MPrintDataHandler)completion
 {
-    NSString *fullpath = _directory;
-    if (path)
-        fullpath = [fullpath stringByAppendingPathComponent:path];
-    fullpath = [fullpath stringByAppendingPathComponent:filename];
+    NSString *fullpath = file.physicalLocalPath;
+    if (!fullpath)
+    {
+        NSString *path = file.path;
+        NSString *filename = file.name;
+        
+        fullpath = _directory;
+        if (path)
+            fullpath = [fullpath stringByAppendingPathComponent:path];
+        fullpath = [fullpath stringByAppendingPathComponent:filename];
+    }
     NSData *data = [NSData dataWithContentsOfFile:fullpath];
     if (completion)
         completion(data, [MPrintResponse successResponse]);

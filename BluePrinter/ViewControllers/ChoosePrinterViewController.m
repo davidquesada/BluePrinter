@@ -30,7 +30,11 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"Printing Locations";
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    // As it turns out, for whatever undocumented BS reason, this works well.
+    // No bugs when fast enabling/disabling search, no problems with translucent
+    // or opaque bars.
+    self.automaticallyAdjustsScrollViewInsets = self.navigationController.navigationBar.isTranslucent;
 }
 
 -(void)loadView

@@ -114,6 +114,7 @@
 		63782E0318D91629002488D7 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63782E0218D91629002488D7 /* NotificationManager.m */; };
 		637C138118D0137A007C14BC /* ServiceFile+FileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */; };
 		637E8295189B811000DA9A35 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 637E8294189B811000DA9A35 /* ServiceFile.m */; };
+		6383D57918DA80A8006FC076 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6383D57818DA80A8006FC076 /* AssetsLibrary.framework */; };
 		63A234AE18D6D7CF00F7EFD0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A234AD18D6D7CF00F7EFD0 /* Images.xcassets */; };
 		63A234B718D6D91A00F7EFD0 /* filesTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B118D6D91A00F7EFD0 /* filesTab.png */; };
 		63A234B818D6D91A00F7EFD0 /* filesTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B218D6D91A00F7EFD0 /* filesTab@2x.png */; };
@@ -280,6 +281,7 @@
 		637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ServiceFile+FileTypes.m"; path = "Categories/ServiceFile+FileTypes.m"; sourceTree = "<group>"; };
 		637E8293189B811000DA9A35 /* ServiceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceFile.h; path = Model/ServiceFile.h; sourceTree = "<group>"; };
 		637E8294189B811000DA9A35 /* ServiceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceFile.m; path = Model/ServiceFile.m; sourceTree = "<group>"; };
+		6383D57818DA80A8006FC076 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		63A234AD18D6D7CF00F7EFD0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		63A234B118D6D91A00F7EFD0 /* filesTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filesTab.png; sourceTree = "<group>"; };
 		63A234B218D6D91A00F7EFD0 /* filesTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filesTab@2x.png"; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6383D57918DA80A8006FC076 /* AssetsLibrary.framework in Frameworks */,
 				6364B40718C544DB002555FA /* QuartzCore.framework in Frameworks */,
 				B20C187218863E890088EE73 /* UIKit.framework in Frameworks */,
 				B20C187418863E890088EE73 /* Foundation.framework in Frameworks */,
@@ -557,6 +560,7 @@
 		B20C187018863E890088EE73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6383D57818DA80A8006FC076 /* AssetsLibrary.framework */,
 				6364B40618C544DB002555FA /* QuartzCore.framework */,
 				B20C187118863E890088EE73 /* UIKit.framework */,
 				B20C187318863E890088EE73 /* Foundation.framework */,

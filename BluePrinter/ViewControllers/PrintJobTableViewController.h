@@ -15,10 +15,15 @@
 @protocol PrintJobTableViewControllerDelegate <NSObject>
 @optional
 -(void)viewControllerWillDismiss:(PrintJobTableViewController *)controller;
+
+// Delegates can implement this method to dismiss the view controller in a customized way.
+-(void)dismissPrintJobViewController:(PrintJobTableViewController *)controller;
+
 @end
 
 @interface PrintJobTableViewController : BaseTableViewController
 
++(UINavigationController *)presentableViewControllerWithPrintRequest:(PrintRequest *)request delegate:(id<PrintJobTableViewControllerDelegate>)delegate;
 -(id)initWithPrintRequest:(PrintRequest *)request;
 
 @property(readonly) PrintRequest *request;

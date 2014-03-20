@@ -44,6 +44,15 @@
 
 @implementation PrintJobTableViewController
 
++(UINavigationController *)presentableViewControllerWithPrintRequest:(PrintRequest *)request delegate:(id<PrintJobTableViewControllerDelegate>)delegate
+{
+    PrintJobTableViewController *root = [[self alloc] initWithPrintRequest:request];
+    root.delegate = delegate;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
+    nav.navigationBar.translucent = NO;
+    return nav;
+}
+
 -(id)initWithPrintRequest:(PrintRequest *)request
 {
     self = [[AppDelegate sharedDelegate].mainStoryboard instantiateViewControllerWithIdentifier:@"printRequestViewController"];
@@ -51,7 +60,7 @@
     return self;
 }
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
  
@@ -163,7 +172,15 @@
 {
     if ([self.delegate respondsToSelector:@selector(viewControllerWillDismiss:)])
         [self.delegate viewControllerWillDismiss:self];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self realDismiss];
+}
+
+-(void)realDismiss
+{
+    if ([self.delegate respondsToSelector:@selector(dismissPrintJobViewController:)])
+        [self.delegate dismissPrintJobViewController:self];
+    else
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - IBActions

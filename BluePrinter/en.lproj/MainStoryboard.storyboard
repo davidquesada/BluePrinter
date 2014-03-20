@@ -230,7 +230,13 @@
                             <outlet property="delegate" destination="a6P-uQ-erI" id="KYR-aj-Vu3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Files" id="h6B-ah-wKR"/>
+                    <navigationItem key="navigationItem" title="Files" id="h6B-ah-wKR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="KPO-gw-ZRt">
+                            <connections>
+                                <action selector="showPhotoChooser:" destination="a6P-uQ-erI" id="oli-Zz-1wi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Ykg-wx-4NQ" id="P2T-1o-7oD"/>
                     </connections>

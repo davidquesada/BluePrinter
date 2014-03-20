@@ -213,7 +213,7 @@ Service *localService;
     
 }
 
--(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion
+-(void)downloadFile:(ServiceFile *)file completion:(MPrintDataHandler)completion
 {
     @throw @"Downloading service files is currently not supported.";
 }

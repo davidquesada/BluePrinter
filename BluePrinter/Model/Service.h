@@ -71,7 +71,7 @@ extern NSString * const MPrintDidImportFileNotification;
 
 // The 'objects' property of the completion is an array of ServiceFile objects.
 -(void)fetchDirectoryInfoForPath:(NSString *)path completion:(MPrintFetchHandler)completion;
--(void)downloadFileWithName:(NSString *)filename inPath:(NSString *)path completion:(MPrintDataHandler)completion;
+-(void)downloadFile:(ServiceFile *)file completion:(MPrintDataHandler)completion;
 
 #pragma mark - File Manipulation Methods
 

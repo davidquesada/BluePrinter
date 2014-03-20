@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 David Quesada. All rights reserved.
 //
 
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "ServicesViewController.h"
-#import "Service.h"
+#import "MPrint.h"
 #import "FilesViewController.h"
 #import "LocalFilesViewController.h"
-#import "MPrintCosignManager.h"
-#import "MPrintResponse.h"
-#import "Account.h"
+#import "PrintJobTableViewController.h"
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
 
@@ -23,7 +22,7 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     AccountButtonModeLoading,
 };
 
-@interface ServicesViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface ServicesViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PrintJobTableViewControllerDelegate>
 {
     BOOL _hasReloaded;
     __weak UIRefreshControl *_refreshControl;
@@ -45,6 +44,8 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 
 -(NSInteger)indexToInsertService:(Service *)service inSection:(NSInteger)section;
 -(void)moveServiceAtIndexPath:(NSIndexPath *)indexPath toSection:(NSInteger)section;
+
+-(void)pushPrintJobControllerInImagePicker:(UIImagePickerController *)picker forAsset:(ALAsset *)asset;
 
 @end
 
@@ -201,7 +202,6 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
         if (a < b)
             return NSOrderedAscending;
         return NSOrderedDescending;
-        //        return [[obj1 valueForKey:@"type"] compare:[obj2 valueForKey:@"type"]];
     }];
 }
 
@@ -221,6 +221,17 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     [self.tableView reloadRowsAtIndexPaths:@[ dest ] withRowAnimation:UITableViewRowAnimationFade];
 }
 
+-(IBAction)showPhotoChooser:(id)sender
+{
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.delegate = self;
+    // Use a different bar tint since the colors look different
+    // on a translucent bar.
+//    controller.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:.05 blue:.2 alpha:1.0];
+    controller.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:.065 blue:.17 alpha:1.0];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 #pragma mark - Notification Handlers
 
 -(void)didRefreshServices:(NSNotification *)note
@@ -237,6 +248,69 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 -(void)userDidLogOut:(NSNotification *)note
 {
     [self setAccountButtonMode:AccountButtonModeLogIn];
+}
+
+#pragma mark - UIImagePickerControllerDelegate Methods
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSURL *photoURL = info[UIImagePickerControllerReferenceURL];
+    if (!photoURL)
+    {
+        NSLog(@"Unable to get URL for picked photo.");
+        [picker dismissViewControllerAnimated:NO completion:nil];
+        return;
+    }
+
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library assetForURL:photoURL resultBlock:^(ALAsset *asset) {
+        [self pushPrintJobControllerInImagePicker:picker forAsset:asset];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Unable to open asset for chosen photo: %@", error);
+        [picker dismissViewControllerAnimated:NO completion:nil];
+    }];
+}
+
+-(void)pushPrintJobControllerInImagePicker:(UIImagePickerController *)picker forAsset:(ALAsset *)asset
+{
+    NSError *error = nil;
+    ALAssetRepresentation *rep = [asset defaultRepresentation];
+    
+    NSString *filename = [[rep filename] lastPathComponent];
+    NSString *dir = NSTemporaryDirectory();
+    filename = [dir stringByAppendingPathComponent:filename];
+    NSDebugLog(@"Saving : %@", filename);
+    
+    long long bufsize = [rep size];
+    uint8_t *buffer = (uint8_t *)malloc((size_t)bufsize);
+    [rep getBytes:buffer fromOffset:0 length:bufsize error:&error];
+    if (error)
+        NSLog(@"Error loading image data from asset library: %@", error);
+    
+    NSMutableData *data = [NSMutableData dataWithBytesNoCopy:buffer length:bufsize freeWhenDone:YES];
+    [data writeToFile:filename options:NSDataWritingAtomic error:&error];
+    if (error)
+        NSLog(@"Error writing image data to file: %@", error);
+    
+    ServiceFile *file = [[ServiceFile alloc] initWithFileAtPath:filename];
+    PrintRequest *req = [[PrintRequest alloc] init];
+    req.file = file;
+    
+    UIViewController *controller = [[PrintJobTableViewController alloc] initWithPrintRequest:req];
+    [(id)controller setDelegate:nil];
+    
+    // Persist the "Cancel" on the right, and remove the item from the left.
+    controller.navigationItem.rightBarButtonItem = [[picker.viewControllers.lastObject navigationItem] rightBarButtonItem];
+    [[controller navigationItem] setLeftBarButtonItem:nil];
+    
+    [picker pushViewController:controller animated:YES];
+}
+
+#pragma mark - PrintJobTableViewControllerDelegate Methods
+
+-(void)dismissPrintJobViewController:(PrintJobTableViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableView Methods

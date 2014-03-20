@@ -13,15 +13,27 @@
     Service *_service;
     NSInteger _modifiedTimestamp;
     NSDate *_cachedModifiedDate;
+    NSString *_physicalLocalPath;
 }
 @property (readwrite) ServiceType serviceType;
 @property (readwrite) BOOL isDirectory;
 @property (readwrite) NSString *name;
 @property (readwrite) NSString *path;
 @property (readwrite) NSString *extension;
+
 @end
 
 @implementation ServiceFile
+
+-(id)initWithFileAtPath:(NSString *)filepath
+{
+    self = [self initWithPath:filepath rootPath:nil];
+    if (self)
+    {
+        _physicalLocalPath = filepath;
+    }
+    return self;
+}
 
 -(id)initWithPath:(NSString *)path rootPath:(NSString *)base
 {
@@ -32,7 +44,9 @@
         self.path = [path stringByDeletingLastPathComponent];
         self.extension = [_name pathExtension];
         
-        NSString *entirePath = [base stringByAppendingPathComponent:path];
+        NSString *entirePath = path;
+        if (base.length)
+            entirePath = [base stringByAppendingPathComponent:path];
         
         BOOL exists, isdir;
         exists = [[NSFileManager defaultManager] fileExistsAtPath:entirePath isDirectory:&isdir];
@@ -89,6 +103,13 @@
     return [path stringByAppendingPathComponent:name];
 }
 
+-(NSString *)physicalLocalPath
+{
+    // This may be nil, if the file is a network file or was a local file created
+    // without specifying the full path;
+    return _physicalLocalPath;
+}
+
 -(NSString *)pathForPrintRequest
 {
     return [self.service printRequestPathForFile:self];
@@ -110,7 +131,7 @@
 
 -(void)downloadFileContentsWithCompletion:(MPrintDataHandler)completion
 {
-    [self.service downloadFileWithName:self.name inPath:self.path completion:completion];
+    [self.service downloadFile:self completion:completion];
 }
 
 -(void)deleteWithCompletion:(void (^)(BOOL))completion
