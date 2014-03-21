@@ -36,7 +36,7 @@
                 <key>Key</key>
                 <string>DefaultOrientation</string>
                 <key>DefaultValue</key>
-                <string>OrientationPortrait</string>
+                <string>MPOrientationPortrait</string>
                 <key>Values</key>
                 <array>
                     <string>MPOrientationPortrait</string>
@@ -97,6 +97,12 @@
                     <string>Bind on long edge</string>
                     <string>Bind on short edge</string>
                 </array>
+                <key>ShortTitles</key>
+                <array>
+                    <string>Single-sided</string>
+                    <string>Bind long edge</string>
+                    <string>Bind short edge</string>
+                </array>
             </dict>
             <dict>
                 <key>Type</key>
@@ -120,18 +126,18 @@
                 <key>Key</key>
                 <string>DefaultImportAction</string>
                 <key>DefaultValue</key>
-                <string>MPImportActionPrintIfLoggedIn</string>
+                <string>MPImportActionPrint</string>
                 <key>Values</key>
                 <array>
-                    <string>MPImportActionNothing</string>
-                    <string>MPImportActionPrintIfLoggedIn</string>
                     <string>MPImportActionPrint</string>
+                    <string>MPImportActionPrintIfLoggedIn</string>
+                    <string>MPImportActionNothing</string>
                 </array>
                 <key>Titles</key>
                 <array>
-                    <string>Do nothing</string>
-                    <string>Print only if I'm logged in</string>
-                    <string>Ask me to log in, then print</string>
+                    <string>Ask me to log in, then print.</string>
+                    <string>Only print if I'm logged in.</string>
+                    <string>Do nothing.</string>
                 </array>
             </dict>
             

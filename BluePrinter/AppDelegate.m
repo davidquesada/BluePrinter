@@ -18,16 +18,20 @@
 #import "Account.h"
 #import "NotificationManager.h"
 #import "UserDefaults.h"
+#import "LoginViewController.h"
+#import "SVProgressHUD.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 AppDelegate *sharedDelegate;
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UINavigationControllerDelegate, LoginViewControllerDelegate>
 {
     BOOL _hasRegisteredNotifications;
     UIBackgroundTaskIdentifier _logoutTask;
+    ServiceFile *_importedFile;
     __weak UIAlertView *_connectionFailedAlertView;
+    __weak LoginViewController *_presentedLoginViewController;
 }
 
 -(void)didLogIn:(NSNotification *)note;
@@ -40,6 +44,10 @@ AppDelegate *sharedDelegate;
 
 -(UIViewController *)targetViewController;
 -(void)registerForNotifications;
+
+-(void)clearTemporaryDocumentsDirectory;
+
+-(void)presentLoginViewController;
 
 @end
 
@@ -75,6 +83,7 @@ AppDelegate *sharedDelegate;
     sharedDelegate = self;
     [self registerForNotifications];
     
+    [self clearTemporaryDocumentsDirectory];
     [self addv7Appearance:application];
     
     // If we're launching the app because the user tapped a notification about a job state,
@@ -152,12 +161,6 @@ AppDelegate *sharedDelegate;
     // Not entirely sure on this. I think whiting out the search bar completely does look pretty cool.
     [[UISearchBar appearance] setBarTintColor:[UIColor whiteColor]];
 }
-							
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
@@ -190,14 +193,33 @@ AppDelegate *sharedDelegate;
     [[NotificationManager defaultNotificationManager] applicationWillEnterForeground];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
+-(void)importLocalFileAtPath:(NSString *)path
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // If the user has selected to save imported files, hand the responsibility off to
+    // the local file service, which will take care of putting the file in a good place.
+    if ([UserDefaults shouldSaveImportedFiles])
+    {
+        [[Service localService] importFileAtLocalPath:path];
+        return;
+    }
+    
+    // Otherwise, we're going to move the file to a temporary location.
+    
+    NSString *newpath = [NSTemporaryDirectory() stringByAppendingPathComponent:[path lastPathComponent]];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    
+    // If we have duplicate filenames, get rid of the old version.
+    if ([manager fileExistsAtPath:newpath])
+        [manager removeItemAtPath:newpath error:nil];
+    
+    NSError *error = nil;
+    [manager moveItemAtPath:path toPath:newpath error:&error];
+    
+    if (error)
+        NSLog(@"Error moving file to temp directory: %@", error);
+    
+    ServiceFile *file = [[ServiceFile alloc] initWithFileAtPath:newpath];
+    [self didImportServiceFile:file];
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -205,7 +227,7 @@ AppDelegate *sharedDelegate;
     [self registerForNotifications];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *path = [url path];
-        [[Service localService] importFileAtLocalPath:path];
+        [self importLocalFileAtPath:path];
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     });
 
@@ -226,9 +248,24 @@ AppDelegate *sharedDelegate;
     ServiceFile *file = note.object;
     if (!file)
         return;
+    [self didImportServiceFile:file];
+}
+
+-(void)didImportServiceFile:(ServiceFile *)file
+{
+    _importedFile = file;
+    
+    ImportAction action = [UserDefaults importAction];
+    if (action == ImportActionNone)
+        return;
+    
+    [SVProgressHUD show];
     [Account checkLoginStatus:^(BOOL isLoggedIn) {
+        [SVProgressHUD dismiss];
         if (isLoggedIn)
-            [self showViewControllerForServiceFile:file];
+            [self presentViewControllerForImportedFile];
+        else if (action == ImportActionPrintAlways)
+            [self presentLoginViewController];
     }];
 }
 
@@ -260,16 +297,35 @@ AppDelegate *sharedDelegate;
     [view show];
 }
 
--(void)showViewControllerForServiceFile:(ServiceFile *)file
+-(void)presentViewControllerForImportedFile
 {
     PrintRequest *req = [PrintRequest printRequestWithDefaultOptions];
-    req.file = file;
+    req.file = _importedFile;
     
     PrintJobTableViewController *table = [[PrintJobTableViewController alloc] initWithPrintRequest:req];
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:table];
     controller.navigationBar.translucent = NO;
     controller.modalPresentationStyle = UIModalPresentationFormSheet;
     [self.targetViewController presentViewController:controller animated:YES completion:nil];
+}
+
+-(void)presentLoginViewController
+{
+    if (_presentedLoginViewController)
+        return;
+    
+    LoginViewController *controller = [[LoginViewController alloc] init];
+    _presentedLoginViewController = controller;
+    controller.delegate = self;
+    
+    [self.targetViewController presentViewController:controller animated:YES completion:nil];
+}
+
+-(void)loginViewController:(LoginViewController *)controller didDismissWithLoginResult:(BOOL)loggedIn
+{
+    if (loggedIn)
+        [self presentViewControllerForImportedFile];
+    _importedFile = nil;
 }
 
 -(UIViewController *)targetViewController
@@ -284,6 +340,32 @@ AppDelegate *sharedDelegate;
     UIViewController *target = [self targetViewController];
     
     [target presentViewController:view animated:YES completion:nil];
+}
+
+-(void)clearTemporaryDocumentsDirectory
+{
+    NSDebugLog(@"Clearing temporary directory.");
+    
+    NSString *directory = NSTemporaryDirectory();
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSArray *filenames = [manager contentsOfDirectoryAtPath:directory error:nil];
+    
+    if (!filenames.count)
+        return;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       
+        for (NSString *filename in filenames)
+        {
+            NSError *error = nil;
+            NSString *fullfilename = [directory stringByAppendingPathComponent:filename];
+            [manager removeItemAtPath:fullfilename error:&error];
+            
+            if (error)
+                NSLog(@"Failed to remove item from temporary directory: %@", error);
+        }
+        
+    });
 }
 
 @end

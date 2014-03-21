@@ -20,7 +20,8 @@ static NSString * const DefaultDoubleSidedKey = @"DefaultDoubleSided";
 static NSString * const DefaultFitToPageKey = @"DefaultFitToPage";
 
 static NSString * const DefaultShouldLogOutWhenLeavingAppKey = @"DefaultLogoutOnBackground";
-
+static NSString * const DefaultShouldSaveImportedFilesKey = @"DefaultSaveImportedFiles";
+static NSString * const DefaultImportActionKey = @"DefaultImportAction";
 
 @interface UserDefaults ()
 
@@ -89,6 +90,24 @@ static NSString * const DefaultShouldLogOutWhenLeavingAppKey = @"DefaultLogoutOn
     return [[NSUserDefaults standardUserDefaults] boolForKey:DefaultShouldLogOutWhenLeavingAppKey];
 }
 
++(BOOL)shouldSaveImportedFiles
+{
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:DefaultShouldSaveImportedFilesKey])
+        return [[NSUserDefaults standardUserDefaults] boolForKey:DefaultShouldSaveImportedFilesKey];
+    return YES;
+}
+
++(ImportAction)importAction
+{
+    MAKE_DICTIONARY(dict, (@{ @"MPImportActionNothing" : @(ImportActionNone),
+                              @"MPImportActionPrintIfLoggedIn" : @(ImportActionPrintSometimes),
+                              @"MPImportActionPrint" : @(ImportActionPrintAlways) }));
+    id val = [self valueForUserDefault:DefaultImportActionKey];
+    if ((val = dict[val]))
+        return (ImportAction)[val integerValue];
+    return ImportActionPrintAlways;
+}
+
 @end
 
 
@@ -97,13 +116,16 @@ static NSString * const DefaultShouldLogOutWhenLeavingAppKey = @"DefaultLogoutOn
 +(instancetype)printRequestWithDefaultOptions
 {
     PrintRequest *req = [[self alloc] init];
-    
-    req.orientation = [UserDefaults defaultOrientation];
-    req.pagesPerSheet = [UserDefaults defaultPagesPerSheet];
-    req.doubleSided = [UserDefaults defaultDoubleSided];
-    req.fitToPage = [UserDefaults defaultFitToPage];
-    
+    [req loadDefaultOptions];
     return req;
+}
+
+-(void)loadDefaultOptions
+{
+    self.orientation = [UserDefaults defaultOrientation];
+    self.pagesPerSheet = [UserDefaults defaultPagesPerSheet];
+    self.doubleSided = [UserDefaults defaultDoubleSided];
+    self.fitToPage = [UserDefaults defaultFitToPage];
 }
 
 @end

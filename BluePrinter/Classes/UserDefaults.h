@@ -9,9 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "PrintRequest.h"
 
+
+typedef NS_ENUM(NSInteger, ImportAction)
+{
+    ImportActionNone,
+    ImportActionPrintSometimes,
+    ImportActionPrintAlways,
+};
+
+
 @interface UserDefaults : NSObject
 
 +(BOOL)shouldLogOutWhenLeavingApp;
++(BOOL)shouldSaveImportedFiles;
++(ImportAction)importAction;
 
 @end
 
@@ -21,5 +32,6 @@
 // Creates a new PrintRequest object with the default options, as specified
 // by the user settings.
 +(instancetype)printRequestWithDefaultOptions;
+-(void)loadDefaultOptions;
 
 @end

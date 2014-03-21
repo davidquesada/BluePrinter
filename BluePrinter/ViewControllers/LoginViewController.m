@@ -10,7 +10,9 @@
 #import "MPrintCosignManager.h"
 
 @interface LoginViewController ()<UIWebViewDelegate>
-
+{
+    BOOL _didLogIn;
+}
 @end
 
 @implementation LoginViewController
@@ -40,7 +42,12 @@
 
 -(IBAction)dismissWebView:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.delegate respondsToSelector:@selector(loginViewController:willDismissWithLoginResult:)])
+        [self.delegate loginViewController:self willDismissWithLoginResult:_didLogIn];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([self.delegate respondsToSelector:@selector(loginViewController:didDismissWithLoginResult:)])
+            [self.delegate loginViewController:self didDismissWithLoginResult:_didLogIn];
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -69,6 +76,7 @@
     if ([location isEqualToString:@"https://mprint.umich.edu/api"])
     {
         [MPrintCosignManager userDidLogIn];
+        _didLogIn = YES;
         [self dismissWebView:nil];
         return NO;
     }

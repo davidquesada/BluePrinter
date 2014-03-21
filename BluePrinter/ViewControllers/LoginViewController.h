@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class LoginViewController;
+@protocol LoginViewControllerDelegate <NSObject>
+@optional
+-(void)loginViewController:(LoginViewController *)controller willDismissWithLoginResult:(BOOL)loggedIn;
+-(void)loginViewController:(LoginViewController *)controller didDismissWithLoginResult:(BOOL)loggedIn;
+@end
+
 @interface LoginViewController : UINavigationController
+
+@property(weak, nonatomic) id<UINavigationControllerDelegate, LoginViewControllerDelegate> delegate;
 
 @end
