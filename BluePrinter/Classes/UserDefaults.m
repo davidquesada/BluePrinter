@@ -19,6 +19,9 @@ static NSString * const DefaultPagesPerSheetKey = @"DefaultPagesPerSheet";
 static NSString * const DefaultDoubleSidedKey = @"DefaultDoubleSided";
 static NSString * const DefaultFitToPageKey = @"DefaultFitToPage";
 
+static NSString * const DefaultShouldLogOutWhenLeavingAppKey = @"DefaultLogoutOnBackground";
+
+
 @interface UserDefaults ()
 
 +(id)valueForUserDefault:(NSString *)key;
@@ -78,6 +81,12 @@ static NSString * const DefaultFitToPageKey = @"DefaultFitToPage";
     if (![val respondsToSelector:@selector(boolValue)])
         return YES;
     return [val boolValue];
+}
+
+
++(BOOL)shouldLogOutWhenLeavingApp
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:DefaultShouldLogOutWhenLeavingAppKey];
 }
 
 @end

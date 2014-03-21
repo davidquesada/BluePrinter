@@ -11,6 +11,8 @@
 
 @interface UserDefaults : NSObject
 
++(BOOL)shouldLogOutWhenLeavingApp;
+
 @end
 
 

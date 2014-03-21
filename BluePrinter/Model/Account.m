@@ -68,14 +68,14 @@
         
         for (Service *svc in [Service allServices])
             [svc invalidateConnection];
+       
+        [PrintJob removeUserJobs];
+        [MPrintCosignManager userDidLogOut];
         
         // TODO: How do we verify the success of a logout?
         if (completion)
             completion(YES);
     }];
-    
-    [PrintJob removeUserJobs];
-    [MPrintCosignManager userDidLogOut];
 }
 
 @end

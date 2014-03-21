@@ -253,6 +253,10 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 -(void)userDidLogOut:(NSNotification *)note
 {
     [self setAccountButtonMode:AccountButtonModeLogIn];
+    
+    // At this point, all the services were pseudo-disconected, so we can refresh
+    // to make them show up in the right section.
+    [self didRefreshServices:nil];
 }
 
 #pragma mark - UIImagePickerControllerDelegate Methods

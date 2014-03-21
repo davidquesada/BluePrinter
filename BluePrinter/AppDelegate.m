@@ -26,6 +26,7 @@ AppDelegate *sharedDelegate;
 @interface AppDelegate ()
 {
     BOOL _hasRegisteredNotifications;
+    UIBackgroundTaskIdentifier _logoutTask;
     __weak UIAlertView *_connectionFailedAlertView;
 }
 
@@ -161,6 +162,27 @@ AppDelegate *sharedDelegate;
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [[NotificationManager defaultNotificationManager] applicationWillEnterBackground];
+    
+    if ([UserDefaults shouldLogOutWhenLeavingApp])
+    {
+        _logoutTask = UIBackgroundTaskInvalid;
+        _logoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
+            NSDebugLog(@"Ending logout background task due to expiration.");
+            [application endBackgroundTask:_logoutTask];
+            _logoutTask = UIBackgroundTaskInvalid;
+        }];
+        
+        [Account logout:^(BOOL success) {
+            NSDebugLog(@"Finished logout.");
+            
+            // Wait a second so notification observers can get the message.
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                NSDebugLog(@"Ending logout background task.");
+                [application endBackgroundTask:_logoutTask];
+                _logoutTask = UIBackgroundTaskInvalid;
+            });
+        }];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
