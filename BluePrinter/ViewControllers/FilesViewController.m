@@ -14,6 +14,7 @@
 #import "PrintJobTableViewController.h"
 #import "ServiceFile+Icons.h"
 #import "UITableView+Notice.h"
+#import "UserDefaults.h"
 
 @interface FilesViewController ()<PrintJobTableViewControllerDelegate>
 {
@@ -348,7 +349,7 @@
         return;
     }
     
-    PrintRequest *req = [[PrintRequest alloc] init];
+    PrintRequest *req = [PrintRequest printRequestWithDefaultOptions];
     req.file = file;
     
     PrintJobTableViewController *controller = [[PrintJobTableViewController alloc] initWithPrintRequest:req];

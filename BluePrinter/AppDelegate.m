@@ -17,6 +17,7 @@
 #import "PrintJobTableViewController.h"
 #import "Account.h"
 #import "NotificationManager.h"
+#import "UserDefaults.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -239,7 +240,7 @@ AppDelegate *sharedDelegate;
 
 -(void)showViewControllerForServiceFile:(ServiceFile *)file
 {
-    PrintRequest *req = [[PrintRequest alloc] init];
+    PrintRequest *req = [PrintRequest printRequestWithDefaultOptions];
     req.file = file;
     
     PrintJobTableViewController *table = [[PrintJobTableViewController alloc] initWithPrintRequest:req];

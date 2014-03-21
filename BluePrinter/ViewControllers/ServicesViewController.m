@@ -14,6 +14,7 @@
 #import "PrintJobTableViewController.h"
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
+#import "UserDefaults.h"
 
 typedef NS_ENUM(NSInteger, AccountButtonMode)
 {
@@ -297,7 +298,7 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
         NSLog(@"Error writing image data to file: %@", error);
     
     ServiceFile *file = [[ServiceFile alloc] initWithFileAtPath:filename];
-    PrintRequest *req = [[PrintRequest alloc] init];
+    PrintRequest *req = [PrintRequest printRequestWithDefaultOptions];
     req.file = file;
     
     UIViewController *controller = [[PrintJobTableViewController alloc] initWithPrintRequest:req];

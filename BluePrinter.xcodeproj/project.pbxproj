@@ -123,6 +123,7 @@
 		63A234BA18D6D91A00F7EFD0 /* jobsTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B418D6D91A00F7EFD0 /* jobsTab@2x.png */; };
 		63A234BB18D6D91A00F7EFD0 /* usageTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B518D6D91A00F7EFD0 /* usageTab.png */; };
 		63A234BC18D6D91A00F7EFD0 /* usageTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B618D6D91A00F7EFD0 /* usageTab@2x.png */; };
+		63A6217E18DC98570059FD8D /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A6217D18DC98570059FD8D /* UserDefaults.m */; };
 		63AA558B1888B44F0073D214 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558A1888B44F0073D214 /* Account.m */; };
 		63AA558E1888F2980073D214 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558D1888F2980073D214 /* LoginViewController.m */; };
 		63AFA41B18C52DF60036EF18 /* UsageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AFA41A18C52DF60036EF18 /* UsageViewController.m */; };
@@ -291,6 +292,8 @@
 		63A234B418D6D91A00F7EFD0 /* jobsTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jobsTab@2x.png"; sourceTree = "<group>"; };
 		63A234B518D6D91A00F7EFD0 /* usageTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = usageTab.png; sourceTree = "<group>"; };
 		63A234B618D6D91A00F7EFD0 /* usageTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "usageTab@2x.png"; sourceTree = "<group>"; };
+		63A6217C18DC98570059FD8D /* UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefaults.h; path = Classes/UserDefaults.h; sourceTree = "<group>"; };
+		63A6217D18DC98570059FD8D /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaults.m; path = Classes/UserDefaults.m; sourceTree = "<group>"; };
 		63AA55891888B44F0073D214 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Account.h; path = Model/Account.h; sourceTree = "<group>"; };
 		63AA558A1888B44F0073D214 /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Account.m; path = Model/Account.m; sourceTree = "<group>"; };
 		63AA558C1888F2980073D214 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
@@ -502,6 +505,8 @@
 			children = (
 				63782E0118D91629002488D7 /* NotificationManager.h */,
 				63782E0218D91629002488D7 /* NotificationManager.m */,
+				63A6217C18DC98570059FD8D /* UserDefaults.h */,
+				63A6217D18DC98570059FD8D /* UserDefaults.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				6318E49318C7D75100884021 /* LocalFilesViewController.m in Sources */,
 				63613C9B1898B308007CD749 /* MPrintObject.m in Sources */,
 				B20C18AE188641520088EE73 /* JobsViewController.m in Sources */,
+				63A6217E18DC98570059FD8D /* UserDefaults.m in Sources */,
 				63C50C7B18AA10AA00D63876 /* PrintJob.m in Sources */,
 				63AFA41E18C52E830036EF18 /* Usage.m in Sources */,
 				B20C18B2188641AA0088EE73 /* Location.m in Sources */,
