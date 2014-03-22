@@ -10,8 +10,6 @@
 
 #import "AppDelegate.h"
 
-void ___black_hole(int unused, ...) { }
-
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
