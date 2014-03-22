@@ -36,6 +36,8 @@ extern NSString * const PrintRequestUserInfoKey;
 // The MPrintResponse object that was returned from sending the PrintRequest object.
 extern NSString * const PrintRequestResponseUserInfoKey;
 
+// The Job ID of a newly queued print job.
+extern NSString * const PrintRequestJobIDKey;
 
 @interface PrintRequest : NSObject
 

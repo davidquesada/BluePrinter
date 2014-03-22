@@ -259,12 +259,27 @@
 {
     _needsToDoFirstRefreshAfterPrint = YES;
     
+    NSString *jobID = note.userInfo[PrintRequestJobIDKey];
+    if (jobID)
+        _pendingJobs = (_pendingJobs ? [_pendingJobs setByAddingObject:jobID] : [NSSet setWithObject:jobID]);
+    
+    UIBackgroundTaskIdentifier taskID = UIBackgroundTaskInvalid;
+    taskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"Waiting for print job." expirationHandler:^{
+        NSDebugLog(@"Background task timed out waiting for print job.");
+        [[UIApplication sharedApplication] endBackgroundTask:taskID];
+    }];
+    
     // It takes an annoying amount of time until the print document actually appears.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSDebugLog(@"Refreshing jobs after sending print job.");
         [PrintJob refreshUserJobs:^(BOOL success) {
             _handleUserJobsRefresh = success;
         }];
+        
+        // Add another delay to make sure that notifications have been posted and other background tasks have started before we kill this one.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] endBackgroundTask:taskID];
+        });
     });
 }
 

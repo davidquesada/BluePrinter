@@ -17,6 +17,7 @@
 NSString * const PrintRequestDidSendNotification = @"PrintRequestDidSendNotification";
 NSString * const PrintRequestUserInfoKey = @"PrintRequestUserInfoKey";
 NSString * const PrintRequestResponseUserInfoKey = @"PrintRequestResponseUserInfoKey";
+NSString * const PrintRequestJobIDKey = @"PrintRequestJobIDKey";
 
 @interface PrintRequest ()
 {
@@ -85,6 +86,9 @@ NSString * const PrintRequestResponseUserInfoKey = @"PrintRequestResponseUserInf
         NSMutableDictionary *dict = [NSMutableDictionary new];
         if (response)
             dict[PrintRequestResponseUserInfoKey] = response;
+        id jobID = response.jsonObject[@"jobID"];
+        if (jobID)
+            dict[PrintRequestJobIDKey] = jobID;
         dict[PrintRequestUserInfoKey] = self;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:PrintRequestDidSendNotification object:nil userInfo:[dict copy]];
