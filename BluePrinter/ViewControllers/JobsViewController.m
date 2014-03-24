@@ -45,21 +45,24 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRefreshJobs:) name:MPrintDidRefreshUserJobsNotification object:nil];
     
     self.tableView.noticeBackgroundColor = [UIColor whiteColor];
-    
-//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
-//    pan.cancelsTouchesInView = NO;
-//    pan.delegate = self;
-//    [self.tableView addGestureRecognizer:pan];
 }
 
-//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-//{
-//    return YES;
-//}
-
--(void)didPan:(UIPanGestureRecognizer *)pan
+-(void)viewWillAppear:(BOOL)animated
 {
-
+    [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    // This fixes a weird thing that causes one of two bugs when the
+    // 'notice' property of the tableview is set:
+    // 1. Cell dividers are shown overlaying the notice view.
+    // 2. Effectively, the contentSize of the tableview is ~80 pt too
+    //    much, and the tableview can be scrollable when it shouldn't be.
+    if (!_hasAppeared)
+    {
+        _hasAppeared = YES;
+        [self didRefreshJobs:nil];
+    }
 }
 
 -(void)dealloc
@@ -74,22 +77,6 @@
     [PrintJob refreshUserJobs:^(BOOL success) {
         [_refreshControl endRefreshing];
     }];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // This fixes a weird thing that causes one of two bugs when the
-    // 'notice' property of the tableview is set:
-    // 1. Cell dividers are shown overlaying the notice view.
-    // 2. Effectively, the contentSize of the tableview is ~80 pt too
-    //    much, and the tableview can be scrollable when it shouldn't be.
-    if (!_hasAppeared)
-    {
-        _hasAppeared = YES;
-        [self didRefreshJobs:nil];
-    }
 }
 
 #pragma mark - Notification Handlers
