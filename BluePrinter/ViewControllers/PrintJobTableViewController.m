@@ -113,6 +113,9 @@
         self.printerCell.textLabel.textColor = [UIColor blackColor];
         self.printerCell.textLabel.text = self.request.printLocation.displayName;
         self.printerCell.detailTextLabel.text = self.request.printLocation.location;
+        
+        // We sometimes need this after choosing a printer for the first time.
+        [_printerCell layoutSubviews];
     } else {
         self.printerCell.textLabel.textColor = [UIColor lightGrayColor];
         self.printerCell.textLabel.text = @"Select a Printer";
@@ -136,7 +139,7 @@
     if (_canPrint)
     {
         _printCell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        _printCell.textLabel.textColor = [UIColor blackColor];
+        _printCell.textLabel.textColor = _copiesStepper.tintColor;
     } else {
         _printCell.selectionStyle = UITableViewCellSelectionStyleNone;
         _printCell.textLabel.textColor = [UIColor lightGrayColor];
