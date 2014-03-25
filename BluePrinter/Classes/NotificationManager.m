@@ -195,7 +195,7 @@
         return;
     
     NSDebugLog(@"Beginning background task for job refresh.");
-    _backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"JobRefreshingTask" expirationHandler:^{
+    _backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         NSDebugLog(@"About to end background task due to task expiration.");
         [self endBackgroundTask];
     }];
@@ -264,7 +264,7 @@
         _pendingJobs = (_pendingJobs ? [_pendingJobs setByAddingObject:jobID] : [NSSet setWithObject:jobID]);
     
     UIBackgroundTaskIdentifier taskID = UIBackgroundTaskInvalid;
-    taskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"Waiting for print job." expirationHandler:^{
+    taskID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         NSDebugLog(@"Background task timed out waiting for print job.");
         [[UIApplication sharedApplication] endBackgroundTask:taskID];
     }];

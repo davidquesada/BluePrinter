@@ -147,7 +147,14 @@
 +(UIColor *)colorForPrintJobState:(PrintJobState)state;
 @end
 
+BOOL _jobCellLegacy;
+
 @implementation JobCell
+
++(void)initialize
+{
+    _jobCellLegacy = ([[[UIDevice currentDevice] systemVersion] integerValue] < 7);
+}
 
 +(UIColor *)colorForPrintJobState:(PrintJobState)state
 {
@@ -182,6 +189,9 @@
     self.contentView.backgroundColor = [UIColor whiteColor];
 
     stateLabel.text = job.stateDescription;
+    
+    if (_jobCellLegacy)
+        self.textLabel.textColor = [self.class colorForPrintJobState:job.state];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder
@@ -200,6 +210,9 @@
         
         self.textLabel.backgroundColor = [UIColor whiteColor];
         self.detailTextLabel.backgroundColor = [UIColor whiteColor];
+        
+        if (_jobCellLegacy)
+            [colorView removeFromSuperview];
     }
     return self;
 }
@@ -207,7 +220,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    if (!pan)
+    if (!pan && !_jobCellLegacy)
     {
         pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
         pan.cancelsTouchesInView = NO;
@@ -265,10 +278,13 @@
 -(void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
-    if (editing)
-        self.backgroundColor = [UIColor whiteColor];
-    else
-        self.backgroundColor = colorView.backgroundColor;
+    if (!_jobCellLegacy)
+    {
+        if (editing)
+            self.backgroundColor = [UIColor whiteColor];
+        else
+            self.backgroundColor = colorView.backgroundColor;
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate Methods

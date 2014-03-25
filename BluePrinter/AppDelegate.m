@@ -20,6 +20,7 @@
 #import "UserDefaults.h"
 #import "LoginViewController.h"
 #import "SVProgressHUD.h"
+#import "LegacySupport.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -38,6 +39,7 @@ AppDelegate *sharedDelegate;
 -(void)didImportDocument:(NSNotification *)note;
 -(void)requestDidFail:(NSNotification *)note;
 -(void)connectionDidFail:(NSNotification *)note;
+-(void)addv6Appearance:(UIApplication *)application;
 -(void)addv7Appearance:(UIApplication *)application;
 
 -(void)showJobsTabOfApplication:(UIApplication *)application;
@@ -84,6 +86,7 @@ AppDelegate *sharedDelegate;
     [self registerForNotifications];
     
     [self clearTemporaryDocumentsDirectory];
+    
     [self addv7Appearance:application];
     
     // If we're launching the app because the user tapped a notification about a job state,
@@ -117,6 +120,11 @@ AppDelegate *sharedDelegate;
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)addv6Appearance:(UIApplication *)application
+{
+    
 }
 
 -(void)addv7Appearance:(UIApplication *)application

@@ -170,7 +170,10 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
         self.activityCount = 0;
         
         self.backgroundColor = [UIColor whiteColor];
-        self.statusFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        if ([UIFont respondsToSelector:@selector(preferredFontForTextStyle:)])
+            self.statusFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        else
+            self.statusFont = [UIFont systemFontOfSize:16.0];
         self.successImage = [UIImage imageNamed:@"SVProgressHUD.bundle/success-black"];
         self.errorImage = [UIImage imageNamed:@"SVProgressHUD.bundle/error-black"];
     }

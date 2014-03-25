@@ -112,6 +112,7 @@
 		6374DD3818B7091C0036129A /* MPrintDriveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3718B7091C0036129A /* MPrintDriveService.m */; };
 		6374DD3B18B70C240036129A /* MPrintIFSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6374DD3A18B70C240036129A /* MPrintIFSService.m */; };
 		63782E0318D91629002488D7 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63782E0218D91629002488D7 /* NotificationManager.m */; };
+		6379CC9D18E1090600968922 /* LegacySupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6379CC9C18E1090600968922 /* LegacySupport.m */; };
 		637C138118D0137A007C14BC /* ServiceFile+FileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */; };
 		637E8295189B811000DA9A35 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 637E8294189B811000DA9A35 /* ServiceFile.m */; };
 		6383D57918DA80A8006FC076 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6383D57818DA80A8006FC076 /* AssetsLibrary.framework */; };
@@ -279,6 +280,8 @@
 		63782E0118D91629002488D7 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationManager.h; path = Classes/NotificationManager.h; sourceTree = "<group>"; };
 		63782E0218D91629002488D7 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationManager.m; path = Classes/NotificationManager.m; sourceTree = "<group>"; };
 		63782E0418D916FE002488D7 /* MPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPrint.h; path = Model/MPrint.h; sourceTree = "<group>"; };
+		6379CC9B18E1090600968922 /* LegacySupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LegacySupport.h; path = Classes/LegacySupport.h; sourceTree = "<group>"; };
+		6379CC9C18E1090600968922 /* LegacySupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LegacySupport.m; path = Classes/LegacySupport.m; sourceTree = "<group>"; };
 		637C137F18D0137A007C14BC /* ServiceFile+FileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ServiceFile+FileTypes.h"; path = "Categories/ServiceFile+FileTypes.h"; sourceTree = "<group>"; };
 		637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ServiceFile+FileTypes.m"; path = "Categories/ServiceFile+FileTypes.m"; sourceTree = "<group>"; };
 		637E8293189B811000DA9A35 /* ServiceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceFile.h; path = Model/ServiceFile.h; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				63782E0218D91629002488D7 /* NotificationManager.m */,
 				63A6217C18DC98570059FD8D /* UserDefaults.h */,
 				63A6217D18DC98570059FD8D /* UserDefaults.m */,
+				6379CC9B18E1090600968922 /* LegacySupport.h */,
+				6379CC9C18E1090600968922 /* LegacySupport.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -872,6 +877,7 @@
 				6318E49018C7BA8900884021 /* UITableView+Notice.m in Sources */,
 				6364B40518C54371002555FA /* SVProgressHUD.m in Sources */,
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
+				6379CC9D18E1090600968922 /* LegacySupport.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,
 				637E8295189B811000DA9A35 /* ServiceFile.m in Sources */,
 				632945F318D0B31600D910FE /* BaseViewController.m in Sources */,
@@ -981,6 +987,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -999,6 +1006,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

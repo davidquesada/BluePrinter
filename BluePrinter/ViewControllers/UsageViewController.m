@@ -96,7 +96,7 @@ static Usage *lastUsage;
     } else if (row == 1)
     {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"allowancesHeader"];
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 320);
+        cell.separatorInset = (UIEdgeInsets){ 0, 0, 0, 320 };
     } else if (category.allocations.count)
     {
         UsageAllocation *item = category.allocations[row - 2];
@@ -104,7 +104,7 @@ static Usage *lastUsage;
         cell.textLabel.text = item.name;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", item.allocation];
         
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 320);
+        cell.separatorInset = (UIEdgeInsets){ 0, 0, 0, 320 };
     } else
     {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"noneCell"];
