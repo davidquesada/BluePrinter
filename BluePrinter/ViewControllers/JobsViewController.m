@@ -298,7 +298,7 @@ BOOL _jobCellLegacy;
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if (isShowingStatus)
+    if (isShowingStatus || (otherGestureRecognizer.state == UIGestureRecognizerStateBegan))
         return NO;
     return YES;
 }
