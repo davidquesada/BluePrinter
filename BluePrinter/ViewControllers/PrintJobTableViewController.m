@@ -139,7 +139,7 @@
     if (_canPrint)
     {
         _printCell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        _printCell.textLabel.textColor = _copiesStepper.tintColor;
+        _printCell.textLabel.textColor = _scaleSwitch.onTintColor;
     } else {
         _printCell.selectionStyle = UITableViewCellSelectionStyleNone;
         _printCell.textLabel.textColor = [UIColor lightGrayColor];
