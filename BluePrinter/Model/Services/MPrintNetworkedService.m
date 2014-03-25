@@ -150,10 +150,16 @@
 
 #pragma Connection related Methods
 
--(void)doSimpleConnect:(void (^)())completion
+-(MPrintRequest *)requestForSimpleConnect
 {
     MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:[self urlForConnect] method:PUT];
     [req addBodyValue:@"" forKey:@"enable"];
+    return req;
+}
+
+-(void)doSimpleConnect:(void (^)())completion
+{
+    MPrintRequest *req = [self requestForSimpleConnect];
     [req performWithCompletion:^(MPrintResponse *response) {
 
         if (response.success)

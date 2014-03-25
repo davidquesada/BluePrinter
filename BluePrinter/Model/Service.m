@@ -179,6 +179,19 @@ Service *localService;
     self.connectedStatus = 0;
 }
 
+-(void)refreshService:(void (^)())completion
+{
+    NSString *_url = [NSString stringWithFormat:@"https://mprint.umich.edu/api/services/%@", [self name]];
+    NSURL *url = [NSURL URLWithString:_url];
+    MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:url];
+    [req performWithCompletion:^(MPrintResponse *response) {
+        if (response.results.count)
+            [self updateStatus:response.results[0]];
+        if (completion)
+            completion();
+    }];
+}
+
 #pragma mark - Service Support Stubs
 
 -(BOOL)supportsDownload

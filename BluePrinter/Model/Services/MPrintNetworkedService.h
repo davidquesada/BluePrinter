@@ -35,6 +35,8 @@ typedef NS_ENUM(NSInteger, MPrintNetworkedServiceAuthResult)
 -(void)didReceiveResponse:(MPrintResponse *)response;
 -(ServiceFile *)fileFromJSONDictionary:(NSDictionary *)dict;
 
+-(MPrintRequest *)requestForSimpleConnect;
+
 -(NSURL *)authorizationURL;
 -(MPrintNetworkedServiceAuthResult)actionForIntermediateURL:(NSURL *)url;
 -(MPrintNetworkedServiceAuthResult)actionForMPrintURL:(NSURL *)url;

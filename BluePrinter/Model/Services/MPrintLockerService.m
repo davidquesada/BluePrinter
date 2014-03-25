@@ -30,4 +30,20 @@
     return MPrintNetworkedServiceConnectionMethodSimple;
 }
 
+-(void)connect:(void (^)())completion
+{
+    [super connect:^{
+        [self refreshService:completion];
+    }];
+}
+
+-(MPrintRequest *)requestForSimpleConnect
+{
+    NSURL *url = [NSURL URLWithString:@"https://mprint.umich.edu/settings/services/locker/enable"];
+    MPrintRequest *req = [[MPrintRequest alloc] initWithCustomURL:url method:POST];
+    [req addBodyValue:@"ifs" forKey:@"service"];
+    [req addBodyValue:@"Enable" forKey:@"confirm"];
+    return req;
+}
+
 @end
