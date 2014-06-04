@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "MPrintCosignManager.h"
 
 @interface LoginViewController ()<UIWebViewDelegate>
 {

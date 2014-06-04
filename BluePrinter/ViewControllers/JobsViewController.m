@@ -7,8 +7,6 @@
 //
 
 #import "JobsViewController.h"
-#import "Account.h"
-#import "PrintJob.h"
 #import "UITableView+Notice.h"
 
 

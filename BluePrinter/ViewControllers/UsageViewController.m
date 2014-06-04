@@ -7,7 +7,6 @@
 //
 
 #import "UsageViewController.h"
-#import "Usage.h"
 #import "SVProgressHUD.h"
 #import "UITableView+Notice.h"
 

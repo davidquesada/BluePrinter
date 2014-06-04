@@ -9,8 +9,6 @@
 #import "PrintJobTableViewController.h"
 #import "ChoosePrinterViewController.h"
 #import "SimpleChooserViewController.h"
-#import "PrintRequest.h"
-#import "ServiceFile.h"
 #import "AppDelegate.h"
 
 @interface PrintJobTableViewController ()<ChoosePrinterViewControllerDelegate, SimpleChooserViewControllerDelegate>

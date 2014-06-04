@@ -7,7 +7,6 @@
 //
 
 #import "ChoosePrinterViewController.h"
-#import "Location.h"
 
 @interface ChoosePrinterViewController ()<UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate>
 @property UISearchDisplayController *sdc;

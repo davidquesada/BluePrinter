@@ -7,10 +7,7 @@
 //
 
 #import "FilesViewController.h"
-#import "Service.h"
-#import "ServiceFile.h"
 #import "ServiceFile+FileTypes.h"
-#import "PrintRequest.h"
 #import "PrintJobTableViewController.h"
 #import "ServiceFile+Icons.h"
 #import "UITableView+Notice.h"

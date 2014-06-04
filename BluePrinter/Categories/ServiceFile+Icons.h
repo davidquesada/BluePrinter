@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 David Quesada. All rights reserved.
 //
 
-#import "ServiceFile.h"
-
 @interface ServiceFile (Icons)
 
 -(UIImage *)imageRepresentationInListView;

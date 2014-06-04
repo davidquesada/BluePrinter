@@ -7,8 +7,6 @@
 //
 
 #import "LocationsViewController.h"
-#import "Location.h"
-#import "Account.h"
 #import "LoginViewController.h"
 
 @interface LocationsViewController ()<UITableViewDataSource, UITableViewDelegate>

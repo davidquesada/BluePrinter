@@ -1,0 +1,25 @@
+//
+//  BluePrinterCore-Prefix.pch
+//  BluePrinterCore
+//
+//  Created by David Quesada on 6/4/14.
+//  Copyright (c) 2014 David Quesada. All rights reserved.
+//
+
+#ifndef BluePrinterCore_BluePrinterCore_Prefix_pch
+#define BluePrinterCore_BluePrinterCore_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+//#define ENABLE_DEBUG_LOGGING
+
+#ifdef ENABLE_DEBUG_LOGGING
+#define NSDebugLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSDebugLog(...)
+#endif
+
+
+#endif

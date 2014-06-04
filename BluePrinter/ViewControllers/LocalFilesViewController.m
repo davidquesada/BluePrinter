@@ -9,7 +9,6 @@
 #import "LocalFilesViewController.h"
 #import "UITableView+Notice.h"
 #import "SVProgressHUD.h"
-#import "ServiceFile.h"
 
 @interface LocalFilesViewController ()<UITableViewDelegate>
 {
