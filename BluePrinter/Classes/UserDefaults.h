@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PrintRequest.h"
-
 
 typedef NS_ENUM(NSInteger, ImportAction)
 {

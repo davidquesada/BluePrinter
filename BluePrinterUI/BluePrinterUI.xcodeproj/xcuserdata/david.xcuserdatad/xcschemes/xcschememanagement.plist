@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>BluePrinterUI.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>BluePrinterUIResources.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>63400E76193F8DD200BEF081</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63400E86193F8DD200BEF081</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63400EAA193F8E1300BEF081</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63400EE8193FA46B00BEF081</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63400F04193FA91D00BEF081</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63B08CF1194002880088763D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

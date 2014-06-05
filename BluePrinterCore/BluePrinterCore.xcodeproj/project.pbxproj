@@ -1,0 +1,440 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		63400E44193F809900BEF081 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E17193F809900BEF081 /* Account.m */; };
+		63400E45193F809900BEF081 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E19193F809900BEF081 /* Location.m */; };
+		63400E46193F809900BEF081 /* MPrintCosignManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E1D193F809900BEF081 /* MPrintCosignManager.m */; };
+		63400E47193F809900BEF081 /* MPrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E1F193F809900BEF081 /* MPrintObject.m */; };
+		63400E48193F809900BEF081 /* MPrintRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E21193F809900BEF081 /* MPrintRequest.m */; };
+		63400E49193F809900BEF081 /* MPrintResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E23193F809900BEF081 /* MPrintResponse.m */; };
+		63400E4A193F809900BEF081 /* PrintJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E26193F809900BEF081 /* PrintJob.m */; };
+		63400E4B193F809900BEF081 /* PrintRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E28193F809900BEF081 /* PrintRequest.m */; };
+		63400E4C193F809900BEF081 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E2A193F809900BEF081 /* Service.m */; };
+		63400E4D193F809900BEF081 /* ServiceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E2C193F809900BEF081 /* ServiceFile.m */; };
+		63400E4E193F809900BEF081 /* MPrintBoxService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E2F193F809900BEF081 /* MPrintBoxService.m */; };
+		63400E4F193F809900BEF081 /* MPrintDriveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E31193F809900BEF081 /* MPrintDriveService.m */; };
+		63400E50193F809900BEF081 /* MPrintDropboxService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E33193F809900BEF081 /* MPrintDropboxService.m */; };
+		63400E51193F809900BEF081 /* MPrintIFSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E35193F809900BEF081 /* MPrintIFSService.m */; };
+		63400E52193F809900BEF081 /* MPrintLocalService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E37193F809900BEF081 /* MPrintLocalService.m */; };
+		63400E53193F809900BEF081 /* MPrintLockerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E39193F809900BEF081 /* MPrintLockerService.m */; };
+		63400E54193F809900BEF081 /* MPrintNetworkedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E3B193F809900BEF081 /* MPrintNetworkedService.m */; };
+		63400E55193F809900BEF081 /* MPrintServiceAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E3D193F809900BEF081 /* MPrintServiceAuthenticationViewController.m */; };
+		63400E56193F809900BEF081 /* Usage.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E3F193F809900BEF081 /* Usage.m */; };
+		63400E57193F809900BEF081 /* UsageAllocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E41193F809900BEF081 /* UsageAllocation.m */; };
+		63400E58193F809900BEF081 /* UsageCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E43193F809900BEF081 /* UsageCategory.m */; };
+		63400E5F193F86AB00BEF081 /* MPrintRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E20193F809900BEF081 /* MPrintRequest.h */; };
+		63400E60193F875500BEF081 /* MPrintLocalService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E36193F809900BEF081 /* MPrintLocalService.h */; };
+		63400E61193F875B00BEF081 /* MPrintResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E22193F809900BEF081 /* MPrintResponse.h */; };
+		63400E62193F876000BEF081 /* MPrintCosignManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E1C193F809900BEF081 /* MPrintCosignManager.h */; };
+		63400E63193F876700BEF081 /* Account.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E16193F809900BEF081 /* Account.h */; };
+		63400E64193F876800BEF081 /* Location.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E18193F809900BEF081 /* Location.h */; };
+		63400E65193F880500BEF081 /* MPrintObject.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E1E193F809900BEF081 /* MPrintObject.h */; };
+		63400E66193F881C00BEF081 /* Service.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E29193F809900BEF081 /* Service.h */; };
+		63400E67193F881F00BEF081 /* ServiceFile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E2B193F809900BEF081 /* ServiceFile.h */; };
+		63400E68193F882C00BEF081 /* PrintRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E27193F809900BEF081 /* PrintRequest.h */; };
+		63400E69193F883200BEF081 /* PrintJob.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E25193F809900BEF081 /* PrintJob.h */; };
+		63400E6A193F883800BEF081 /* Usage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E3E193F809900BEF081 /* Usage.h */; };
+		63400E6B193F883A00BEF081 /* UsageAllocation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E40193F809900BEF081 /* UsageAllocation.h */; };
+		63400E6C193F883D00BEF081 /* UsageCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E42193F809900BEF081 /* UsageCategory.h */; };
+		63AE2625193F7F8200A74B89 /* BluePrinterCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63AE2624193F7F8200A74B89 /* BluePrinterCore.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		63AE261F193F7F8200A74B89 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				63400E67193F881F00BEF081 /* ServiceFile.h in CopyFiles */,
+				63AE2625193F7F8200A74B89 /* BluePrinterCore.h in CopyFiles */,
+				63400E5F193F86AB00BEF081 /* MPrintRequest.h in CopyFiles */,
+				63400E61193F875B00BEF081 /* MPrintResponse.h in CopyFiles */,
+				63400E60193F875500BEF081 /* MPrintLocalService.h in CopyFiles */,
+				63400E62193F876000BEF081 /* MPrintCosignManager.h in CopyFiles */,
+				63400E63193F876700BEF081 /* Account.h in CopyFiles */,
+				63400E64193F876800BEF081 /* Location.h in CopyFiles */,
+				63400E65193F880500BEF081 /* MPrintObject.h in CopyFiles */,
+				63400E66193F881C00BEF081 /* Service.h in CopyFiles */,
+				63400E68193F882C00BEF081 /* PrintRequest.h in CopyFiles */,
+				63400E69193F883200BEF081 /* PrintJob.h in CopyFiles */,
+				63400E6A193F883800BEF081 /* Usage.h in CopyFiles */,
+				63400E6B193F883A00BEF081 /* UsageAllocation.h in CopyFiles */,
+				63400E6C193F883D00BEF081 /* UsageCategory.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		63400E16193F809900BEF081 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Account.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E17193F809900BEF081 /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Account.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E18193F809900BEF081 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Location.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E19193F809900BEF081 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Location.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E1A193F809900BEF081 /* MPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrint.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E1C193F809900BEF081 /* MPrintCosignManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintCosignManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E1D193F809900BEF081 /* MPrintCosignManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintCosignManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E1E193F809900BEF081 /* MPrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintObject.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E1F193F809900BEF081 /* MPrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E20193F809900BEF081 /* MPrintRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E21193F809900BEF081 /* MPrintRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E22193F809900BEF081 /* MPrintResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintResponse.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E23193F809900BEF081 /* MPrintResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E24193F809900BEF081 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Network.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E25193F809900BEF081 /* PrintJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PrintJob.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E26193F809900BEF081 /* PrintJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PrintJob.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E27193F809900BEF081 /* PrintRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PrintRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E28193F809900BEF081 /* PrintRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PrintRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E29193F809900BEF081 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Service.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E2A193F809900BEF081 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Service.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E2B193F809900BEF081 /* ServiceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ServiceFile.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E2C193F809900BEF081 /* ServiceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ServiceFile.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E2E193F809900BEF081 /* MPrintBoxService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintBoxService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E2F193F809900BEF081 /* MPrintBoxService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintBoxService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E30193F809900BEF081 /* MPrintDriveService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintDriveService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E31193F809900BEF081 /* MPrintDriveService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintDriveService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E32193F809900BEF081 /* MPrintDropboxService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintDropboxService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E33193F809900BEF081 /* MPrintDropboxService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintDropboxService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E34193F809900BEF081 /* MPrintIFSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintIFSService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E35193F809900BEF081 /* MPrintIFSService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintIFSService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E36193F809900BEF081 /* MPrintLocalService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintLocalService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E37193F809900BEF081 /* MPrintLocalService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintLocalService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E38193F809900BEF081 /* MPrintLockerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintLockerService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E39193F809900BEF081 /* MPrintLockerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintLockerService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E3A193F809900BEF081 /* MPrintNetworkedService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintNetworkedService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E3B193F809900BEF081 /* MPrintNetworkedService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintNetworkedService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E3C193F809900BEF081 /* MPrintServiceAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MPrintServiceAuthenticationViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E3D193F809900BEF081 /* MPrintServiceAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintServiceAuthenticationViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E3E193F809900BEF081 /* Usage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Usage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E3F193F809900BEF081 /* Usage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Usage.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E40193F809900BEF081 /* UsageAllocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UsageAllocation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E41193F809900BEF081 /* UsageAllocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UsageAllocation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E42193F809900BEF081 /* UsageCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UsageCategory.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63400E43193F809900BEF081 /* UsageCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UsageCategory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		63400E6D193F8A1700BEF081 /* BluePrinterCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluePrinterCore-Prefix.pch"; sourceTree = "<group>"; };
+		63AE2621193F7F8200A74B89 /* libBluePrinterCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBluePrinterCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		63AE2624193F7F8200A74B89 /* BluePrinterCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BluePrinterCore.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		63AE261E193F7F8200A74B89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		63400E15193F809900BEF081 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63400E1B193F809900BEF081 /* Network */,
+				63400E2D193F809900BEF081 /* Services */,
+				63400E16193F809900BEF081 /* Account.h */,
+				63400E17193F809900BEF081 /* Account.m */,
+				63400E18193F809900BEF081 /* Location.h */,
+				63400E19193F809900BEF081 /* Location.m */,
+				63400E1A193F809900BEF081 /* MPrint.h */,
+				63400E25193F809900BEF081 /* PrintJob.h */,
+				63400E26193F809900BEF081 /* PrintJob.m */,
+				63400E27193F809900BEF081 /* PrintRequest.h */,
+				63400E28193F809900BEF081 /* PrintRequest.m */,
+				63400E29193F809900BEF081 /* Service.h */,
+				63400E2A193F809900BEF081 /* Service.m */,
+				63400E2B193F809900BEF081 /* ServiceFile.h */,
+				63400E2C193F809900BEF081 /* ServiceFile.m */,
+				63400E3E193F809900BEF081 /* Usage.h */,
+				63400E3F193F809900BEF081 /* Usage.m */,
+				63400E40193F809900BEF081 /* UsageAllocation.h */,
+				63400E41193F809900BEF081 /* UsageAllocation.m */,
+				63400E42193F809900BEF081 /* UsageCategory.h */,
+				63400E43193F809900BEF081 /* UsageCategory.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		63400E1B193F809900BEF081 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				63400E1C193F809900BEF081 /* MPrintCosignManager.h */,
+				63400E1D193F809900BEF081 /* MPrintCosignManager.m */,
+				63400E1E193F809900BEF081 /* MPrintObject.h */,
+				63400E1F193F809900BEF081 /* MPrintObject.m */,
+				63400E20193F809900BEF081 /* MPrintRequest.h */,
+				63400E21193F809900BEF081 /* MPrintRequest.m */,
+				63400E22193F809900BEF081 /* MPrintResponse.h */,
+				63400E23193F809900BEF081 /* MPrintResponse.m */,
+				63400E24193F809900BEF081 /* Network.h */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		63400E2D193F809900BEF081 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				63400E2E193F809900BEF081 /* MPrintBoxService.h */,
+				63400E2F193F809900BEF081 /* MPrintBoxService.m */,
+				63400E30193F809900BEF081 /* MPrintDriveService.h */,
+				63400E31193F809900BEF081 /* MPrintDriveService.m */,
+				63400E32193F809900BEF081 /* MPrintDropboxService.h */,
+				63400E33193F809900BEF081 /* MPrintDropboxService.m */,
+				63400E34193F809900BEF081 /* MPrintIFSService.h */,
+				63400E35193F809900BEF081 /* MPrintIFSService.m */,
+				63400E36193F809900BEF081 /* MPrintLocalService.h */,
+				63400E37193F809900BEF081 /* MPrintLocalService.m */,
+				63400E38193F809900BEF081 /* MPrintLockerService.h */,
+				63400E39193F809900BEF081 /* MPrintLockerService.m */,
+				63400E3A193F809900BEF081 /* MPrintNetworkedService.h */,
+				63400E3B193F809900BEF081 /* MPrintNetworkedService.m */,
+				63400E3C193F809900BEF081 /* MPrintServiceAuthenticationViewController.h */,
+				63400E3D193F809900BEF081 /* MPrintServiceAuthenticationViewController.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		638E6494194013C6003B8778 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				63400E6D193F8A1700BEF081 /* BluePrinterCore-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		63AE2618193F7F8200A74B89 = {
+			isa = PBXGroup;
+			children = (
+				63AE2623193F7F8200A74B89 /* BluePrinterCore */,
+				63AE2622193F7F8200A74B89 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		63AE2622193F7F8200A74B89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63AE2621193F7F8200A74B89 /* libBluePrinterCore.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		63AE2623193F7F8200A74B89 /* BluePrinterCore */ = {
+			isa = PBXGroup;
+			children = (
+				63400E15193F809900BEF081 /* Model */,
+				63AE2624193F7F8200A74B89 /* BluePrinterCore.h */,
+				638E6494194013C6003B8778 /* Supporting Files */,
+			);
+			path = BluePrinterCore;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63AE2620193F7F8200A74B89 /* BluePrinterCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63AE2635193F7F8200A74B89 /* Build configuration list for PBXNativeTarget "BluePrinterCore" */;
+			buildPhases = (
+				63AE261D193F7F8200A74B89 /* Sources */,
+				63AE261E193F7F8200A74B89 /* Frameworks */,
+				63AE261F193F7F8200A74B89 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BluePrinterCore;
+			productName = BluePrinterCore;
+			productReference = 63AE2621193F7F8200A74B89 /* libBluePrinterCore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		63AE2619193F7F8200A74B89 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "David Quesada";
+				TargetAttributes = {
+					63AE2620193F7F8200A74B89 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+				};
+			};
+			buildConfigurationList = 63AE261C193F7F8200A74B89 /* Build configuration list for PBXProject "BluePrinterCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 63AE2618193F7F8200A74B89;
+			productRefGroup = 63AE2622193F7F8200A74B89 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63AE2620193F7F8200A74B89 /* BluePrinterCore */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63AE261D193F7F8200A74B89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63400E49193F809900BEF081 /* MPrintResponse.m in Sources */,
+				63400E4E193F809900BEF081 /* MPrintBoxService.m in Sources */,
+				63400E50193F809900BEF081 /* MPrintDropboxService.m in Sources */,
+				63400E4B193F809900BEF081 /* PrintRequest.m in Sources */,
+				63400E47193F809900BEF081 /* MPrintObject.m in Sources */,
+				63400E52193F809900BEF081 /* MPrintLocalService.m in Sources */,
+				63400E4D193F809900BEF081 /* ServiceFile.m in Sources */,
+				63400E48193F809900BEF081 /* MPrintRequest.m in Sources */,
+				63400E46193F809900BEF081 /* MPrintCosignManager.m in Sources */,
+				63400E4C193F809900BEF081 /* Service.m in Sources */,
+				63400E4F193F809900BEF081 /* MPrintDriveService.m in Sources */,
+				63400E58193F809900BEF081 /* UsageCategory.m in Sources */,
+				63400E57193F809900BEF081 /* UsageAllocation.m in Sources */,
+				63400E51193F809900BEF081 /* MPrintIFSService.m in Sources */,
+				63400E4A193F809900BEF081 /* PrintJob.m in Sources */,
+				63400E55193F809900BEF081 /* MPrintServiceAuthenticationViewController.m in Sources */,
+				63400E45193F809900BEF081 /* Location.m in Sources */,
+				63400E44193F809900BEF081 /* Account.m in Sources */,
+				63400E53193F809900BEF081 /* MPrintLockerService.m in Sources */,
+				63400E54193F809900BEF081 /* MPrintNetworkedService.m in Sources */,
+				63400E56193F809900BEF081 /* Usage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		63AE2633193F7F8200A74B89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		63AE2634193F7F8200A74B89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		63AE2636193F7F8200A74B89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "BluePrinterCore/BluePrinterCore-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		63AE2637193F7F8200A74B89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "BluePrinterCore/BluePrinterCore-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		63AE261C193F7F8200A74B89 /* Build configuration list for PBXProject "BluePrinterCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63AE2633193F7F8200A74B89 /* Debug */,
+				63AE2634193F7F8200A74B89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63AE2635193F7F8200A74B89 /* Build configuration list for PBXNativeTarget "BluePrinterCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63AE2636193F7F8200A74B89 /* Debug */,
+				63AE2637193F7F8200A74B89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 63AE2619193F7F8200A74B89 /* Project object */;
+}

@@ -1,0 +1,359 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		63400E7B193F8DD200BEF081 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63400E7A193F8DD200BEF081 /* Foundation.framework */; };
+		63400E80193F8DD200BEF081 /* BluePrinterUI.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E7F193F8DD200BEF081 /* BluePrinterUI.h */; };
+		63400EBD193F90F200BEF081 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63400EBC193F90F200BEF081 /* UIKit.framework */; };
+		63400EBF193F90F600BEF081 /* libBluePrinterCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63400EBE193F90F600BEF081 /* libBluePrinterCore.a */; };
+		63400EC3193F914100BEF081 /* BluePrinterBaseViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400EC2193F914100BEF081 /* BluePrinterBaseViewControllers.m */; };
+		63400EC4193F917D00BEF081 /* BluePrinterBaseViewControllers.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400EC1193F914100BEF081 /* BluePrinterBaseViewControllers.h */; };
+		63400EC8193F91E600BEF081 /* UITableView+Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400EC7193F91E600BEF081 /* UITableView+Notice.m */; };
+		63400EC9193F91F700BEF081 /* UITableView+Notice.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400EC6193F91E600BEF081 /* UITableView+Notice.h */; };
+		63400ECC193F923A00BEF081 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400ECB193F923A00BEF081 /* LoginViewController.m */; };
+		63400ECD193F924300BEF081 /* LoginViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400ECA193F923A00BEF081 /* LoginViewController.h */; };
+		63400ED0193F93DA00BEF081 /* ChoosePrinterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400ECF193F93DA00BEF081 /* ChoosePrinterViewController.m */; };
+		63400ED3193F93E700BEF081 /* SimpleChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400ED2193F93E700BEF081 /* SimpleChooserViewController.m */; };
+		63400ED4193F940300BEF081 /* SimpleChooserViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400ED1193F93E700BEF081 /* SimpleChooserViewController.h */; };
+		63400ED5193F940500BEF081 /* ChoosePrinterViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400ECE193F93DA00BEF081 /* ChoosePrinterViewController.h */; };
+		63400ED8193F957000BEF081 /* PrintJobTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400ED7193F957000BEF081 /* PrintJobTableViewController.m */; };
+		63400EDA193F96A500BEF081 /* PrintJobTableViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400ED6193F957000BEF081 /* PrintJobTableViewController.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		63400E75193F8DD200BEF081 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				63400E80193F8DD200BEF081 /* BluePrinterUI.h in CopyFiles */,
+				63400EC4193F917D00BEF081 /* BluePrinterBaseViewControllers.h in CopyFiles */,
+				63400EC9193F91F700BEF081 /* UITableView+Notice.h in CopyFiles */,
+				63400ECD193F924300BEF081 /* LoginViewController.h in CopyFiles */,
+				63400ED4193F940300BEF081 /* SimpleChooserViewController.h in CopyFiles */,
+				63400ED5193F940500BEF081 /* ChoosePrinterViewController.h in CopyFiles */,
+				63400EDA193F96A500BEF081 /* PrintJobTableViewController.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63400EDD193F986A00BEF081 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		63400E77193F8DD200BEF081 /* libBluePrinterUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBluePrinterUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		63400E7A193F8DD200BEF081 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		63400E7E193F8DD200BEF081 /* BluePrinterUI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluePrinterUI-Prefix.pch"; sourceTree = "<group>"; };
+		63400E7F193F8DD200BEF081 /* BluePrinterUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BluePrinterUI.h; sourceTree = "<group>"; };
+		63400E88193F8DD200BEF081 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		63400E8B193F8DD200BEF081 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		63400EBC193F90F200BEF081 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		63400EBE193F90F600BEF081 /* libBluePrinterCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBluePrinterCore.a; path = "../../../Library/Developer/Xcode/DerivedData/BluePrinter-fzujcurtyfvdgwcbpsxaonwduyqp/Build/Products/Debug-iphoneos/libBluePrinterCore.a"; sourceTree = "<group>"; };
+		63400EC1193F914100BEF081 /* BluePrinterBaseViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluePrinterBaseViewControllers.h; sourceTree = "<group>"; };
+		63400EC2193F914100BEF081 /* BluePrinterBaseViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluePrinterBaseViewControllers.m; sourceTree = "<group>"; };
+		63400EC6193F91E600BEF081 /* UITableView+Notice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Notice.h"; sourceTree = "<group>"; };
+		63400EC7193F91E600BEF081 /* UITableView+Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Notice.m"; sourceTree = "<group>"; };
+		63400ECA193F923A00BEF081 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		63400ECB193F923A00BEF081 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		63400ECE193F93DA00BEF081 /* ChoosePrinterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePrinterViewController.h; sourceTree = "<group>"; };
+		63400ECF193F93DA00BEF081 /* ChoosePrinterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePrinterViewController.m; sourceTree = "<group>"; };
+		63400ED1193F93E700BEF081 /* SimpleChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleChooserViewController.h; sourceTree = "<group>"; };
+		63400ED2193F93E700BEF081 /* SimpleChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleChooserViewController.m; sourceTree = "<group>"; };
+		63400ED6193F957000BEF081 /* PrintJobTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintJobTableViewController.h; sourceTree = "<group>"; };
+		63400ED7193F957000BEF081 /* PrintJobTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintJobTableViewController.m; sourceTree = "<group>"; };
+		63400EEA193FA46B00BEF081 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		638E649119400C17003B8778 /* BluePrinterUI.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BluePrinterUI.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		63400E74193F8DD200BEF081 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63400EBF193F90F600BEF081 /* libBluePrinterCore.a in Frameworks */,
+				63400EBD193F90F200BEF081 /* UIKit.framework in Frameworks */,
+				63400E7B193F8DD200BEF081 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		63400E6E193F8DD200BEF081 = {
+			isa = PBXGroup;
+			children = (
+				63400E7C193F8DD200BEF081 /* BluePrinterUI */,
+				63400E79193F8DD200BEF081 /* Frameworks */,
+				63400E78193F8DD200BEF081 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		63400E78193F8DD200BEF081 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63400E77193F8DD200BEF081 /* libBluePrinterUI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		63400E79193F8DD200BEF081 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63400EBE193F90F600BEF081 /* libBluePrinterCore.a */,
+				63400EBC193F90F200BEF081 /* UIKit.framework */,
+				63400E7A193F8DD200BEF081 /* Foundation.framework */,
+				63400E88193F8DD200BEF081 /* XCTest.framework */,
+				63400E8B193F8DD200BEF081 /* UIKit.framework */,
+				63400EEA193FA46B00BEF081 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63400E7C193F8DD200BEF081 /* BluePrinterUI */ = {
+			isa = PBXGroup;
+			children = (
+				63400EC0193F914100BEF081 /* ViewControllers */,
+				63400EC5193F91E600BEF081 /* Categories */,
+				63400E7F193F8DD200BEF081 /* BluePrinterUI.h */,
+				638E649119400C17003B8778 /* BluePrinterUI.storyboard */,
+				63400E7D193F8DD200BEF081 /* Supporting Files */,
+			);
+			path = BluePrinterUI;
+			sourceTree = "<group>";
+		};
+		63400E7D193F8DD200BEF081 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				63400E7E193F8DD200BEF081 /* BluePrinterUI-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		63400EC0193F914100BEF081 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				63400EC1193F914100BEF081 /* BluePrinterBaseViewControllers.h */,
+				63400EC2193F914100BEF081 /* BluePrinterBaseViewControllers.m */,
+				63400ECA193F923A00BEF081 /* LoginViewController.h */,
+				63400ECB193F923A00BEF081 /* LoginViewController.m */,
+				63400ECE193F93DA00BEF081 /* ChoosePrinterViewController.h */,
+				63400ECF193F93DA00BEF081 /* ChoosePrinterViewController.m */,
+				63400ED1193F93E700BEF081 /* SimpleChooserViewController.h */,
+				63400ED2193F93E700BEF081 /* SimpleChooserViewController.m */,
+				63400ED6193F957000BEF081 /* PrintJobTableViewController.h */,
+				63400ED7193F957000BEF081 /* PrintJobTableViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		63400EC5193F91E600BEF081 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				63400EC6193F91E600BEF081 /* UITableView+Notice.h */,
+				63400EC7193F91E600BEF081 /* UITableView+Notice.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63400E76193F8DD200BEF081 /* BluePrinterUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63400E9A193F8DD200BEF081 /* Build configuration list for PBXNativeTarget "BluePrinterUI" */;
+			buildPhases = (
+				63400E73193F8DD200BEF081 /* Sources */,
+				63400E74193F8DD200BEF081 /* Frameworks */,
+				63400E75193F8DD200BEF081 /* CopyFiles */,
+				63400EDD193F986A00BEF081 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BluePrinterUI;
+			productName = BluePrinterUI;
+			productReference = 63400E77193F8DD200BEF081 /* libBluePrinterUI.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		63400E6F193F8DD200BEF081 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "David Quesada";
+			};
+			buildConfigurationList = 63400E72193F8DD200BEF081 /* Build configuration list for PBXProject "BluePrinterUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 63400E6E193F8DD200BEF081;
+			productRefGroup = 63400E78193F8DD200BEF081 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63400E76193F8DD200BEF081 /* BluePrinterUI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63400E73193F8DD200BEF081 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63400ED3193F93E700BEF081 /* SimpleChooserViewController.m in Sources */,
+				63400ECC193F923A00BEF081 /* LoginViewController.m in Sources */,
+				63400EC3193F914100BEF081 /* BluePrinterBaseViewControllers.m in Sources */,
+				63400ED8193F957000BEF081 /* PrintJobTableViewController.m in Sources */,
+				63400EC8193F91E600BEF081 /* UITableView+Notice.m in Sources */,
+				63400ED0193F93DA00BEF081 /* ChoosePrinterViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		63400E98193F8DD200BEF081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		63400E99193F8DD200BEF081 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		63400E9B193F8DD200BEF081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/BluePrinterUI.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BluePrinterUI/BluePrinterUI-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BluePrinter-fzujcurtyfvdgwcbpsxaonwduyqp/Build/Products/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		63400E9C193F8DD200BEF081 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/BluePrinterUI.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BluePrinterUI/BluePrinterUI-Prefix.pch";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/BluePrinter-fzujcurtyfvdgwcbpsxaonwduyqp/Build/Products/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		63400E72193F8DD200BEF081 /* Build configuration list for PBXProject "BluePrinterUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63400E98193F8DD200BEF081 /* Debug */,
+				63400E99193F8DD200BEF081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63400E9A193F8DD200BEF081 /* Build configuration list for PBXNativeTarget "BluePrinterUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63400E9B193F8DD200BEF081 /* Debug */,
+				63400E9C193F8DD200BEF081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 63400E6F193F8DD200BEF081 /* Project object */;
+}
