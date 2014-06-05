@@ -7,11 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginViewController.h"
-#import "PrintJobTableViewController.h"
 #import "NotificationManager.h"
 #import "UserDefaults.h"
-#import "LoginViewController.h"
 #import "SVProgressHUD.h"
 #import "LegacySupport.h"
 

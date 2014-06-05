@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 
 @class Service;
 @class ServiceFile;
 
-@interface FilesViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface FilesViewController : BluePrinterUIViewController<UITableViewDataSource, UITableViewDelegate>
 
 -(id)initWithService:(Service *)service;
 -(id)initWithService:(Service *)service path:(NSString *)path;

@@ -1,13 +1,13 @@
 //
 //  PrintJobTableViewController.h
-//  BluePrinter
+//  BluePrinterUI
 //
 //  Created by David Quesada on 2/15/14.
 //  Copyright (c) 2014 David Quesada. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "BluePrinterBaseViewControllers.h"
 
 @class PrintRequest;
 @class PrintJobTableViewController;
@@ -21,7 +21,7 @@
 
 @end
 
-@interface PrintJobTableViewController : BaseTableViewController
+@interface PrintJobTableViewController : BluePrinterUITableViewController
 
 +(UINavigationController *)presentableViewControllerWithPrintRequest:(PrintRequest *)request delegate:(id<PrintJobTableViewControllerDelegate>)delegate;
 -(id)initWithPrintRequest:(PrintRequest *)request;

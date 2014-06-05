@@ -8,7 +8,6 @@
 
 #import "UsageViewController.h"
 #import "SVProgressHUD.h"
-#import "UITableView+Notice.h"
 
 #define DIVIDER_FOOTER_CELL_TAG 875
 

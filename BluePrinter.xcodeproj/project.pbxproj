@@ -7,13 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6318E49018C7BA8900884021 /* UITableView+Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318E48F18C7BA8900884021 /* UITableView+Notice.m */; };
 		6318E49318C7D75100884021 /* LocalFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318E49218C7D75100884021 /* LocalFilesViewController.m */; };
-		632945F318D0B31600D910FE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 632945F218D0B31600D910FE /* BaseViewController.m */; };
-		63400E5A193F80D400BEF081 /* libBluePrinterCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AE2641193F7F8300A74B89 /* libBluePrinterCore.a */; };
+		63400EA9193F8E0100BEF081 /* libBluePrinterUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63400EA6193F8DD300BEF081 /* libBluePrinterUI.a */; };
 		6355364218B0682B00E88433 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6355364118B0682B00E88433 /* FileCell.xib */; };
-		6355364518B0716900E88433 /* PrintJobTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6355364418B0716900E88433 /* PrintJobTableViewController.m */; };
-		6355364818B07BE100E88433 /* ChoosePrinterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6355364718B07BE100E88433 /* ChoosePrinterViewController.m */; };
 		63613CA11898D095007CD749 /* ServicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63613CA01898D095007CD749 /* ServicesViewController.m */; };
 		6364B40418C54371002555FA /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6364B40118C54371002555FA /* SVProgressHUD.bundle */; };
 		6364B40518C54371002555FA /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6364B40318C54371002555FA /* SVProgressHUD.m */; };
@@ -110,6 +106,7 @@
 		637C138118D0137A007C14BC /* ServiceFile+FileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */; };
 		6383D57918DA80A8006FC076 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6383D57818DA80A8006FC076 /* AssetsLibrary.framework */; };
 		6383D57B18DABA8B006FC076 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6383D57A18DABA8A006FC076 /* Settings.bundle */; };
+		638E649319400C5D003B8778 /* BluePrinterUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638E649219400C5D003B8778 /* BluePrinterUI.storyboard */; };
 		63A234AE18D6D7CF00F7EFD0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63A234AD18D6D7CF00F7EFD0 /* Images.xcassets */; };
 		63A234B718D6D91A00F7EFD0 /* filesTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B118D6D91A00F7EFD0 /* filesTab.png */; };
 		63A234B818D6D91A00F7EFD0 /* filesTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B218D6D91A00F7EFD0 /* filesTab@2x.png */; };
@@ -118,9 +115,7 @@
 		63A234BB18D6D91A00F7EFD0 /* usageTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B518D6D91A00F7EFD0 /* usageTab.png */; };
 		63A234BC18D6D91A00F7EFD0 /* usageTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B618D6D91A00F7EFD0 /* usageTab@2x.png */; };
 		63A6217E18DC98570059FD8D /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A6217D18DC98570059FD8D /* UserDefaults.m */; };
-		63AA558E1888F2980073D214 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AA558D1888F2980073D214 /* LoginViewController.m */; };
 		63AFA41B18C52DF60036EF18 /* UsageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AFA41A18C52DF60036EF18 /* UsageViewController.m */; };
-		63F9CD8618B31F7600B6B63A /* SimpleChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F9CD8518B31F7600B6B63A /* SimpleChooserViewController.m */; };
 		B20C187218863E890088EE73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187118863E890088EE73 /* UIKit.framework */; };
 		B20C187418863E890088EE73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187318863E890088EE73 /* Foundation.framework */; };
 		B20C187618863E890088EE73 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187518863E890088EE73 /* CoreGraphics.framework */; };
@@ -138,6 +133,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		63400EA5193F8DD300BEF081 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63400EA0193F8DD200BEF081 /* BluePrinterUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 63400E77193F8DD200BEF081;
+			remoteInfo = BluePrinterUI;
+		};
+		638E64861940036E003B8778 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63400EA0193F8DD200BEF081 /* BluePrinterUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 63400E76193F8DD200BEF081;
+			remoteInfo = BluePrinterUI;
+		};
 		63AE2640193F7F8300A74B89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 63AE263B193F7F8200A74B89 /* BluePrinterCore.xcodeproj */;
@@ -148,17 +157,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6318E48E18C7BA8900884021 /* UITableView+Notice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Notice.h"; path = "Categories/UITableView+Notice.h"; sourceTree = "<group>"; };
-		6318E48F18C7BA8900884021 /* UITableView+Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Notice.m"; path = "Categories/UITableView+Notice.m"; sourceTree = "<group>"; };
 		6318E49118C7D75100884021 /* LocalFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalFilesViewController.h; path = ViewControllers/LocalFilesViewController.h; sourceTree = "<group>"; };
 		6318E49218C7D75100884021 /* LocalFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalFilesViewController.m; path = ViewControllers/LocalFilesViewController.m; sourceTree = "<group>"; };
-		632945F118D0B31600D910FE /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseViewController.h; path = ViewControllers/BaseViewController.h; sourceTree = "<group>"; };
-		632945F218D0B31600D910FE /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseViewController.m; path = ViewControllers/BaseViewController.m; sourceTree = "<group>"; };
+		63400EA0193F8DD200BEF081 /* BluePrinterUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BluePrinterUI.xcodeproj; path = BluePrinterUI/BluePrinterUI.xcodeproj; sourceTree = "<group>"; };
 		6355364118B0682B00E88433 /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FileCell.xib; path = Nibs/FileCell.xib; sourceTree = "<group>"; };
-		6355364318B0716900E88433 /* PrintJobTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintJobTableViewController.h; path = ViewControllers/PrintJobTableViewController.h; sourceTree = "<group>"; };
-		6355364418B0716900E88433 /* PrintJobTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintJobTableViewController.m; path = ViewControllers/PrintJobTableViewController.m; sourceTree = "<group>"; };
-		6355364618B07BE100E88433 /* ChoosePrinterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChoosePrinterViewController.h; path = ViewControllers/ChoosePrinterViewController.h; sourceTree = "<group>"; };
-		6355364718B07BE100E88433 /* ChoosePrinterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChoosePrinterViewController.m; path = ViewControllers/ChoosePrinterViewController.m; sourceTree = "<group>"; };
 		63613C9F1898D095007CD749 /* ServicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServicesViewController.h; path = ViewControllers/ServicesViewController.h; sourceTree = "<group>"; };
 		63613CA01898D095007CD749 /* ServicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServicesViewController.m; path = ViewControllers/ServicesViewController.m; sourceTree = "<group>"; };
 		6364B40118C54371002555FA /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = Libraries/SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ServiceFile+FileTypes.m"; path = "Categories/ServiceFile+FileTypes.m"; sourceTree = "<group>"; };
 		6383D57818DA80A8006FC076 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		6383D57A18DABA8A006FC076 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		638E649219400C5D003B8778 /* BluePrinterUI.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = BluePrinterUI.storyboard; path = BluePrinterUI/BluePrinterUI/BluePrinterUI.storyboard; sourceTree = "<group>"; };
 		63A234AD18D6D7CF00F7EFD0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		63A234B118D6D91A00F7EFD0 /* filesTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filesTab.png; sourceTree = "<group>"; };
 		63A234B218D6D91A00F7EFD0 /* filesTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filesTab@2x.png"; sourceTree = "<group>"; };
@@ -270,13 +273,9 @@
 		63A234B618D6D91A00F7EFD0 /* usageTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "usageTab@2x.png"; sourceTree = "<group>"; };
 		63A6217C18DC98570059FD8D /* UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefaults.h; path = Classes/UserDefaults.h; sourceTree = "<group>"; };
 		63A6217D18DC98570059FD8D /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaults.m; path = Classes/UserDefaults.m; sourceTree = "<group>"; };
-		63AA558C1888F2980073D214 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
-		63AA558D1888F2980073D214 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = ViewControllers/LoginViewController.m; sourceTree = "<group>"; };
 		63AE263B193F7F8200A74B89 /* BluePrinterCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BluePrinterCore.xcodeproj; path = BluePrinterCore/BluePrinterCore.xcodeproj; sourceTree = "<group>"; };
 		63AFA41918C52DF60036EF18 /* UsageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsageViewController.h; path = ViewControllers/UsageViewController.h; sourceTree = "<group>"; };
 		63AFA41A18C52DF60036EF18 /* UsageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsageViewController.m; path = ViewControllers/UsageViewController.m; sourceTree = "<group>"; };
-		63F9CD8418B31F7600B6B63A /* SimpleChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleChooserViewController.h; path = ViewControllers/SimpleChooserViewController.h; sourceTree = "<group>"; };
-		63F9CD8518B31F7600B6B63A /* SimpleChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleChooserViewController.m; path = ViewControllers/SimpleChooserViewController.m; sourceTree = "<group>"; };
 		B20C186D18863E890088EE73 /* BluePrinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluePrinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B20C187118863E890088EE73 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B20C187318863E890088EE73 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -306,7 +305,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63400E5A193F80D400BEF081 /* libBluePrinterCore.a in Frameworks */,
+				63400EA9193F8E0100BEF081 /* libBluePrinterUI.a in Frameworks */,
 				6383D57918DA80A8006FC076 /* AssetsLibrary.framework in Frameworks */,
 				6364B40718C544DB002555FA /* QuartzCore.framework in Frameworks */,
 				B20C187218863E890088EE73 /* UIKit.framework in Frameworks */,
@@ -318,6 +317,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63400EA1193F8DD200BEF081 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63400EA6193F8DD300BEF081 /* libBluePrinterUI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6355364018B067FF00E88433 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,8 +450,6 @@
 			children = (
 				636833D518B839E000720C4B /* ServiceFile+Icons.h */,
 				636833D618B839E000720C4B /* ServiceFile+Icons.m */,
-				6318E48E18C7BA8900884021 /* UITableView+Notice.h */,
-				6318E48F18C7BA8900884021 /* UITableView+Notice.m */,
 				637C137F18D0137A007C14BC /* ServiceFile+FileTypes.h */,
 				637C138018D0137A007C14BC /* ServiceFile+FileTypes.m */,
 			);
@@ -454,6 +459,8 @@
 		63782E0018D915E4002488D7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B20C188018863E890088EE73 /* AppDelegate.h */,
+				B20C188118863E890088EE73 /* AppDelegate.m */,
 				63782E0118D91629002488D7 /* NotificationManager.h */,
 				63782E0218D91629002488D7 /* NotificationManager.m */,
 				63A6217C18DC98570059FD8D /* UserDefaults.h */,
@@ -488,6 +495,8 @@
 		B20C186218863E890088EE73 = {
 			isa = PBXGroup;
 			children = (
+				638E649219400C5D003B8778 /* BluePrinterUI.storyboard */,
+				63400EA0193F8DD200BEF081 /* BluePrinterUI.xcodeproj */,
 				63AE263B193F7F8200A74B89 /* BluePrinterCore.xcodeproj */,
 				B20C187718863E890088EE73 /* BluePrinter */,
 				B20C187018863E890088EE73 /* Frameworks */,
@@ -519,8 +528,6 @@
 			isa = PBXGroup;
 			children = (
 				63782E0018D915E4002488D7 /* Classes */,
-				B20C188018863E890088EE73 /* AppDelegate.h */,
-				B20C188118863E890088EE73 /* AppDelegate.m */,
 				B20C188918863E890088EE73 /* MainStoryboard.storyboard */,
 				636833D418B839AB00720C4B /* Categories */,
 				6368332B18B8399A00720C4B /* Graphics */,
@@ -559,22 +566,12 @@
 				B20C18AD188641520088EE73 /* JobsViewController.m */,
 				B20C18A91886412C0088EE73 /* OptionsViewController.h */,
 				B20C18AA1886412C0088EE73 /* OptionsViewController.m */,
-				63AA558C1888F2980073D214 /* LoginViewController.h */,
-				63AA558D1888F2980073D214 /* LoginViewController.m */,
 				63613C9F1898D095007CD749 /* ServicesViewController.h */,
 				63613CA01898D095007CD749 /* ServicesViewController.m */,
-				6355364318B0716900E88433 /* PrintJobTableViewController.h */,
-				6355364418B0716900E88433 /* PrintJobTableViewController.m */,
-				6355364618B07BE100E88433 /* ChoosePrinterViewController.h */,
-				6355364718B07BE100E88433 /* ChoosePrinterViewController.m */,
-				63F9CD8418B31F7600B6B63A /* SimpleChooserViewController.h */,
-				63F9CD8518B31F7600B6B63A /* SimpleChooserViewController.m */,
 				63AFA41918C52DF60036EF18 /* UsageViewController.h */,
 				63AFA41A18C52DF60036EF18 /* UsageViewController.m */,
 				6318E49118C7D75100884021 /* LocalFilesViewController.h */,
 				6318E49218C7D75100884021 /* LocalFilesViewController.m */,
-				632945F118D0B31600D910FE /* BaseViewController.h */,
-				632945F218D0B31600D910FE /* BaseViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -593,6 +590,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				638E64871940036E003B8778 /* PBXTargetDependency */,
 			);
 			name = BluePrinter;
 			productName = BluePrinter;
@@ -628,6 +626,10 @@
 					ProductGroup = 63AE263C193F7F8200A74B89 /* Products */;
 					ProjectRef = 63AE263B193F7F8200A74B89 /* BluePrinterCore.xcodeproj */;
 				},
+				{
+					ProductGroup = 63400EA1193F8DD200BEF081 /* Products */;
+					ProjectRef = 63400EA0193F8DD200BEF081 /* BluePrinterUI.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -637,6 +639,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		63400EA6193F8DD300BEF081 /* libBluePrinterUI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBluePrinterUI.a;
+			remoteRef = 63400EA5193F8DD300BEF081 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		63AE2641193F7F8300A74B89 /* libBluePrinterCore.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -752,6 +761,7 @@
 				6368339518B8399A00720C4B /* package@2x.png in Resources */,
 				636833C418B8399A00720C4B /* page_white_ruby.png in Resources */,
 				636833D318B8399A00720C4B /* pages@2x.png in Resources */,
+				638E649319400C5D003B8778 /* BluePrinterUI.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,31 +772,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F9CD8618B31F7600B6B63A /* SimpleChooserViewController.m in Sources */,
 				636833D718B839E000720C4B /* ServiceFile+Icons.m in Sources */,
 				63613CA11898D095007CD749 /* ServicesViewController.m in Sources */,
 				B20C187E18863E890088EE73 /* main.m in Sources */,
 				B20C188218863E890088EE73 /* AppDelegate.m in Sources */,
 				B20C18A2188641040088EE73 /* FilesViewController.m in Sources */,
-				6355364818B07BE100E88433 /* ChoosePrinterViewController.m in Sources */,
-				6318E49018C7BA8900884021 /* UITableView+Notice.m in Sources */,
 				6364B40518C54371002555FA /* SVProgressHUD.m in Sources */,
 				B20C18A5188641160088EE73 /* LocationsViewController.m in Sources */,
 				6379CC9D18E1090600968922 /* LegacySupport.m in Sources */,
 				B20C18AB1886412C0088EE73 /* OptionsViewController.m in Sources */,
-				632945F318D0B31600D910FE /* BaseViewController.m in Sources */,
 				6318E49318C7D75100884021 /* LocalFilesViewController.m in Sources */,
 				B20C18AE188641520088EE73 /* JobsViewController.m in Sources */,
 				63A6217E18DC98570059FD8D /* UserDefaults.m in Sources */,
 				637C138118D0137A007C14BC /* ServiceFile+FileTypes.m in Sources */,
 				63782E0318D91629002488D7 /* NotificationManager.m in Sources */,
 				63AFA41B18C52DF60036EF18 /* UsageViewController.m in Sources */,
-				63AA558E1888F2980073D214 /* LoginViewController.m in Sources */,
-				6355364518B0716900E88433 /* PrintJobTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		638E64871940036E003B8778 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BluePrinterUI;
+			targetProxy = 638E64861940036E003B8778 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B20C187A18863E890088EE73 /* InfoPlist.strings */ = {
@@ -869,6 +881,7 @@
 				GCC_PREFIX_HEADER = "BluePrinter/BluePrinter-Prefix.pch";
 				INFOPLIST_FILE = "BluePrinter/BluePrinter-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -888,6 +901,7 @@
 				GCC_PREFIX_HEADER = "BluePrinter/BluePrinter-Prefix.pch";
 				INFOPLIST_FILE = "BluePrinter/BluePrinter-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

@@ -1,6 +1,6 @@
 //
-//  BaseViewController.h
-//  BluePrinter
+//  BluePrinterBaseViewControllers.h
+//  BluePrinterUI
 //
 //  Created by David Quesada on 3/12/14.
 //  Copyright (c) 2014 David Quesada. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaseViewController : UIViewController
+@interface BluePrinterUIViewController : UIViewController
 
 @property BOOL actuallyDeselectRowOnViewWillAppear;
 
@@ -17,7 +17,7 @@
 @end
 
 
-@interface BaseTableViewController : UITableViewController
+@interface BluePrinterUITableViewController : UITableViewController
 
 @property BOOL actuallyDeselectRowOnViewWillAppear;
 

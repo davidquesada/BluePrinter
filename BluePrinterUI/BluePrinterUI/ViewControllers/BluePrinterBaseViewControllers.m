@@ -1,21 +1,21 @@
 //
 //  BaseViewController.m
-//  BluePrinter
+//  BluePrinterUI
 //
 //  Created by David Quesada on 3/12/14.
 //  Copyright (c) 2014 David Quesada. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BluePrinterBaseViewControllers.h"
 
-@interface BaseViewController ()
+@interface BluePrinterUIViewController ()
 {
     NSIndexPath *_selectedIndexPath;
 }
 -(UITableView *)tableView;
 @end
 
-@implementation BaseViewController
+@implementation BluePrinterUIViewController
 
 -(UITableView *)tableView
 {
@@ -50,13 +50,13 @@
 @end
 
 
-@interface BaseTableViewController ()
+@interface BluePrinterUITableViewController ()
 {
     NSIndexPath *_selectedIndexPath;
 }
 @end
 
-@implementation BaseTableViewController
+@implementation BluePrinterUITableViewController
 
 -(void)viewWillAppear:(BOOL)animated
 {

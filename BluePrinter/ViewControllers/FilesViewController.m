@@ -8,9 +8,7 @@
 
 #import "FilesViewController.h"
 #import "ServiceFile+FileTypes.h"
-#import "PrintJobTableViewController.h"
 #import "ServiceFile+Icons.h"
-#import "UITableView+Notice.h"
 #import "UserDefaults.h"
 
 @interface FilesViewController ()<PrintJobTableViewControllerDelegate>

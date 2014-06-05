@@ -1,15 +1,15 @@
 //
 //  PrintJobTableViewController.m
-//  BluePrinter
+//  BluePrinterUI
 //
 //  Created by David Quesada on 2/15/14.
 //  Copyright (c) 2014 David Quesada. All rights reserved.
 //
 
 #import "PrintJobTableViewController.h"
-#import "ChoosePrinterViewController.h"
+
 #import "SimpleChooserViewController.h"
-#import "AppDelegate.h"
+#import "ChoosePrinterViewController.h"
 
 @interface PrintJobTableViewController ()<ChoosePrinterViewControllerDelegate, SimpleChooserViewControllerDelegate>
 {
@@ -53,7 +53,8 @@
 
 -(id)initWithPrintRequest:(PrintRequest *)request
 {
-    self = [[AppDelegate sharedDelegate].mainStoryboard instantiateViewControllerWithIdentifier:@"printRequestViewController"];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"BluePrinterUI" bundle:nil];
+    self = [sb instantiateInitialViewController];
     self.request = request;
     return self;
 }

@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 
-@interface ServicesViewController : BaseViewController
+@interface ServicesViewController : BluePrinterUIViewController
 
 @end

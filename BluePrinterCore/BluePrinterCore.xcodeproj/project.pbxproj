@@ -43,7 +43,6 @@
 		63400E6B193F883A00BEF081 /* UsageAllocation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E40193F809900BEF081 /* UsageAllocation.h */; };
 		63400E6C193F883D00BEF081 /* UsageCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E42193F809900BEF081 /* UsageCategory.h */; };
 		63AE2625193F7F8200A74B89 /* BluePrinterCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63AE2624193F7F8200A74B89 /* BluePrinterCore.h */; };
-		63AE2627193F7F8200A74B89 /* BluePrinterCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AE2626193F7F8200A74B89 /* BluePrinterCore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -121,7 +120,6 @@
 		63400E6D193F8A1700BEF081 /* BluePrinterCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluePrinterCore-Prefix.pch"; sourceTree = "<group>"; };
 		63AE2621193F7F8200A74B89 /* libBluePrinterCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBluePrinterCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		63AE2624193F7F8200A74B89 /* BluePrinterCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BluePrinterCore.h; sourceTree = "<group>"; };
-		63AE2626193F7F8200A74B89 /* BluePrinterCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BluePrinterCore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +200,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		638E6494194013C6003B8778 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				63400E6D193F8A1700BEF081 /* BluePrinterCore-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		63AE2618193F7F8200A74B89 = {
 			isa = PBXGroup;
 			children = (
@@ -223,8 +229,7 @@
 			children = (
 				63400E15193F809900BEF081 /* Model */,
 				63AE2624193F7F8200A74B89 /* BluePrinterCore.h */,
-				63AE2626193F7F8200A74B89 /* BluePrinterCore.m */,
-				63400E6D193F8A1700BEF081 /* BluePrinterCore-Prefix.pch */,
+				638E6494194013C6003B8778 /* Supporting Files */,
 			);
 			path = BluePrinterCore;
 			sourceTree = "<group>";
@@ -299,7 +304,6 @@
 				63400E58193F809900BEF081 /* UsageCategory.m in Sources */,
 				63400E57193F809900BEF081 /* UsageAllocation.m in Sources */,
 				63400E51193F809900BEF081 /* MPrintIFSService.m in Sources */,
-				63AE2627193F7F8200A74B89 /* BluePrinterCore.m in Sources */,
 				63400E4A193F809900BEF081 /* PrintJob.m in Sources */,
 				63400E55193F809900BEF081 /* MPrintServiceAuthenticationViewController.m in Sources */,
 				63400E45193F809900BEF081 /* Location.m in Sources */,

@@ -1,6 +1,6 @@
 //
 //  UITableView+Notice.h
-//  BluePrinter
+//  BluePrinterUI
 //
 //  Created by David Quesada on 3/5/14.
 //  Copyright (c) 2014 David Quesada. All rights reserved.

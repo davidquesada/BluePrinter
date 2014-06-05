@@ -7,7 +7,6 @@
 //
 
 #import "JobsViewController.h"
-#import "UITableView+Notice.h"
 
 
 @interface JobCell : UITableViewCell

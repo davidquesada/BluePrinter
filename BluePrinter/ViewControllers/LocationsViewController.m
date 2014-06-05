@@ -7,7 +7,6 @@
 //
 
 #import "LocationsViewController.h"
-#import "LoginViewController.h"
 
 @interface LocationsViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak) IBOutlet UITableView *tableView;
