@@ -8,11 +8,23 @@
 
 #import "MPrintObject.h"
 
-#import "UsageAllocation.h"
-#import "UsageCategory.h"
+typedef NS_ENUM(NSInteger, UsageType)
+{
+    UsageTypeBlackAndWhite,
+    UsageTypeColor,
+    UsageTypeTabloid,
+};
 
 @interface Usage : MPrintObject
 
-@property(readonly) NSArray *categories;
+@property(readonly) double balance;
+@property(readonly) int totalJobs;
+@property(readonly) int totalPages;
+@property(readonly) int totalSheets;
+
++(NSString *)costDescriptionForUsageType:(UsageType)type;
++(double)costForUsageType:(UsageType)type;
+
+-(int)estimatedRemainingUsagesOfType:(UsageType)type;
 
 @end

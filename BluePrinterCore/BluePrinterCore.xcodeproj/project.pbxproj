@@ -26,8 +26,6 @@
 		63400E54193F809900BEF081 /* MPrintNetworkedService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E3B193F809900BEF081 /* MPrintNetworkedService.m */; };
 		63400E55193F809900BEF081 /* MPrintServiceAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E3D193F809900BEF081 /* MPrintServiceAuthenticationViewController.m */; };
 		63400E56193F809900BEF081 /* Usage.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E3F193F809900BEF081 /* Usage.m */; };
-		63400E57193F809900BEF081 /* UsageAllocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E41193F809900BEF081 /* UsageAllocation.m */; };
-		63400E58193F809900BEF081 /* UsageCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63400E43193F809900BEF081 /* UsageCategory.m */; };
 		63400E5F193F86AB00BEF081 /* MPrintRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E20193F809900BEF081 /* MPrintRequest.h */; };
 		63400E60193F875500BEF081 /* MPrintLocalService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E36193F809900BEF081 /* MPrintLocalService.h */; };
 		63400E61193F875B00BEF081 /* MPrintResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E22193F809900BEF081 /* MPrintResponse.h */; };
@@ -40,8 +38,6 @@
 		63400E68193F882C00BEF081 /* PrintRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E27193F809900BEF081 /* PrintRequest.h */; };
 		63400E69193F883200BEF081 /* PrintJob.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E25193F809900BEF081 /* PrintJob.h */; };
 		63400E6A193F883800BEF081 /* Usage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E3E193F809900BEF081 /* Usage.h */; };
-		63400E6B193F883A00BEF081 /* UsageAllocation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E40193F809900BEF081 /* UsageAllocation.h */; };
-		63400E6C193F883D00BEF081 /* UsageCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63400E42193F809900BEF081 /* UsageCategory.h */; };
 		63AE2625193F7F8200A74B89 /* BluePrinterCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63AE2624193F7F8200A74B89 /* BluePrinterCore.h */; };
 /* End PBXBuildFile section */
 
@@ -65,8 +61,6 @@
 				63400E68193F882C00BEF081 /* PrintRequest.h in CopyFiles */,
 				63400E69193F883200BEF081 /* PrintJob.h in CopyFiles */,
 				63400E6A193F883800BEF081 /* Usage.h in CopyFiles */,
-				63400E6B193F883A00BEF081 /* UsageAllocation.h in CopyFiles */,
-				63400E6C193F883D00BEF081 /* UsageCategory.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,10 +107,6 @@
 		63400E3D193F809900BEF081 /* MPrintServiceAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MPrintServiceAuthenticationViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63400E3E193F809900BEF081 /* Usage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Usage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		63400E3F193F809900BEF081 /* Usage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Usage.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		63400E40193F809900BEF081 /* UsageAllocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UsageAllocation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		63400E41193F809900BEF081 /* UsageAllocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UsageAllocation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		63400E42193F809900BEF081 /* UsageCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UsageCategory.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		63400E43193F809900BEF081 /* UsageCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UsageCategory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63400E6D193F8A1700BEF081 /* BluePrinterCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluePrinterCore-Prefix.pch"; sourceTree = "<group>"; };
 		63AE2621193F7F8200A74B89 /* libBluePrinterCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBluePrinterCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		63AE2624193F7F8200A74B89 /* BluePrinterCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BluePrinterCore.h; sourceTree = "<group>"; };
@@ -153,10 +143,6 @@
 				63400E2C193F809900BEF081 /* ServiceFile.m */,
 				63400E3E193F809900BEF081 /* Usage.h */,
 				63400E3F193F809900BEF081 /* Usage.m */,
-				63400E40193F809900BEF081 /* UsageAllocation.h */,
-				63400E41193F809900BEF081 /* UsageAllocation.m */,
-				63400E42193F809900BEF081 /* UsageCategory.h */,
-				63400E43193F809900BEF081 /* UsageCategory.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,8 +287,6 @@
 				63400E46193F809900BEF081 /* MPrintCosignManager.m in Sources */,
 				63400E4C193F809900BEF081 /* Service.m in Sources */,
 				63400E4F193F809900BEF081 /* MPrintDriveService.m in Sources */,
-				63400E58193F809900BEF081 /* UsageCategory.m in Sources */,
-				63400E57193F809900BEF081 /* UsageAllocation.m in Sources */,
 				63400E51193F809900BEF081 /* MPrintIFSService.m in Sources */,
 				63400E4A193F809900BEF081 /* PrintJob.m in Sources */,
 				63400E55193F809900BEF081 /* MPrintServiceAuthenticationViewController.m in Sources */,

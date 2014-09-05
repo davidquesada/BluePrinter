@@ -19,5 +19,3 @@
 #import "PrintRequest.h"
 #import "PrintJob.h"
 #import "Usage.h"
-#import "UsageCategory.h"
-#import "UsageAllocation.h"
