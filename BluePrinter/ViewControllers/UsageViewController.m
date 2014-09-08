@@ -12,6 +12,7 @@
 #define DIVIDER_FOOTER_CELL_TAG 875
 
 static Usage *lastUsage;
+static const SVProgressHUDMaskType UsageViewControllerHUDMaskType = SVProgressHUDMaskTypeBlack;
 
 @interface UsageViewController ()
 {
@@ -58,13 +59,13 @@ static Usage *lastUsage;
 {
     [super viewWillAppear:animated];
     if (_isShowingHUD)
-        [SVProgressHUD show];
+        [SVProgressHUD showWithMaskType:UsageViewControllerHUDMaskType];
 }
 
 -(void)loadUsage:(UIRefreshControl *)sender
 {
     _isShowingHUD = YES;
-    [SVProgressHUD show];
+    [SVProgressHUD showWithMaskType:UsageViewControllerHUDMaskType];
     
     [Usage fetchWithCompletion:^(NSMutableArray *objects, MPrintResponse *response) {
         if (response.success)
