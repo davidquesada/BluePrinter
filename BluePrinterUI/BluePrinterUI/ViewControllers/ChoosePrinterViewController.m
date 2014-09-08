@@ -49,7 +49,7 @@
     
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
 
-    // I like the subtle effect this has.
+    // I like the subtle effect this has.  TODO: I think this broke. Fix it.
     UIView *bg = [[[[[[searchBar subviews]lastObject]subviews]lastObject]subviews]lastObject]; // WOO!
     if ([[[[bg class] description] lowercaseString] rangeOfString:@"backgroundview"].location != NSNotFound)
         [bg removeFromSuperview];
@@ -208,6 +208,7 @@
         if (!cell)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"enabled"];
+            cell.detailTextLabel.textColor = [UIColor darkGrayColor];
         }
     }
     else
@@ -239,6 +240,10 @@
         
         cell.accessoryType = acc;
     }
+    
+    cell.textLabel.minimumScaleFactor = 0.5;
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.numberOfLines = 1;
     
     return cell;
 }
