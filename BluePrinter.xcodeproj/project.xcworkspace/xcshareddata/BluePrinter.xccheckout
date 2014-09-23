@@ -10,29 +10,29 @@
 	<string>BluePrinter</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</key>
+		<key>A8F8A4EEBDE57751D6384E90513D1C64244A8BC9</key>
 		<string>https://github.com/davidquesada/BluePrinter.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BluePrinter.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</key>
+		<key>A8F8A4EEBDE57751D6384E90513D1C64244A8BC9</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/davidquesada/BluePrinter.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</string>
+	<string>A8F8A4EEBDE57751D6384E90513D1C64244A8BC9</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>95C19F6F-1A10-4CE3-8DDC-FA37724914A1</string>
+			<string>A8F8A4EEBDE57751D6384E90513D1C64244A8BC9</string>
 			<key>IDESourceControlWCCName</key>
 			<string>BluePrinter</string>
 		</dict>
