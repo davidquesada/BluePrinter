@@ -28,6 +28,7 @@ Service *localService;
 @interface Service ()
 {
     ServiceType _type;
+    NSString *_description;
 }
 @property (readwrite) NSString *description;
 @property (readwrite) int connectedStatus;
@@ -191,6 +192,21 @@ Service *localService;
             completion();
     }];
 }
+
+#pragma mark - Properties
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+-(NSString *)description
+{
+    return _description;
+}
+// Fixes an issue when compiling in Xcode 6. It won't synthesize the description property
+// as readwrite, so exceptions are thrown when modifying the description of services.
+-(void)setDescription:(NSString *)description
+{
+    _description = description;
+}
+#endif
 
 #pragma mark - Service Support Stubs
 
