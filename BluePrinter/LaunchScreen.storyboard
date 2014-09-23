@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oaC-N1-DeQ">
+    <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="nIQ-UQ-cdm">
+            <objects>
+                <navigationController id="oaC-N1-DeQ" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="fTT-CL-A2D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.1529411765" blue="0.30980392159999998" alpha="0.070000000000000007" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vVr-KO-auM" kind="relationship" relationship="rootViewController" id="q0G-bY-7tl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c3P-YH-fyG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-333" y="439"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="8g0-X7-cKn">
+            <objects>
+                <viewController id="vVr-KO-auM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Q2-KE-f3t"/>
+                        <viewControllerLayoutGuide type="bottom" id="WFR-dK-8qb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DQa-yA-4DM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg0-wV-c3G">
+                                <rect key="frame" x="0.0" y="487" width="600" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Files" image="filesTab.png" id="2ja-5B-kec"/>
+                                    <tabBarItem title="Jobs" image="jobsTab.png" id="Cmt-gs-azz"/>
+                                    <tabBarItem title="Usage" image="usageTab.png" id="efX-t4-MlJ"/>
+                                </items>
+                                <color key="barTintColor" red="0.0" green="0.21568627450980393" blue="0.37254901960784315" alpha="1" colorSpace="deviceRGB"/>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WFR-dK-8qb" firstAttribute="top" secondItem="sg0-wV-c3G" secondAttribute="bottom" id="6pe-JS-jCq"/>
+                            <constraint firstAttribute="centerX" secondItem="sg0-wV-c3G" secondAttribute="centerX" id="gAu-SW-amN"/>
+                            <constraint firstAttribute="width" secondItem="sg0-wV-c3G" secondAttribute="width" id="nUc-Oz-XNQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="b38-HA-Yrr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w3y-p8-eLU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="497" y="397"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="filesTab.png" width="25" height="25"/>
+        <image name="jobsTab.png" width="25" height="25"/>
+        <image name="usageTab.png" width="25" height="25"/>
+    </resources>
+</document>

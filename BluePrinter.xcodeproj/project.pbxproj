@@ -115,6 +115,7 @@
 		63A234BB18D6D91A00F7EFD0 /* usageTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B518D6D91A00F7EFD0 /* usageTab.png */; };
 		63A234BC18D6D91A00F7EFD0 /* usageTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A234B618D6D91A00F7EFD0 /* usageTab@2x.png */; };
 		63A6217E18DC98570059FD8D /* UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A6217D18DC98570059FD8D /* UserDefaults.m */; };
+		63AED41919D12926001F27D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63AED41819D12926001F27D3 /* LaunchScreen.storyboard */; };
 		63AFA41B18C52DF60036EF18 /* UsageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AFA41A18C52DF60036EF18 /* UsageViewController.m */; };
 		B20C187218863E890088EE73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187118863E890088EE73 /* UIKit.framework */; };
 		B20C187418863E890088EE73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20C187318863E890088EE73 /* Foundation.framework */; };
@@ -274,6 +275,7 @@
 		63A6217C18DC98570059FD8D /* UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefaults.h; path = Classes/UserDefaults.h; sourceTree = "<group>"; };
 		63A6217D18DC98570059FD8D /* UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaults.m; path = Classes/UserDefaults.m; sourceTree = "<group>"; };
 		63AE263B193F7F8200A74B89 /* BluePrinterCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BluePrinterCore.xcodeproj; path = BluePrinterCore/BluePrinterCore.xcodeproj; sourceTree = "<group>"; };
+		63AED41819D12926001F27D3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63AFA41918C52DF60036EF18 /* UsageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsageViewController.h; path = ViewControllers/UsageViewController.h; sourceTree = "<group>"; };
 		63AFA41A18C52DF60036EF18 /* UsageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsageViewController.m; path = ViewControllers/UsageViewController.m; sourceTree = "<group>"; };
 		B20C186D18863E890088EE73 /* BluePrinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluePrinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -537,6 +539,7 @@
 				B20C189F18863EBF0088EE73 /* ViewControllers */,
 				63A234AD18D6D7CF00F7EFD0 /* Images.xcassets */,
 				6383D57A18DABA8A006FC076 /* Settings.bundle */,
+				63AED41819D12926001F27D3 /* LaunchScreen.storyboard */,
 			);
 			path = BluePrinter;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				6383D57B18DABA8B006FC076 /* Settings.bundle in Resources */,
 				6368339618B8399A00720C4B /* page_white.png in Resources */,
 				636833BB18B8399A00720C4B /* page_white_js@2x.png in Resources */,
+				63AED41919D12926001F27D3 /* LaunchScreen.storyboard in Resources */,
 				636833A218B8399A00720C4B /* page_white_compressed.png in Resources */,
 				636833CF18B8399A00720C4B /* page_white_visualstudio@2x.png in Resources */,
 				636833B218B8399A00720C4B /* page_white_gear.png in Resources */,
