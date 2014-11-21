@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
 @interface ServicesViewController ()<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PrintJobTableViewControllerDelegate>
 {
     BOOL _hasReloaded;
+    BOOL _doNilTextAdjustmentThingForiOS8;
     __weak UIRefreshControl *_refreshControl;
 }
 @property (weak) IBOutlet UITableView *tableView;
@@ -73,6 +74,8 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogIn:) name:MPrintUserDidLogInNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogOut:) name:MPrintUserDidLogOutNotification object:nil];
     [self setAccountButtonMode:AccountButtonModeLogIn];
+    
+    _doNilTextAdjustmentThingForiOS8 = ([[[UIDevice currentDevice] systemVersion] integerValue] >= 8);
 }
 
 -(void)dealloc
@@ -349,6 +352,20 @@ typedef NS_ENUM(NSInteger, AccountButtonMode)
     cell.textLabel.text = service.description;
     cell.detailTextLabel.text = (service.isConnected ? nil : @"Tap to connect");
     cell.accessoryType = (service.isConnected ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone);
+    
+    
+    // There's weird stuff that happens introduced in iOS 8 where moving cells around and changing the
+    // detailTextLabel text between nil and non-nil values may result in the label not displaying properly.
+    if (_doNilTextAdjustmentThingForiOS8)
+    {
+        if (indexPath.section == 1)
+            cell.detailTextLabel.text = nil;
+        
+        // sudo layoutallthethings
+        [cell.detailTextLabel setNeedsLayout];
+        [cell setNeedsLayout];
+        [cell layoutSubviews];
+    }
     
     return cell;
 }
