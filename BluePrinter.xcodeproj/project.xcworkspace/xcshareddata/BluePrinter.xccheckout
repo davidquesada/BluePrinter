@@ -14,7 +14,7 @@
 		<string>https://github.com/davidquesada/BluePrinter.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BluePrinter.xcodeproj/project.xcworkspace</string>
+	<string>BluePrinter.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A8F8A4EEBDE57751D6384E90513D1C64244A8BC9</key>
